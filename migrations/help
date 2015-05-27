@@ -1,0 +1,2 @@
+"php yii migrate/create create_user_table" - create new migration
+"php yii migrate/up" - apply migration
