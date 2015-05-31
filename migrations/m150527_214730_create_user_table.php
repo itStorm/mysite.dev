@@ -11,7 +11,7 @@ class m150527_214730_create_user_table extends Migration
             'id' => Schema::TYPE_PK,
             'username' => Schema::TYPE_STRING . '(255) NOT NULL',
             'email' => Schema::TYPE_STRING . '(255) NOT NULL',
-            'password_hash' => Schema::TYPE_STRING . '(32) NOT NULL',
+            'password_hash' => Schema::TYPE_STRING . '(60) NOT NULL',
             'auth_key' => Schema::TYPE_STRING . '(32) NULL DEFAULT NULL',
         ]);
     }
