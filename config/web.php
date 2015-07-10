@@ -5,6 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+//    'language' => 'ru',
     'defaultRoute' => 'main/default/index',
     'bootstrap' => ['log'],
     'components' => [
@@ -21,6 +22,12 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'main/default/error',
+        ],
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => require(__DIR__ . '/rules.php'),
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
