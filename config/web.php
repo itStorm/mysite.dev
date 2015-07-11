@@ -5,7 +5,8 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-//    'language' => 'ru',
+    'language' => 'ru-RU', // set target language to be Russian
+    'sourceLanguage' => 'en-US', // set source language to be English
     'defaultRoute' => 'main/default/index',
     'bootstrap' => ['log'],
     'components' => [
@@ -46,6 +47,18 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                    ],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
     // My modules
