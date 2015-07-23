@@ -54,14 +54,14 @@ AppAsset::register($this);
 
         <div class="container">
             <?= $this->blocks['before_content']; ?>
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
         </div>
 
         <div class="container">
             <div class="row">
                 <div class="col-sm-9">
-                    <?= Breadcrumbs::widget([
-                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                    ]) ?>
                     <?= $content ?>
                 </div>
                 <div class="col-sm-2 col-sm-offset-1">
