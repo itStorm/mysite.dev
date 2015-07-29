@@ -20,6 +20,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\modules\user\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => '/login'
         ],
         'errorHandler' => [
             'errorAction' => 'main/default/error',

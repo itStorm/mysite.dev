@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegistrationForm;
+use yii\captcha\CaptchaAction;
 
 class DefaultController extends Controller
 {
@@ -13,7 +14,7 @@ class DefaultController extends Controller
 	{
 		return [
 			'captcha' => [
-				'class' => 'yii\captcha\CaptchaAction',
+				'class' => CaptchaAction::className(),
 				'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
 			],
 		];

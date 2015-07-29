@@ -60,6 +60,12 @@ class DefaultController extends Controller
      */
     public function actionCreate()
     {
+        $user = \Yii::$app->getUser();
+        if($user->isGuest) {
+            $user->setReturnUrl(\Yii::$app->getRequest()->getUrl());
+            $this->redirect($user->loginUrl);
+        }
+
         $model = new Article();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

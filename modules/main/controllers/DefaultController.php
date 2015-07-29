@@ -3,6 +3,7 @@
 namespace app\modules\main\controllers;
 
 use Yii;
+use yii\captcha\CaptchaAction;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -40,7 +41,7 @@ class DefaultController extends Controller
 				'class' => 'yii\web\ErrorAction',
 			],
 			'captcha' => [
-				'class' => 'yii\captcha\CaptchaAction',
+				'class' => CaptchaAction::className(),
 				'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
 			],
 		];
