@@ -8,7 +8,6 @@ use app\modules\article\models\ArticleSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * DefaultController implements the CRUD actions for Article model.
@@ -18,19 +17,19 @@ class DefaultController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['create', 'update', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create'],
+                        'actions' => ['delete'],
+                        'verbs' => ['POST'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create', 'update'],
                         'roles' => ['@'],
                     ],
                 ],
