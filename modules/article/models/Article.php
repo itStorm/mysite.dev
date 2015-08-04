@@ -32,10 +32,19 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title'], 'required'],
+            [['title'], 'filter', 'filter' => 'trim'],
+            [['title'], 'string', 'length' => [2, 255]],
+
+            [['content'], 'required'],
+            [['content'], 'filter', 'filter' => 'trim'],
             [['content'], 'string'],
-            [['created', 'updated'], 'safe'],
+
+            [['created', 'updated'], 'required'],
+            [['created', 'updated'], 'date', 'format' => 'yyyy-MM-dd'],
+
+            [['user_id'], 'required'],
             [['user_id'], 'integer'],
-            [['title'], 'string', 'max' => 255]
         ];
     }
 
