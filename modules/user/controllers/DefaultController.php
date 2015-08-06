@@ -2,7 +2,9 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\user\models\User;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegistrationForm;
@@ -20,13 +22,35 @@ class DefaultController extends Controller
 		];
 	}
 
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'only' => ['index'],
+				'rules' => [
+					[
+						'allow' => true,
+						'roles' => ['@'],
+					],
+				],
+			],
+		];
+	}
+
 	/**
 	 * Профиль пользователя
 	 * @return string
 	 */
 	public function actionIndex()
 	{
-		return $this->render('index');
+		$user = \Yii::$app->getUser();
+		/** @var User $model */
+		$model = $user->getIdentity();
+
+		return $this->render('index', [
+			'model' => $model,
+		]);
 	}
 
 	/**

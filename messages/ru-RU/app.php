@@ -5,4 +5,5 @@ return [
     'Contact' => 'Контакты',
     'Login' => 'Войти',
     'Logout ({username})' => 'Выйти ({username})',
+    'Profile' => 'Профиль пользователя',
 ];
