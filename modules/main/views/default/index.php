@@ -1,7 +1,10 @@
 <?php
+use yii\helpers\Html;
 use yii\bootstrap\Carousel;
 
-/* @var $this yii\web\View */
+/** @var $this yii\web\View */
+/** @var $articles app\modules\article\models\Article[]*/
+
 $this->title = 'My Yii Application';
 ?>
 
@@ -30,23 +33,19 @@ $this->endBlock();
 <?php $this->endBlock() ?>
 
 <div class="site-index">
-
-    <div class="row">
-        <div class="col-sm-4">
-            <h2>Header 1</h2>
-            <p>Text 1</p>
-            <p><a class="btn btn-default" href="#">more... &raquo;</a></p>
+    <?php
+    $articlesRows = array_chunk($articles, 3);
+    foreach ($articlesRows as $row): ?>
+        <div class="row">
+            <?php
+            /** @var  $row app\modules\article\models\Article[] */
+            foreach($row as $article): ?>
+                <div class="col-sm-4">
+                    <h2><?= $article->title; ?></h2>
+                    <p><?= $article->content; ?></p>
+                    <p><?= Html::a('more... &raquo;', ['/article/default/view', 'id' => $article->id], ['class' => 'btn btn-default'])?></p>
+                </div>
+            <?php endforeach; ?>
         </div>
-        <div class="col-sm-4">
-            <h2>Header 2</h2>
-            <p>Text 2</p>
-            <p><a class="btn btn-default" href="#">more... &raquo;</a></p>
-        </div>
-        <div class="col-sm-4">
-            <h2>Header 3</h2>
-            <p>Text 3</p>
-            <p><a class="btn btn-default" href="#">more... &raquo;</a></p>
-        </div>
-    </div>
-
+    <?php endforeach; ?>
 </div>

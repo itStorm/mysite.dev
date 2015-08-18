@@ -2,6 +2,7 @@
 
 namespace app\modules\main\controllers;
 
+use app\modules\article\models\Article;
 use Yii;
 use yii\captcha\CaptchaAction;
 use yii\filters\AccessControl;
@@ -11,6 +12,11 @@ use app\modules\main\models\ContactForm;
 
 class DefaultController extends Controller
 {
+	/**
+	 * Количество статей на странице
+	 */
+	const ARTICLES_COUNT_PER_PAGE = 6;
+
 	public function behaviors()
 	{
 		return [
@@ -53,7 +59,11 @@ class DefaultController extends Controller
 	 */
 	public function actionIndex()
 	{
-		return $this->render('index');
+		$articles = Article::find()->limit(self::ARTICLES_COUNT_PER_PAGE)->all();
+
+		return $this->render('index', [
+			'articles' => $articles
+		]);
 	}
 
 	/**
