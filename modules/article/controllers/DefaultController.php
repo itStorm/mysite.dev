@@ -30,7 +30,7 @@ class DefaultController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['create', 'update'],
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ],
                 ],
             ],
