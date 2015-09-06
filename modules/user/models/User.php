@@ -19,7 +19,7 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
 	const ROLE_USER = 1;
-	const ROLE_MODER = 5;
+	const ROLE_MODERATOR = 5;
 	const ROLE_ADMIN = 10;
 
 	/**

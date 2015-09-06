@@ -3,7 +3,7 @@ namespace app\commands;
 
 use Yii;
 use yii\console\Controller;
-use common\components\rbac\UserRoleRule;
+use app\modules\rbac\UserRoleRule;
 
 class RbacController extends Controller
 {
@@ -31,19 +31,19 @@ class RbacController extends Controller
         $user->ruleName = $rule->name;
         $auth->add($user);
 
-        $moder = $auth->createRole('moder');
-        $moder->description = 'Модератор';
-        $moder->ruleName = $rule->name;
-        $auth->add($moder);
+        $moderator = $auth->createRole('moderator');
+        $moderator->description = 'Модератор';
+        $moderator->ruleName = $rule->name;
+        $auth->add($moderator);
 
         //Добавляем потомков
-        $auth->addChild($moder, $user);
-        $auth->addChild($moder, $dashboard);
+        $auth->addChild($moderator, $user);
+        $auth->addChild($moderator, $dashboard);
         $admin = $auth->createRole('admin');
         $admin->description = 'Администратор';
         $admin->ruleName = $rule->name;
         $auth->add($admin);
-        $auth->addChild($admin, $moder);
+        $auth->addChild($admin, $moderator);
 
         echo "Done!\n";
     }

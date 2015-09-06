@@ -9,7 +9,7 @@ return [
         'description' => 'Пользователь',
         'ruleName' => 'userRole',
     ],
-    'moder' => [
+    'moderator' => [
         'type' => 1,
         'description' => 'Модератор',
         'ruleName' => 'userRole',
@@ -23,7 +23,7 @@ return [
         'description' => 'Администратор',
         'ruleName' => 'userRole',
         'children' => [
-            'moder',
+            'moderator',
         ],
     ],
 ];
