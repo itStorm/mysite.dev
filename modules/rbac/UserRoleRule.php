@@ -21,9 +21,9 @@ class UserRoleRule extends Rule
                 return $role == User::ROLE_ADMIN;
             } elseif ($item->name === 'moderator') {
                 //moder является потомком admin, который получает его права
-                return $role == User::ROLE_ADMIN || $role == User::ROLE_MODER;
+                return $role == User::ROLE_ADMIN || $role == User::ROLE_MODERATOR;
             } elseif ($item->name === 'user') {
-                return $role == User::ROLE_ADMIN || $role == User::ROLE_MODER
+                return $role == User::ROLE_ADMIN || $role == User::ROLE_MODERATOR
                 || $role == User::ROLE_USER;
             }
         }
