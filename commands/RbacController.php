@@ -4,6 +4,7 @@ namespace app\commands;
 use Yii;
 use yii\console\Controller;
 use app\modules\rbac\UserRoleRule;
+use app\modules\article\models\Article;
 
 class RbacController extends Controller
 {
@@ -16,33 +17,45 @@ class RbacController extends Controller
 
         $auth->removeAll(); //удаляем старые данные
 
-        //Создадим для примера права для доступа к админке
-        $dashboard = $auth->createPermission('dashboard');
-        $dashboard->description = 'Админ панель';
-        $auth->add($dashboard);
+        // ARTICLES RULES
+        $articleView = $auth->createPermission(Article::RULE_VIEW);
+        $articleView->description = 'Article view';
+        $auth->add($articleView);
+        $articleCreate = $auth->createPermission(Article::RULE_CREATE);
+        $articleCreate->description = 'Article create';
+        $auth->add($articleCreate);
+        $articleUpdate = $auth->createPermission(Article::RULE_UPDATE);
+        $articleUpdate->description = 'Article update';
+        $auth->add($articleUpdate);
 
-        //Включаем наш обработчик
+        // Rule for checking roles
         $rule = new UserRoleRule();
         $auth->add($rule);
 
-        //Добавляем роли
+        // Create roles
         $user = $auth->createRole('user');
-        $user->description = 'Пользователь';
+        $user->description = 'User';
         $user->ruleName = $rule->name;
         $auth->add($user);
 
         $moderator = $auth->createRole('moderator');
-        $moderator->description = 'Модератор';
+        $moderator->description = 'Moderator';
         $moderator->ruleName = $rule->name;
         $auth->add($moderator);
 
-        //Добавляем потомков
-        $auth->addChild($moderator, $user);
-        $auth->addChild($moderator, $dashboard);
         $admin = $auth->createRole('admin');
-        $admin->description = 'Администратор';
+        $admin->description = 'Admin';
         $admin->ruleName = $rule->name;
         $auth->add($admin);
+
+        // Set relations between different roles add permissions
+        // ..user
+        $auth->addChild($user, $articleView);
+        // ..moderator
+        $auth->addChild($moderator, $user);
+        $auth->addChild($moderator, $articleCreate);
+        $auth->addChild($moderator, $articleUpdate);
+        // ..admin
         $auth->addChild($admin, $moderator);
 
         echo "Done!\n";

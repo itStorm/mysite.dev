@@ -50,7 +50,9 @@ class RegistrationForm extends Model
 		$user           = new User();
 		$user->username = $this->username;
 		$user->email    = $this->email;
+		$user->role = User::ROLE_USER;
 		$user->setPassword($this->password);
+
 		return $user->save();
 	}
 }

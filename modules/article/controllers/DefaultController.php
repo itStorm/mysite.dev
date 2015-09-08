@@ -19,18 +19,28 @@ class DefaultController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'update', 'delete'],
+                'only' => ['view', 'create', 'update', 'delete'],
                 'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['?', Article::RULE_VIEW],
+                    ],
                     [
                         'allow' => true,
                         'actions' => ['delete'],
                         'verbs' => ['POST'],
-                        'roles' => ['moderator'],
+                        'roles' => [Article::RULE_UPDATE],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['create', 'update'],
-                        'roles' => ['moderator'],
+                        'actions' => ['create'],
+                        'roles' => [Article::RULE_CREATE],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => [Article::RULE_UPDATE],
                     ],
                 ],
             ],

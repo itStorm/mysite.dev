@@ -18,6 +18,10 @@ use Yii;
  */
 class Article extends \yii\db\ActiveRecord
 {
+    const RULE_VIEW = 'article_view';
+    const RULE_CREATE = 'article_create';
+    const RULE_UPDATE = 'article_update';
+
     /**
      * @inheritdoc
      */

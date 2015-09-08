@@ -1,26 +1,38 @@
 <?php
 return [
-    'dashboard' => [
+    'article_view' => [
         'type' => 2,
-        'description' => 'Админ панель',
+        'description' => 'Article view',
+    ],
+    'article_create' => [
+        'type' => 2,
+        'description' => 'Article create',
+    ],
+    'article_update' => [
+        'type' => 2,
+        'description' => 'Article update',
     ],
     'user' => [
         'type' => 1,
-        'description' => 'Пользователь',
+        'description' => 'User',
         'ruleName' => 'userRole',
+        'children' => [
+            'article_view',
+        ],
     ],
     'moderator' => [
         'type' => 1,
-        'description' => 'Модератор',
+        'description' => 'Moderator',
         'ruleName' => 'userRole',
         'children' => [
             'user',
-            'dashboard',
+            'article_create',
+            'article_update',
         ],
     ],
     'admin' => [
         'type' => 1,
-        'description' => 'Администратор',
+        'description' => 'Admin',
         'ruleName' => 'userRole',
         'children' => [
             'moderator',
