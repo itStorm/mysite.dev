@@ -3,10 +3,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
+use app\assets\TinyMCEAsset;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
 /* @var $form yii\widgets\ActiveForm */
+
+TinyMCEAsset::register($this);
 ?>
 
 <div class="article-form">
@@ -15,7 +18,7 @@ use yii\jui\DatePicker;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->textarea(['rows' => 6, 'class' => 'form-control wisywyg-editor']) ?>
 
     <?= $form->field($model, 'created')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd']) ?>
 
