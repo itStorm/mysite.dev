@@ -58,6 +58,9 @@ $config['modules'] = [
     'article' => [
         'class' => 'app\modules\article\Module',
     ],
+    'file' => [
+        'class' => 'app\modules\file\Module',
+    ],
 ];
 
 // DEV CONFIGURATION

@@ -13,7 +13,7 @@ class TinyMCEAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [];
     public $js = [
-        'js/tinymce/tinymce.min.js',
+        'tinymce/tinymce.min.js',
         'js/wisywyg.js',
     ];
 
