@@ -1,5 +1,7 @@
 <?php
 
+namespace app\modules\file\lib;
+
 /**
  * elFinder - file manager for web.
  * Core class.
@@ -216,7 +218,7 @@ class elFinder {
 
 		// "mount" volumes
 		foreach ($opts['roots'] as $i => $o) {
-			$class = 'elFinderVolume'.(isset($o['driver']) ? $o['driver'] : '');
+			$class = __NAMESPACE__ .'\elFinderVolume'.(isset($o['driver']) ? $o['driver'] : '');
 
 			if (class_exists($class)) {
 				$volume = new $class();

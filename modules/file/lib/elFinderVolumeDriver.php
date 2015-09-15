@@ -1,4 +1,7 @@
 <?php
+
+namespace app\modules\file\lib;
+
 /**
  * Base class for elFinder volume.
  * Provide 2 layers:

@@ -2,7 +2,11 @@
 
 namespace app\modules\file\controllers;
 
+use Yii;
 use yii\web\Controller;
+use app\modules\file\lib\elFinder;
+use app\modules\file\lib\elFinderConnector;
+
 
 /**
  * Class DefaultController
@@ -11,6 +15,16 @@ use yii\web\Controller;
  */
 class DefaultController extends Controller
 {
+    /** @inheritdoc */
+    public function beforeAction($action)
+    {
+        if ($action->id == 'connector') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
     public function actionIndex()
     {
         return $this->getView()->render('index', [], $this);
@@ -18,7 +32,20 @@ class DefaultController extends Controller
 
     public function actionConnector()
     {
-        var_dump('connector');
-        die();
+        $this->enableCsrfValidation;
+        $opts = [
+            'roots' => [
+                [
+                    'driver' => 'LocalFileSystem',
+                    'path'   => Yii::getAlias('@files') . '/',
+                    'URL'    => Yii::$app->getRequest()->getHostInfo() . '/files/',
+                ]
+            ]
+        ];
+
+        $connector = new elFinderConnector(new elFinder($opts));
+        $connector->run();
+
+        exit();
     }
 }

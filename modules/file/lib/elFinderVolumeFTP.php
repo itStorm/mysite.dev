@@ -1,5 +1,7 @@
 <?php
 
+namespace app\modules\file\lib;
+
 function chmodnum($chmod) {
     $trans = array('-' => '0', 'r' => '4', 'w' => '2', 'x' => '1');
     $chmod = substr(strtr($chmod, $trans), 1);

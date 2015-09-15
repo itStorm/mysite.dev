@@ -2,6 +2,7 @@
 
 Yii::setAlias('@common', dirname(__DIR__) . '/common');
 Yii::setAlias('@modules', dirname(__DIR__) . '/modules');
+Yii::setAlias('@files', dirname(__DIR__) . '/web/files');
 
 return [
     'basePath'   => dirname(__DIR__),

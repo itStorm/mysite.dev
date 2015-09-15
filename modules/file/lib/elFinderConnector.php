@@ -1,5 +1,7 @@
 <?php
 
+namespace app\modules\file\lib;
+
 /**
  * Default elFinder connector
  *

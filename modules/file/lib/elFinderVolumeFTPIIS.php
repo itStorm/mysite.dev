@@ -1,5 +1,7 @@
 <?php
 
+namespace app\modules\file\lib;
+
 /**
  * Simple elFinder driver for IIS FTP
  *
