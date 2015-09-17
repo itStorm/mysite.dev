@@ -3,9 +3,11 @@
 namespace app\modules\file\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\modules\file\lib\elFinder;
 use app\modules\file\lib\elFinderConnector;
+use app\modules\file\models\File;
 
 
 /**
@@ -15,6 +17,21 @@ use app\modules\file\lib\elFinderConnector;
  */
 class DefaultController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [File::RULE_UPLOAD],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /** @inheritdoc */
     public function beforeAction($action)
     {

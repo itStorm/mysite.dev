@@ -5,6 +5,7 @@ use Yii;
 use yii\console\Controller;
 use app\modules\rbac\UserRoleRule;
 use app\modules\article\models\Article;
+use app\modules\file\models\File;
 
 class RbacController extends Controller
 {
@@ -27,6 +28,11 @@ class RbacController extends Controller
         $articleUpdate = $auth->createPermission(Article::RULE_UPDATE);
         $articleUpdate->description = 'Article update';
         $auth->add($articleUpdate);
+
+        // FILE UPLOADER
+        $fileUpload = $auth->createPermission(File::RULE_UPLOAD);
+        $fileUpload->description = 'Work with file upload';
+        $auth->add($fileUpload);
 
         // Rule for checking roles
         $rule = new UserRoleRule();
@@ -57,6 +63,7 @@ class RbacController extends Controller
         $auth->addChild($moderator, $articleUpdate);
         // ..admin
         $auth->addChild($admin, $moderator);
+        $auth->addChild($admin, $fileUpload);
 
         echo "Done!\n";
     }

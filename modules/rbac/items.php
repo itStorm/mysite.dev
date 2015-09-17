@@ -12,6 +12,10 @@ return [
         'type' => 2,
         'description' => 'Article update',
     ],
+    'file_upload' => [
+        'type' => 2,
+        'description' => 'Work with file upload',
+    ],
     'user' => [
         'type' => 1,
         'description' => 'User',
@@ -36,6 +40,7 @@ return [
         'ruleName' => 'userRole',
         'children' => [
             'moderator',
+            'file_upload',
         ],
     ],
 ];
