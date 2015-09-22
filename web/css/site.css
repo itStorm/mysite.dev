@@ -138,3 +138,17 @@ a.desc:after {
 .carousel-inner > .item > .img > img {
     height: 250px;
 }
+
+/* ARTICLE DECORATION */
+.article-date {
+    color: #777;
+    font-style: italic;
+}
+
+.article-content {
+    margin: 20px 0px 20px 0px;
+}
+
+.user-sign {
+    color: #777;
+}

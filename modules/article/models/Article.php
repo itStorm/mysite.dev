@@ -3,6 +3,7 @@
 namespace app\modules\article\models;
 
 use Yii;
+use app\modules\user\models\User;
 
 /**
  * This is the model class for table "articles".
@@ -13,8 +14,7 @@ use Yii;
  * @property string $created
  * @property string $updated
  * @property integer $user_id
- *
- * @property Users $user
+ * @property User $user
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -68,10 +68,20 @@ class Article extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return User
      */
     public function getUser()
     {
-        return $this->hasOne(Users::className(), ['id' => 'user_id']);
+        return User::findIdentity($this->user_id);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreated()
+    {
+        $created = new \DateTime($this->created);
+
+        return $created->format('j F, Y');
     }
 }
