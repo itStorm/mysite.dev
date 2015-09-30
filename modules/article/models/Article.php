@@ -36,52 +36,18 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
-            [['title'], 'filter', 'filter' => 'trim'],
-            [['title'], 'string', 'length' => [2, 255]],
-
-            [['content'], 'required'],
-            [['content'], 'filter', 'filter' => 'trim'],
-            [['content'], 'string'],
-
-            [['created', 'updated'], 'required'],
-            [['created', 'updated'], 'date', 'format' => 'yyyy-MM-dd'],
-
-            [['user_id'], 'required'],
-            [['user_id'], 'integer'],
+            [['title', 'content', 'user_id', 'created', 'updated'], 'required'],
+            [['title'], 'string', 'max' => 255],
+            ['content', 'string'],
+            [['user_id','created', 'updated'], 'integer'],
         ];
     }
 
     /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'content' => 'Content',
-            'created' => 'Created',
-            'updated' => 'Updated',
-            'user_id' => 'User ID',
-        ];
-    }
-
-    /**
-     * @return User
+     * @return null|User
      */
     public function getUser()
     {
         return User::findIdentity($this->user_id);
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreated()
-    {
-        $created = new \DateTime($this->created);
-
-        return $created->format('j F, Y');
     }
 }

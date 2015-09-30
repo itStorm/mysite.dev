@@ -1,4 +1,6 @@
 <?php
+use kartik\datecontrol\Module as KartikModule;
+
 $config = require(__DIR__ . '/main.php');
 
 $config['id'] = 'basic';
@@ -45,6 +47,12 @@ $config['components']['i18n'] = [
         ],
     ],
 ];
+$config['components']['formatter'] = [
+    'class'          => 'yii\i18n\Formatter',
+    'dateFormat'     => 'php:j F, Y',
+    'datetimeFormat' => 'php:j F, Y H:i:s',
+    'timeFormat'     => 'php:H:i:s',
+];
 $config['components']['log']['traceLevel'] = YII_DEBUG ? 3 : 0;
 
 // MODULES
@@ -61,6 +69,14 @@ $config['modules'] = [
     'file' => [
         'class' => 'app\modules\file\Module',
     ],
+    'datecontrol' => [
+        'class'        => 'kartik\datecontrol\Module',
+        'saveSettings' => [
+            KartikModule::FORMAT_DATE     => 'php:U', // saves as unix timestamp
+            KartikModule::FORMAT_TIME     => 'php:H:i:s',
+            KartikModule::FORMAT_DATETIME => 'php:U',
+        ],
+    ]
 ];
 
 // DEV CONFIGURATION

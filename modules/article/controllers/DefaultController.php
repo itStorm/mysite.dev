@@ -5,6 +5,7 @@ namespace app\modules\article\controllers;
 use Yii;
 use app\modules\article\models\Article;
 use app\modules\article\models\ArticleSearch;
+use app\modules\article\models\ArticleEditForm;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -81,7 +82,7 @@ class DefaultController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Article();
+        $model = new ArticleEditForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

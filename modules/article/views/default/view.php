@@ -31,7 +31,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     <h1><?= Html::encode($this->title) ?></h1>
     <span class="article-date">
         Published:
-        <?= $model->getCreated()?>
+        <?= \Yii::$app->formatter->asDatetime($model->created);?>
     </span>
     &nbsp;&nbsp;&nbsp;
     <a href="#">

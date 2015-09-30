@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\jui\DatePicker;
+use kartik\datecontrol\DateControl;
 use app\assets\TinyMCEAsset;
 
 /* @var $this yii\web\View */
@@ -20,14 +20,12 @@ TinyMCEAsset::register($this);
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6, 'class' => 'form-control wisywyg-editor']) ?>
 
-    <?= $form->field($model, 'created')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd']) ?>
+    <?= $form->field($model, 'created')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
 
-    <?= $form->field($model, 'updated')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd']) ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'updated')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton(!$model->id ? 'Create' : 'Update', ['class' => !$model->id ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
