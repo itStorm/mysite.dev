@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\Carousel;
+use yii\helpers\HtmlPurifier;
 
 /** @var $this yii\web\View */
 /** @var $articles app\modules\article\models\Article[]*/
@@ -42,7 +43,7 @@ $this->endBlock();
             foreach($row as $article): ?>
                 <div class="col-sm-4">
                     <h2><?= $article->title; ?></h2>
-                    <p><?= $article->content; ?></p>
+                    <p><?= HtmlPurifier::process($article->content, ['HTML.Allowed' => '']) ?></p>
                     <p><?= Html::a('more... &raquo;', ['/article/default/view', 'id' => $article->id], ['class' => 'btn btn-default'])?></p>
                 </div>
             <?php endforeach; ?>
