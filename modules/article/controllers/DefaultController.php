@@ -101,7 +101,9 @@ class DefaultController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $article = $this->findModel($id);
+        $model = new ArticleEditForm();
+        $model->setModel($article);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

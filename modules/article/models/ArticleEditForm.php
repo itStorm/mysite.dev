@@ -22,6 +22,11 @@ class ArticleEditForm extends Model
     public $created;
     /** @var  string */
     public $updated;
+    /** @var  integer */
+    public $user_id;
+
+    /** @var Article */
+    private $model;
 
     /**
      * @return array the validation rules.
@@ -56,6 +61,14 @@ class ArticleEditForm extends Model
     }
 
     /**
+     * @param Article $article
+     */
+    public function setModel(Article $article) {
+        $this->model = $article;
+        $this->setAttributes($article->getAttributes(), false);
+    }
+
+    /**
      * Сохранить статью
      * @return bool
      */
@@ -65,8 +78,32 @@ class ArticleEditForm extends Model
             return false;
         }
 
-        $this->id = 1;
+        $article = $this->getModel();
+        $article->id = $this->id;
+        $article->user_id = Yii::$app->user->id;
+        $article->title = $this->title;
+        $article->content = $this->content;
+        $article->created = $this->created;
+        $article->updated = $this->updated;
 
-        return true;
+        if ($article->save()) {
+            $this->id = $article->id;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return Article
+     */
+    private function getModel()
+    {
+        if (!$this->model) {
+            $this->model = new Article();
+        }
+
+        return $this->model;
     }
 }
