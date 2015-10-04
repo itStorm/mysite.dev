@@ -46,3 +46,7 @@ function elFinderBrowser (callback, value, meta) {
     });
     return false;
 }
+
+$('form').bind('submit', function(e) {
+    tinyMCE.triggerSave();
+});
