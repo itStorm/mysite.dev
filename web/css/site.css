@@ -139,6 +139,24 @@ a.desc:after {
     height: 250px;
 }
 
+/* ARTICLE ANNOUNCEMENT DECORATION */
+.article-announcement .preview {
+    position: relative;
+    height: 20px;
+    overflow: hidden;
+}
+
+.article-announcement .fade-out {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1;
+    width: 30px;
+    height: 20px;
+    background: url('/img/fade-out-white.png') top left repeat-y;
+}
+
 /* ARTICLE DECORATION */
 .article-date {
     color: #777;

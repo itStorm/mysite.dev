@@ -42,9 +42,14 @@ $this->endBlock();
             /** @var  $row app\modules\article\models\Article[] */
             foreach($row as $article): ?>
                 <div class="col-sm-4">
-                    <h2><?= $article->title; ?></h2>
-                    <p><?= HtmlPurifier::process($article->content, ['HTML.Allowed' => '']) ?></p>
-                    <p><?= Html::a('more... &raquo;', ['/article/default/view', 'id' => $article->id], ['class' => 'btn btn-default'])?></p>
+                    <div class="article-announcement">
+                        <h2 class="title"><?= $article->title; ?></h2>
+                        <span class="preview">
+                            <div class="fade-out"></div>
+                            <?= $article->getShortContent();?>
+                        </span>
+                        <p><?= Html::a('more... &raquo;', ['/article/default/view', 'id' => $article->id], ['class' => 'btn btn-default'])?></p>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
