@@ -4,17 +4,23 @@ namespace app\modules\article\controllers;
 
 use Yii;
 use app\modules\article\models\Article;
-use app\modules\article\models\ArticleSearch;
 use app\modules\article\models\ArticleEditForm;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * DefaultController implements the CRUD actions for Article model.
+ * Class DefaultController
+ * @package app\modules\article\controllers
  */
 class DefaultController extends Controller
 {
+    /**
+     * Количество статей на странице
+     */
+    const ARTICLES_COUNT_PER_PAGE = 10;
+
     public function behaviors()
     {
         return [
@@ -54,12 +60,22 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ArticleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Article::find();
+        $countQuery = clone $query;
+
+        $pages = new Pagination([
+            'totalCount' => $countQuery->count(),
+            'pageSize' => self::ARTICLES_COUNT_PER_PAGE,
+        ]);
+
+        $articles = $query
+            ->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'articles' => $articles,
+            'pages'    => $pages,
         ]);
     }
 

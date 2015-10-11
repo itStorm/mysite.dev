@@ -10,6 +10,10 @@ use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegistrationForm;
 use yii\captcha\CaptchaAction;
 
+/**
+ * Class DefaultController
+ * @package app\modules\user\controllers
+ */
 class DefaultController extends Controller
 {
 	public function actions()

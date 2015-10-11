@@ -3,8 +3,11 @@
 namespace app\modules\article\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
 use app\modules\user\models\User;
 use common\behaviors\TextCutter;
+use yii\helpers\Url;
+
 
 /**
  * This is the model class for table "articles".
@@ -18,9 +21,9 @@ use common\behaviors\TextCutter;
  * @property User $user
  *
  * @see common\behaviors\TextCutter::cut()
- * @method string cut() cut(string $field_value, string $filed_config_name)
+ * @method string cut() cut(string $field_name, int $length)
  */
-class Article extends \yii\db\ActiveRecord
+class Article extends ActiveRecord
 {
     const RULE_VIEW = 'article_view';
     const RULE_CREATE = 'article_create';
@@ -68,8 +71,16 @@ class Article extends \yii\db\ActiveRecord
         return User::findIdentity($this->user_id);
     }
 
-    public function getShortContent()
+    /**
+     * @param int $length
+     * @return string
+     */
+    public function getShortContent($length = null)
     {
-        return $this->cut('content');
+        return $this->cut('content', $length);
+    }
+
+    public function getUrl() {
+        return Url::to(['/article/default/view', 'id' => $this->id]);
     }
 }

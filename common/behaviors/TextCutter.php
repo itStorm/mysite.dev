@@ -18,10 +18,9 @@ class TextCutter extends Behavior
      * @param string $propertyName
      * @return string
      */
-    public function cut($propertyName)
+    public function cut($propertyName, $length = null)
     {
-        $length = $this->fields[$propertyName];
-
+        $length = $length ?: $this->fields[$propertyName] ?: null;
         if (!$length) {
             return '';
         }

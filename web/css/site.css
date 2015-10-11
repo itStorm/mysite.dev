@@ -170,3 +170,29 @@ a.desc:after {
 .user-sign {
     color: #777;
 }
+
+/* LIST DECORATION */
+.list-page {
+
+}
+
+.list-page .list-page-item {
+    display: block;
+    color: #555;
+}
+
+.list-page .list-page-item .glyphicon-chevron-right {
+    display: none;
+}
+
+.list-page .list-page-item:hover {
+    text-decoration: none;
+}
+
+.list-page .list-page-item:hover .glyphicon-chevron-right{
+    display: inline;
+}
+
+.list-page .list-page-item:nth-of-type(odd) {
+    /*background-color: #f9f9f9;*/
+}
