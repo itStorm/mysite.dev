@@ -9,7 +9,7 @@ use yii\data\Pagination;
 /** @var $articles Article[] */
 /** @var $pages Pagination */
 
-$this->title = 'Articles';
+$this->title = Yii::t('app', 'Articles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">

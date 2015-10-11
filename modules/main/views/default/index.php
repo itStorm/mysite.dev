@@ -39,15 +39,16 @@ $this->endBlock();
         <div class="row">
             <?php
             /** @var  $row app\modules\article\models\Article[] */
-            foreach($row as $article): ?>
+            foreach ($row as $article): ?>
                 <div class="col-sm-4">
                     <div class="article-announcement">
                         <div class="h2 title"><?= $article->title; ?></div>
                         <span class="preview">
                             <span class="fade-out"></span>
-                            <?= $article->getShortContent();?>
+                            <?= $article->getShortContent(); ?>
                         </span>
-                        <p><?= Html::a('more... &raquo;', $article->getUrl(), ['class' => 'btn btn-default'])?></p>
+
+                        <p><?= Html::a(Yii::t('app', 'more') . '... &raquo;', $article->getUrl(), ['class' => 'btn btn-default']) ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>

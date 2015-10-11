@@ -7,13 +7,11 @@ use yii\captcha\Captcha;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\modules\user\models\RegistrationForm */
 
-$this->title = 'Registration';
+$this->title = Yii::t('app', 'Registration');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-registration">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to register:</p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -28,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
 
             <div class="form-group">
-                <?= Html::submitButton('Send', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>
