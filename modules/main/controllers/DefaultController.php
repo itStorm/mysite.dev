@@ -3,6 +3,7 @@
 namespace app\modules\main\controllers;
 
 use app\modules\article\models\Article;
+use app\modules\user\models\User;
 use Yii;
 use yii\captcha\CaptchaAction;
 use yii\filters\AccessControl;
@@ -19,24 +20,34 @@ class DefaultController extends Controller
 
 	public function behaviors()
 	{
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'only' => ['logout'],
-				'rules' => [
-					[
-						'actions' => ['logout'],
-						'allow' => true,
-						'roles' => ['@'],
-					],
-				],
-			],
-			'verbs' => [
-				'class' => VerbFilter::className(),
-				'actions' => [
-					'logout' => ['post'],
-				],
-			],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['logout', 'contact', 'about'],
+                'rules' => [
+                    [
+                        'allow'   => true,
+                        'actions' => ['logout'],
+                        'roles'   => ['@'],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['contact'],
+                        'roles'   => [User::ROLE_NAME_ADMIN],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['about'],
+                        'roles'   => [User::ROLE_NAME_ADMIN],
+                    ],
+                ],
+            ],
+            'verbs'  => [
+                'class'   => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
 		];
 	}
 

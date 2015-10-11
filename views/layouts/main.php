@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\modules\user\models\User;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -26,36 +27,42 @@ AppAsset::register($this);
     <div class="wrap">
         <div class="navbar-wrapper">
             <div class="container">
-            <?php
+                <?php
+
+                $navBarItems = [Yii::$app->user->isGuest ?
+                    ['label' => Yii::t('app', 'Login'),
+                     'url'   => ['/user/default/login']] :
+                    ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Html::encode(Yii::$app->user->identity->username),
+                     'url'   => ['/user']],
+                    Yii::$app->user->isGuest ? '' :
+                        ['label'       => '<span class="glyphicon glyphicon-off"></span>',
+                         'url'         => ['/user/default/logout'],
+                         'linkOptions' => ['data-method' => 'post']],
+                ];
+
+                if (Yii::$app->user->can(User::ROLE_NAME_ADMIN)) {
+                    $navBarItems = array_merge([
+                        ['label' => Yii::t('app', 'Home'), 'url' => ['/main/default/index']],
+                        ['label' => Yii::t('app', 'About'), 'url' => ['/main/default/about']],
+                        ['label' => Yii::t('app', 'Contact'), 'url' => ['/main/default/contact']]
+                    ], $navBarItems);
+                }
+
                 NavBar::begin([
                     'brandLabel' => Yii::$app->params['projectName'],
-                    'brandUrl' => Yii::$app->homeUrl,
-                    'options' => [
+                    'brandUrl'   => Yii::$app->homeUrl,
+                    'options'    => [
                         'class' => 'navbar-inverse  navbar-static-top',
                     ],
                 ]);
                 echo Nav::widget([
-                    'options' => ['class' => 'navbar-nav navbar-right'],
+                    'options'      => ['class' => 'navbar-nav navbar-right'],
                     'encodeLabels' => false,
-                    'items' => [
-                        ['label' => Yii::t('app', 'Home'), 'url' => ['/main/default/index']],
-                        ['label' => Yii::t('app', 'About'), 'url' => ['/main/default/about']],
-                        ['label' => Yii::t('app', 'Contact'), 'url' => ['/main/default/contact']],
-                        Yii::$app->user->isGuest ?
-                            ['label' => Yii::t('app', 'Login'),
-                             'url'   => ['/user/default/login']] :
-                            ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Html::encode(Yii::$app->user->identity->username),
-                             'url'   => ['/user']],
-                        Yii::$app->user->isGuest ? '' :
-                            ['label'       => '<span class="glyphicon glyphicon-off"></span>',
-                             'url'         => ['/user/default/logout'],
-                             'linkOptions' => ['data-method' => 'post']],
-                    ],
-                ]);
+                    'items'        => $navBarItems]);
                 NavBar::end();
-            ?>
+                ?>
             </div>
-         </div>
+        </div>
 
         <div class="container">
             <?= $this->blocks['before_content']; ?>
