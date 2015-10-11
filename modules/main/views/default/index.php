@@ -6,7 +6,7 @@ use yii\helpers\HtmlPurifier;
 /** @var $this yii\web\View */
 /** @var $articles app\modules\article\models\Article[]*/
 
-$this->title = 'My Yii Application';
+$this->title = 'Main';
 ?>
 
 
@@ -15,13 +15,13 @@ $this->beginBlock('before_content');
 echo Carousel::widget ( [
     'items' => [
         [
-            'content' => '<div class="img"><img src="//:0"/></div>',
-            'caption' => '<h2>Article caption 1</h2><p>announcement text 1 .......</p>',
+            'content' => '<div class="img"><img src="/img/slide-1.jpeg"/></div>',
+            'caption' => '<h2></h2><p></p>',
             'options' => []
         ],
         [
-            'content' => '<div class="img"><img src="//:0"/></div>',
-            'caption' => '<h2>Article caption 2</h2><p>announcement text 2 .......</p>',
+            'content' => '<div class="img"><img src="/img/slide-2.jpeg"></div>',
+            'caption' => '<h2></h2><p></p>',
             'options' => []
         ],
     ],
@@ -30,7 +30,7 @@ $this->endBlock();
 ?>
 
 <?php $this->beginBlock('sidebar') ?>
-    MENU
+<!--    MENU-->
 <?php $this->endBlock() ?>
 
 <div class="site-index">
