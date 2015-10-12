@@ -28,3 +28,6 @@ phpunit.phar
 
 # vagrant files
 .vagrant
+
+# db config
+/config/db.php
