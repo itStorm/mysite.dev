@@ -69,6 +69,9 @@ $config['modules'] = [
     'file' => [
         'class' => 'app\modules\file\Module',
     ],
+    'test' => [
+        'class' => 'app\modules\test\Module',
+    ],
     'datecontrol' => [
         'class'        => 'kartik\datecontrol\Module',
         'saveSettings' => [
