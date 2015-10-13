@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use app\modules\article\models\Article;
-use common\widgets\SocialButtons;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
@@ -14,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $adminButtons = '';
 if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     $adminButtons = '<p>'
-        . Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) .' '
+        . Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' '
         . Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data'  => [
@@ -32,7 +31,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     <div class="h1"><?= Html::encode($this->title) ?></div>
     <span class="article-date">
         Published:
-        <?= \Yii::$app->formatter->asDatetime($model->created);?>
+        <?= \Yii::$app->formatter->asDatetime($model->created); ?>
     </span>
     &nbsp;&nbsp;&nbsp;
     <a href="#">
@@ -41,8 +40,9 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
             <?= $model->user->username ?>
         </span>
     </a>
+
     <div class="article-content">
-        <?= $model->content?>
+        <?= $model->content ?>
     </div>
-    <?= SocialButtons::widget();?>
+
 </div>
