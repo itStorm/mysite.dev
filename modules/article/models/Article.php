@@ -2,6 +2,7 @@
 
 namespace app\modules\article\models;
 
+use common\lib\safedata\SafeDataFinder;
 use Yii;
 use \yii\db\ActiveRecord;
 use app\modules\user\models\User;
@@ -102,5 +103,16 @@ class Article extends ActiveRecord implements SafeDataInterface
     public static function hasAccessToDeleted($user)
     {
         return $user->can(User::ROLE_NAME_ADMIN);
+    }
+
+    /**
+     * Пометить удаленным
+     * @return bool
+     */
+    public function markDeleted()
+    {
+        $this->is_deleted = SafeDataFinder::IS_DELETED;
+
+        return $this->save(false, ['is_deleted']);
     }
 }

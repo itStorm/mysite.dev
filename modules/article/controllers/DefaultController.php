@@ -136,12 +136,15 @@ class DefaultController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if ($this->findModel($id)->markDeleted()) {
+            return $this->redirect(['index']);
+        }
 
-        return $this->redirect(['index']);
+        throw new NotFoundHttpException('Occured error. Try again or not. :(');
     }
 
     /**
