@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datecontrol\DateControl;
 use app\assets\TinyMCEAsset;
+use app\modules\user\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
@@ -23,6 +24,15 @@ TinyMCEAsset::register($this);
     <?= $form->field($model, 'created')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
 
     <?= $form->field($model, 'updated')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
+
+    <?= $form->field($model, 'is_enabled')->checkbox() ?>
+
+    <?php
+        if(Yii::$app->user->can(User::ROLE_NAME_ADMIN)) {
+            echo $form->field($model, 'is_deleted')->checkbox();
+        }
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton(!$model->id ? 'Create' : 'Update', ['class' => !$model->id ? 'btn btn-success' : 'btn btn-primary']) ?>

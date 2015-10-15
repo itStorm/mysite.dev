@@ -24,6 +24,10 @@ class ArticleEditForm extends Model
     public $updated;
     /** @var  integer */
     public $user_id;
+    /** @var bool */
+    public $is_deleted;
+    /** @var bool */
+    public $is_enabled;
 
     /** @var Article */
     private $model;
@@ -44,6 +48,8 @@ class ArticleEditForm extends Model
 
             [['created', 'updated'], 'required'],
             [['created', 'updated'], 'date', 'format' => 'php:U'],
+
+            [['is_deleted', 'is_enabled'], 'boolean'],
         ];
     }
 
@@ -53,10 +59,12 @@ class ArticleEditForm extends Model
     public function attributeLabels()
     {
         return [
-            'title'   => 'Title',
-            'content' => 'Content',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'title'      => 'Title',
+            'content'    => 'Content',
+            'created'    => 'Created',
+            'updated'    => 'Updated',
+            'is_enabled' => 'Enable',
+            'is_deleted' => 'Deleted',
         ];
     }
 
@@ -85,6 +93,8 @@ class ArticleEditForm extends Model
         $article->content = $this->content;
         $article->created = $this->created;
         $article->updated = $this->updated;
+        $article->is_enabled = $this->is_enabled;
+        $article->is_deleted = $this->is_deleted;
 
         if ($article->save()) {
             $this->id = $article->id;
