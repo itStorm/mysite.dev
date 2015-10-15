@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="list-page">
         <?php foreach ($articles as $article): ?>
             <a href="<?= $article->getUrl()?>" class="list-page-item article-announcement">
-                <div class="h3"><?= $article->title ?></div>
+                <div class="h3"><?= $this->render('components/_title', ['model' => $article]) ?></div>
                 <div class="article-date">
                     Published:
                     <?= \Yii::$app->formatter->asDatetime($article->created); ?>

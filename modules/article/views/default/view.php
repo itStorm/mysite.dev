@@ -28,7 +28,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
 <?= $adminButtons ?>
 <div class="article-view">
 
-    <div class="h1"><?= Html::encode($this->title) ?></div>
+    <div class="h1"><?= $this->render('components/_title', ['model' => $model]) ?></div>
     <span class="article-date">
         Published:
         <?= \Yii::$app->formatter->asDatetime($model->created); ?>
