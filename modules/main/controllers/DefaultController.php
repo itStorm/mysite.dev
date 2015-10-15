@@ -2,14 +2,15 @@
 
 namespace app\modules\main\controllers;
 
-use app\modules\article\models\Article;
-use app\modules\user\models\User;
 use Yii;
 use yii\captcha\CaptchaAction;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\modules\main\models\ContactForm;
+use app\modules\article\models\Article;
+use app\modules\user\models\User;
+use common\lib\safedata\SafeDataFinder;
 
 class DefaultController extends Controller
 {
@@ -70,7 +71,8 @@ class DefaultController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$articles = Article::find()->limit(self::ARTICLES_COUNT_PER_PAGE)->all();
+
+		$articles = SafeDataFinder::init(Article::className())->find()->limit(self::ARTICLES_COUNT_PER_PAGE)->all();
 
 		return $this->render('index', [
 			'articles' => $articles

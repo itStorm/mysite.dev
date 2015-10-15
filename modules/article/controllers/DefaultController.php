@@ -9,6 +9,7 @@ use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use common\lib\safedata\SafeDataFinder;
 
 /**
  * Class DefaultController
@@ -60,12 +61,12 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $query = Article::find();
+        $query = SafeDataFinder::init(Article::className())->find();
         $countQuery = clone $query;
 
         $pages = new Pagination([
             'totalCount' => $countQuery->count(),
-            'pageSize' => self::ARTICLES_COUNT_PER_PAGE,
+            'pageSize'   => self::ARTICLES_COUNT_PER_PAGE,
         ]);
 
         $articles = $query
@@ -152,10 +153,11 @@ class DefaultController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Article::findOne($id)) !== null) {
-            return $model;
-        } else {
+        $model = SafeDataFinder::init(Article::className())->findOne($id);
+        if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        return $model;
     }
 }

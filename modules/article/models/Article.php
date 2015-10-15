@@ -7,6 +7,7 @@ use \yii\db\ActiveRecord;
 use app\modules\user\models\User;
 use common\behaviors\TextCutter;
 use yii\helpers\Url;
+use common\lib\safedata\interfaces\SafeDataInterface;
 
 
 /**
@@ -18,12 +19,14 @@ use yii\helpers\Url;
  * @property string $created
  * @property string $updated
  * @property integer $user_id
+ * @property bool $is_deleted
+ * @property bool $is_enabled
  * @property User $user
  *
  * @see common\behaviors\TextCutter::cut()
  * @method string cut() cut(string $field_name, int $length)
  */
-class Article extends ActiveRecord
+class Article extends ActiveRecord implements SafeDataInterface
 {
     const RULE_VIEW = 'article_view';
     const RULE_CREATE = 'article_create';
@@ -80,7 +83,24 @@ class Article extends ActiveRecord
         return $this->cut('content', $length);
     }
 
-    public function getUrl() {
+    /**
+     * Получить Url к статье
+     * @return string
+     */
+    public function getUrl()
+    {
         return Url::to(['/article/default/view', 'id' => $this->id]);
+    }
+
+    /** @inheritdoc */
+    public static function hasAccessToDisabled($user)
+    {
+        return $user->can(self::RULE_UPDATE);
+    }
+
+    /** @inheritdoc */
+    public static function hasAccessToDeleted($user)
+    {
+        return $user->can(User::ROLE_NAME_ADMIN);
     }
 }
