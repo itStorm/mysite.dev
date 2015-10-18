@@ -61,7 +61,10 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $query = SafeDataFinder::init(Article::className())->find();
+        $query = SafeDataFinder::init(Article::className())
+            ->find()
+            ->orderBy(['updated' => SORT_DESC]);
+
         $countQuery = clone $query;
 
         $pages = new Pagination([
