@@ -29,7 +29,7 @@ $this->endBlock();
 ?>
 
 <?php $this->beginBlock('sidebar') ?>
-<!--    MENU-->
+    <?php echo $this->render('@modules/article/views/default/components/_menu'); ?>
 <?php $this->endBlock() ?>
 
 <div class="site-index">
