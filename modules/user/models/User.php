@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use app\modules\article\models\Article;
 
 /**
  * This is the model class for table "users".
@@ -16,6 +17,7 @@ use yii\web\IdentityInterface;
  * @property string $password_hash
  * @property string $auth_key
  * @property int $role
+ * @property Article[] $articles
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -160,5 +162,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function setNewAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    public function getArticles()
+    {
+        return $this->hasMany(Article::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 }

@@ -72,7 +72,7 @@ class Article extends ActiveRecord implements SafeDataInterface
      */
     public function getUser()
     {
-        return User::findIdentity($this->user_id);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**

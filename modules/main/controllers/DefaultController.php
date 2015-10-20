@@ -11,16 +11,17 @@ use app\modules\main\models\ContactForm;
 use app\modules\article\models\Article;
 use app\modules\user\models\User;
 use common\lib\safedata\SafeDataFinder;
+use yii\web\ErrorAction;
 
 class DefaultController extends Controller
 {
-	/**
-	 * Количество статей на странице
-	 */
-	const ARTICLES_COUNT_PER_PAGE = 6;
+    /**
+     * Количество статей на странице
+     */
+    const ARTICLES_COUNT_PER_PAGE = 6;
 
-	public function behaviors()
-	{
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -49,64 +50,64 @@ class DefaultController extends Controller
                     'logout' => ['post'],
                 ],
             ],
-		];
-	}
+        ];
+    }
 
-	public function actions()
-	{
-		return [
-			'error' => [
-				'class' => 'yii\web\ErrorAction',
-			],
-			'captcha' => [
-				'class' => CaptchaAction::className(),
-				'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-			],
-		];
-	}
+    public function actions()
+    {
+        return [
+            'error'   => [
+                'class' => ErrorAction::className(),
+            ],
+            'captcha' => [
+                'class'           => CaptchaAction::className(),
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+        ];
+    }
 
-	/**
-	 * Главная страница
-	 * @return string
-	 */
-	public function actionIndex()
-	{
+    /**
+     * Главная страница
+     * @return string
+     */
+    public function actionIndex()
+    {
 
-		$articles = SafeDataFinder::init(Article::className())
-			->find()
-			->orderBy(['updated' => SORT_DESC])
-			->limit(self::ARTICLES_COUNT_PER_PAGE)
-			->all();
+        $articles = SafeDataFinder::init(Article::className())
+            ->find()
+            ->orderBy(['updated' => SORT_DESC])
+            ->limit(self::ARTICLES_COUNT_PER_PAGE)
+            ->all();
 
-		return $this->render('index', [
-			'articles' => $articles
-		]);
-	}
+        return $this->render('index', [
+            'articles' => $articles
+        ]);
+    }
 
-	/**
-	 * Обратная связь
-	 * @return string
-	 */
-	public function actionContact()
-	{
-		$model = new ContactForm();
-		if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-			Yii::$app->session->setFlash('contactFormSubmitted');
+    /**
+     * Обратная связь
+     * @return string
+     */
+    public function actionContact()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
 
-			return $this->refresh();
-		} else {
-			return $this->render('contact', [
-				'model' => $model,
-			]);
-		}
-	}
+            return $this->refresh();
+        } else {
+            return $this->render('contact', [
+                'model' => $model,
+            ]);
+        }
+    }
 
-	/**
-	 * О проекте
-	 * @return string
-	 */
-	public function actionAbout()
-	{
-		return $this->render('about');
-	}
+    /**
+     * О проекте
+     * @return string
+     */
+    public function actionAbout()
+    {
+        return $this->render('about');
+    }
 }
