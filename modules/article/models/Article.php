@@ -4,6 +4,7 @@ namespace app\modules\article\models;
 
 use common\lib\safedata\SafeDataFinder;
 use Yii;
+use yii\db\ActiveQuery;
 use \yii\db\ActiveRecord;
 use app\modules\user\models\User;
 use common\behaviors\TextCutter;
@@ -23,6 +24,7 @@ use common\lib\safedata\interfaces\SafeDataInterface;
  * @property bool $is_deleted
  * @property bool $is_enabled
  * @property User $user
+ * @property Tag[] $tags
  *
  * @see common\behaviors\TextCutter::cut()
  * @method string cut() cut(string $field_name, int $length)
@@ -68,11 +70,20 @@ class Article extends ActiveRecord implements SafeDataInterface
     }
 
     /**
-     * @return null|User
+     * @return ActiveQuery
      */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable('article_tag', ['article_id' => 'id']);
     }
 
     /**

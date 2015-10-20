@@ -4,6 +4,7 @@ namespace app\modules\user\models;
 
 use Yii;
 use yii\base\NotSupportedException;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use app\modules\article\models\Article;
@@ -164,6 +165,9 @@ class User extends ActiveRecord implements IdentityInterface
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getArticles()
     {
         return $this->hasMany(Article::className(), ['user_id' => 'id'])->inverseOf('user');
