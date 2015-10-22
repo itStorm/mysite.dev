@@ -6,6 +6,10 @@ use yii\base\Behavior;
 use app\modules\article\models\Article;
 use yii\helpers\HtmlPurifier;
 
+/**
+ * Class TextCutter
+ * @package common\behaviors
+ */
 class TextCutter extends Behavior
 {
     public $fields = [];
@@ -15,7 +19,10 @@ class TextCutter extends Behavior
 
 
     /**
+     * Аккуратная обрезка текста согласно необходимой длинне
+     *
      * @param string $propertyName
+     * @param int $length
      * @return string
      */
     public function cut($propertyName, $length = null)
@@ -24,7 +31,7 @@ class TextCutter extends Behavior
         if (!$length) {
             return '';
         }
-        $value = $this->owner[$propertyName] ?: '';
+        $value = empty($this->owner->{$propertyName}) ? '' : $this->owner->{$propertyName};
         $clearValue = HtmlPurifier::process($value, ['HTML.Allowed' => '']);
 
         // если строка короткая - отдаем её как есть
