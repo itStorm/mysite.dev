@@ -32,6 +32,7 @@ return [
             'user',
             'article_create',
             'article_update',
+            'file_upload',
         ],
     ],
     'admin' => [
@@ -40,7 +41,6 @@ return [
         'ruleName' => 'userRole',
         'children' => [
             'moderator',
-            'file_upload',
         ],
     ],
 ];

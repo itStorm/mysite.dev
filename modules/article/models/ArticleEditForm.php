@@ -23,9 +23,9 @@ class ArticleEditForm extends Model
     /** @var  string */
     public $updated;
     /** @var bool */
-    public $is_deleted;
+    public $is_deleted = 0;
     /** @var bool */
-    public $is_enabled;
+    public $is_enabled = 0;
 
     /** @var Article */
     private $model;

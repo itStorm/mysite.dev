@@ -61,9 +61,10 @@ class RbacController extends Controller
         $auth->addChild($moderator, $user);
         $auth->addChild($moderator, $articleCreate);
         $auth->addChild($moderator, $articleUpdate);
+        $auth->addChild($moderator, $fileUpload);
+
         // ..admin
         $auth->addChild($admin, $moderator);
-        $auth->addChild($admin, $fileUpload);
 
         echo "Done!\n";
     }
