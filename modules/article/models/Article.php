@@ -2,6 +2,7 @@
 
 namespace app\modules\article\models;
 
+use common\behaviors\Blameable;
 use common\lib\safedata\SafeDataFinder;
 use Yii;
 use yii\db\ActiveQuery;
@@ -20,10 +21,12 @@ use common\lib\safedata\interfaces\SafeDataInterface;
  * @property string $content
  * @property string $created
  * @property string $updated
- * @property integer $user_id
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property bool $is_deleted
  * @property bool $is_enabled
- * @property User $user
+ * @property User $createdBy
+ * @property User $updatedBy
  * @property Tag[] $tags
  *
  * @see common\behaviors\TextCutter::cut()
@@ -44,7 +47,8 @@ class Article extends ActiveRecord implements SafeDataInterface
                 'fields' => [
                     'content' => 100,
                 ]
-            ]
+            ],
+            'blameable'  => Blameable::className(),
         ];
     }
 
@@ -62,19 +66,27 @@ class Article extends ActiveRecord implements SafeDataInterface
     public function rules()
     {
         return [
-            [['title', 'content', 'user_id', 'created', 'updated'], 'required'],
+            [['title', 'content', 'created_by', 'updated_by', 'created', 'updated'], 'required'],
             [['title'], 'string', 'max' => 255],
             ['content', 'string'],
-            [['user_id', 'created', 'updated'], 'integer'],
+            [['created_by', 'updated_by', 'created', 'updated'], 'integer'],
         ];
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getUser()
+    public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
     /**

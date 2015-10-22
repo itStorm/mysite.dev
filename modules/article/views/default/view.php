@@ -34,7 +34,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     <a href="#">
         <span class="user-sign">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <?= $model->user->username ?>
+            <?= $model->createdBy->username ?>
         </span>
     </a>
 

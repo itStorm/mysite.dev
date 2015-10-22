@@ -22,8 +22,6 @@ class ArticleEditForm extends Model
     public $created;
     /** @var  string */
     public $updated;
-    /** @var  integer */
-    public $user_id;
     /** @var bool */
     public $is_deleted;
     /** @var bool */
@@ -71,7 +69,8 @@ class ArticleEditForm extends Model
     /**
      * @param Article $article
      */
-    public function setModel(Article $article) {
+    public function setModel(Article $article)
+    {
         $this->model = $article;
         $this->setAttributes($article->getAttributes(), false);
     }
@@ -88,7 +87,6 @@ class ArticleEditForm extends Model
 
         $article = $this->getModel();
         $article->id = $this->id;
-        $article->user_id = Yii::$app->user->id;
         $article->title = $this->title;
         $article->content = $this->content;
         $article->created = $this->created;
@@ -96,7 +94,7 @@ class ArticleEditForm extends Model
         $article->is_enabled = $this->is_enabled;
         $article->is_deleted = $this->is_deleted;
 
-        if ($article->save()) {
+        if ($article->save(false)) {
             $this->id = $article->id;
 
             return true;
