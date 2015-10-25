@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\datecontrol\DateControl;
 use app\assets\TinyMCEAsset;
 use app\modules\user\models\User;
+use common\widgets\TagsWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
@@ -27,10 +28,14 @@ TinyMCEAsset::register($this);
 
     <?= $form->field($model, 'is_enabled')->checkbox() ?>
 
+    <div class="form-group">
+        <?= TagsWidget::widget(['model' => $model, 'attribute' => 'tags']); ?>
+    </div>
+
     <?php
-        if(Yii::$app->user->can(User::ROLE_NAME_ADMIN)) {
-            echo $form->field($model, 'is_deleted')->checkbox();
-        }
+    if (Yii::$app->user->can(User::ROLE_NAME_ADMIN)) {
+        echo $form->field($model, 'is_deleted')->checkbox();
+    }
     ?>
 
 

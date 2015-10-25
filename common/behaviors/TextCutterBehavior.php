@@ -10,7 +10,7 @@ use yii\helpers\HtmlPurifier;
  * Class TextCutter
  * @package common\behaviors
  */
-class TextCutter extends Behavior
+class TextCutterBehavior extends Behavior
 {
     public $fields = [];
 

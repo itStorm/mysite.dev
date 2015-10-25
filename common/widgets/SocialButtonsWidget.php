@@ -4,7 +4,7 @@ namespace common\widgets;
 use yii\base\Widget;
 use yii\web\View;
 
-class SocialButtons extends Widget
+class SocialButtonsWidget extends Widget
 {
     public $url = null;
     public $type = 'website';

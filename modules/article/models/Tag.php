@@ -56,4 +56,19 @@ class Tag extends ActiveRecord
         return $this->hasMany(Article::className(), ['id' => 'article_id'])
             ->viaTable('article_tag', ['tag_id' => 'id']);
     }
+
+    /**
+     * Форматировать массив тегов в простой массив список tag_id => name
+     * @param Tag[] $tags
+     * @return array
+     */
+    public static function convertAsList(array $tags = [])
+    {
+        $list = [];
+        foreach ($tags as $tag) {
+            $list[$tag->id] = $tag->name;
+        }
+
+        return $list;
+    }
 }

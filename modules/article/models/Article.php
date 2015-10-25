@@ -2,13 +2,14 @@
 
 namespace app\modules\article\models;
 
-use common\behaviors\Blameable;
+use common\behaviors\BlameableBehavior;
+use common\widgets\interfaces\TagsInterface;
 use common\lib\safedata\SafeDataFinder;
 use Yii;
 use yii\db\ActiveQuery;
 use \yii\db\ActiveRecord;
 use app\modules\user\models\User;
-use common\behaviors\TextCutter;
+use common\behaviors\TextCutterBehavior;
 use yii\helpers\Url;
 use common\lib\safedata\interfaces\SafeDataInterface;
 
@@ -32,7 +33,7 @@ use common\lib\safedata\interfaces\SafeDataInterface;
  * @see common\behaviors\TextCutter::cut()
  * @method string cut() cut(string $field_name, int $length)
  */
-class Article extends ActiveRecord implements SafeDataInterface
+class Article extends ActiveRecord implements SafeDataInterface, TagsInterface
 {
     const RULE_VIEW = 'article_view';
     const RULE_CREATE = 'article_create';
@@ -43,12 +44,12 @@ class Article extends ActiveRecord implements SafeDataInterface
     {
         return [
             'textCutter' => [
-                'class'  => TextCutter::className(),
+                'class'  => TextCutterBehavior::className(),
                 'fields' => [
                     'content' => 100,
                 ]
             ],
-            'blameable'  => Blameable::className(),
+            'blameable'  => BlameableBehavior::className(),
         ];
     }
 
@@ -89,9 +90,7 @@ class Article extends ActiveRecord implements SafeDataInterface
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
-    /**
-     * @return ActiveQuery
-     */
+    /** @inheritdoc */
     public function getTags()
     {
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])

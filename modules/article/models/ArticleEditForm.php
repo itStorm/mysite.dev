@@ -2,6 +2,7 @@
 
 namespace app\modules\article\models;
 
+use common\widgets\interfaces\TagsInterface;
 use Yii;
 use yii\base\Model;
 
@@ -9,7 +10,7 @@ use yii\base\Model;
  * Class ArticleEditForm
  * @package app\modules\article\models
  */
-class ArticleEditForm extends Model
+class ArticleEditForm extends Model implements TagsInterface
 {
 
     /** @var  integer */
@@ -26,6 +27,9 @@ class ArticleEditForm extends Model
     public $is_deleted = 0;
     /** @var bool */
     public $is_enabled = 0;
+
+    /** @var array  */
+    public $tags;
 
     /** @var Article */
     private $model;
@@ -71,8 +75,15 @@ class ArticleEditForm extends Model
      */
     public function setModel(Article $article)
     {
-        $this->model = $article;
         $this->setAttributes($article->getAttributes(), false);
+
+        $this->model = $article;
+        $this->tags = $article->tags;
+    }
+
+    /** @inheritdoc */
+    public function getTags() {
+        return $this->model->getTags();
     }
 
     /**

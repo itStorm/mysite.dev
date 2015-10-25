@@ -11,7 +11,7 @@ use yii\web\User;
  * Class Blameable
  * @package common\behaviors
  */
-class Blameable extends Behavior
+class BlameableBehavior extends Behavior
 {
     const CREATED_BY_ATTR = 'createdBy';
     const UPDATED_BY_ATTR = 'updatedBy';

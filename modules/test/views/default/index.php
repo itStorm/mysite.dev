@@ -6,7 +6,7 @@
 
 <br><br>
 <?php
-    echo common\widgets\SocialButtons::widget([
+    echo common\widgets\SocialButtonsWidget::widget([
         'url' => '/test/ololo12',
     ]);
 ?>
