@@ -7,7 +7,7 @@ use yii\db\ActiveQuery;
 interface TagsInterface
 {
     /**
-     * @return ActiveQuery
+     * @return array
      */
     public function getTags();
 }

@@ -33,7 +33,7 @@ use common\lib\safedata\interfaces\SafeDataInterface;
  * @see common\behaviors\TextCutter::cut()
  * @method string cut() cut(string $field_name, int $length)
  */
-class Article extends ActiveRecord implements SafeDataInterface, TagsInterface
+class Article extends ActiveRecord implements SafeDataInterface
 {
     const RULE_VIEW = 'article_view';
     const RULE_CREATE = 'article_create';
@@ -90,7 +90,9 @@ class Article extends ActiveRecord implements SafeDataInterface, TagsInterface
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
-    /** @inheritdoc */
+    /**
+     * @return ActiveQuery
+     */
     public function getTags()
     {
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])

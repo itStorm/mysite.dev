@@ -58,17 +58,18 @@ class Tag extends ActiveRecord
     }
 
     /**
-     * Форматировать массив тегов в простой массив список tag_id => name
-     * @param Tag[] $tags
+     * Базовые теги (исп. в автокомплите)
      * @return array
      */
-    public static function convertAsList(array $tags = [])
+    public static function getBaseTagsNames()
     {
-        $list = [];
-        foreach ($tags as $tag) {
-            $list[$tag->id] = $tag->name;
-        }
-
-        return $list;
+        return self::find()
+            ->select('name')
+            ->where([
+                'is_base' => 1
+            ])
+            ->asArray()
+            ->column();
     }
+
 }

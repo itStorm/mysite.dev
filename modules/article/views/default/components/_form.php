@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\datecontrol\DateControl;
 use app\assets\TinyMCEAsset;
 use app\modules\user\models\User;
-use common\widgets\TagsWidget;
+use common\widgets\TagsInputWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
@@ -29,7 +29,7 @@ TinyMCEAsset::register($this);
     <?= $form->field($model, 'is_enabled')->checkbox() ?>
 
     <div class="form-group">
-        <?= TagsWidget::widget(['model' => $model, 'attribute' => 'tags']); ?>
+        <?= TagsInputWidget::widget(['model' => $model, 'attribute' => 'tags']); ?>
     </div>
 
     <?php

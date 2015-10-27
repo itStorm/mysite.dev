@@ -90,6 +90,14 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+.label {
+    margin: 2px;
+}
+
+.tags-lables {
+    margin: 2px 0px 5px 0px;
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 .navbar-wrapper {

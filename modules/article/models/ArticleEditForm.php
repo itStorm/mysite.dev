@@ -28,7 +28,7 @@ class ArticleEditForm extends Model implements TagsInterface
     /** @var bool */
     public $is_enabled = 0;
 
-    /** @var array  */
+    /** @var array */
     public $tags;
 
     /** @var Article */
@@ -52,6 +52,8 @@ class ArticleEditForm extends Model implements TagsInterface
             [['created', 'updated'], 'date', 'format' => 'php:U'],
 
             [['is_deleted', 'is_enabled'], 'boolean'],
+
+            [['tags'], 'safe'],
         ];
     }
 
@@ -67,6 +69,7 @@ class ArticleEditForm extends Model implements TagsInterface
             'updated'    => 'Updated',
             'is_enabled' => 'Enable',
             'is_deleted' => 'Deleted',
+            'tags'       => 'Tags',
         ];
     }
 
@@ -76,14 +79,17 @@ class ArticleEditForm extends Model implements TagsInterface
     public function setModel(Article $article)
     {
         $this->setAttributes($article->getAttributes(), false);
-
         $this->model = $article;
-        $this->tags = $article->tags;
     }
 
     /** @inheritdoc */
-    public function getTags() {
-        return $this->model->getTags();
+    public function getTags()
+    {
+        if (is_null($this->tags)) {
+            $this->tags = $this->getModel()->getTags()->select('name')->asArray()->column();
+        }
+
+        return $this->tags;
     }
 
     /**
