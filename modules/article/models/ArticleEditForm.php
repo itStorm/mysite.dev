@@ -103,15 +103,10 @@ class ArticleEditForm extends Model implements TagsInterface
         }
 
         $article = $this->getModel();
-        $article->id = $this->id;
-        $article->title = $this->title;
-        $article->content = $this->content;
-        $article->created = $this->created;
-        $article->updated = $this->updated;
-        $article->is_enabled = $this->is_enabled;
-        $article->is_deleted = $this->is_deleted;
+        $article->setAttributes($this->getAttributes());
 
         if ($article->save(false)) {
+            $article->saveTags($this->tags);
             $this->id = $article->id;
 
             return true;

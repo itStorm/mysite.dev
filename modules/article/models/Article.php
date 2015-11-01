@@ -3,7 +3,6 @@
 namespace app\modules\article\models;
 
 use common\behaviors\BlameableBehavior;
-use common\widgets\interfaces\TagsInterface;
 use common\lib\safedata\SafeDataFinder;
 use Yii;
 use yii\db\ActiveQuery;
@@ -68,9 +67,14 @@ class Article extends ActiveRecord implements SafeDataInterface
     {
         return [
             [['title', 'content', 'created_by', 'updated_by', 'created', 'updated'], 'required'],
+
             [['title'], 'string', 'max' => 255],
+
             ['content', 'string'],
+
             [['created_by', 'updated_by', 'created', 'updated'], 'integer'],
+
+            [['is_deleted', 'is_enabled'], 'boolean'],
         ];
     }
 
@@ -138,5 +142,51 @@ class Article extends ActiveRecord implements SafeDataInterface
         $this->is_deleted = SafeDataFinder::IS_DELETED;
 
         return $this->save(false, ['is_deleted']);
+    }
+
+    /**
+     * Сохранить/установить теги
+     * @param array|string $tags
+     */
+    public function saveTags($tags = [])
+    {
+        // фильтруем пустые теги
+        $tags = is_array($tags) ? $tags : [$tags];
+        $tags = array_filter($tags);
+
+        $saveTagsTransaction = Article::getDb()->beginTransaction();
+        try {
+            // отсоединяем старые теги
+            $this->unlinkAllTags();
+
+            // сохраняем заново все теги
+            foreach ($tags as $tagName) {
+                $tagName = trim($tagName);
+                /** @var Tag $tag */
+                $tag = Tag::findOne(['name' => $tagName]);
+                if (!$tag) {
+                    $tag = new Tag();
+                    $tag->name = $tagName;
+                    $tag->save();
+                }
+                $this->link('tags', $tag);
+            }
+
+            $saveTagsTransaction->commit();
+        } catch (\Exception $e) {
+            die('dscds');
+            $saveTagsTransaction->rollBack();
+        }
+    }
+
+    /**
+     * Отсоединить все теги
+     */
+    protected function unlinkAllTags()
+    {
+        /** @var Tag $tag */
+        foreach ($this->tags as $tag) {
+            $this->unlink('tags', $tag, true);
+        }
     }
 }
