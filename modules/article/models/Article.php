@@ -116,7 +116,7 @@ class Article extends ActiveRecord implements SafeDataInterface
      * Получить Url к статье
      * @return string
      */
-    public function getUrl()
+    public function getUrlView()
     {
         return Url::to(['/article/default/view', 'id' => $this->id]);
     }

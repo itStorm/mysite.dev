@@ -2,6 +2,7 @@
 
 namespace app\modules\article\controllers;
 
+use app\modules\article\models\Tag;
 use Yii;
 use app\modules\article\models\Article;
 use app\modules\article\models\ArticleEditForm;
@@ -27,28 +28,28 @@ class DefaultController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['view', 'create', 'update', 'delete'],
+                'only'  => ['view', 'create', 'update', 'delete'],
                 'rules' => [
                     [
-                        'allow' => true,
+                        'allow'   => true,
                         'actions' => ['view'],
-                        'roles' => ['?', Article::RULE_VIEW],
+                        'roles'   => ['?', Article::RULE_VIEW],
                     ],
                     [
-                        'allow' => true,
+                        'allow'   => true,
                         'actions' => ['delete'],
-                        'verbs' => ['POST'],
-                        'roles' => [Article::RULE_UPDATE],
+                        'verbs'   => ['POST'],
+                        'roles'   => [Article::RULE_UPDATE],
                     ],
                     [
-                        'allow' => true,
+                        'allow'   => true,
                         'actions' => ['create'],
-                        'roles' => [Article::RULE_CREATE],
+                        'roles'   => [Article::RULE_CREATE],
                     ],
                     [
-                        'allow' => true,
+                        'allow'   => true,
                         'actions' => ['update'],
-                        'roles' => [Article::RULE_UPDATE],
+                        'roles'   => [Article::RULE_UPDATE],
                     ],
                 ],
             ],
@@ -57,12 +58,53 @@ class DefaultController extends Controller
 
     /**
      * Lists all Article models.
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
         $query = SafeDataFinder::init(Article::className())
             ->find()
+            ->orderBy(['updated' => SORT_DESC]);
+
+        $countQuery = clone $query;
+
+        $pages = new Pagination([
+            'totalCount' => $countQuery->count(),
+            'pageSize'   => self::ARTICLES_COUNT_PER_PAGE,
+        ]);
+
+        $articles = $query
+            ->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('index', [
+            'articles' => $articles,
+            'pages'    => $pages,
+        ]);
+    }
+
+    /**
+     * Просмотр категории
+     * @param string|int $category
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionCategory($category)
+    {
+        $tagConditions = ['is_main' => Tag::IS_MAIN];
+        $tagConditions += is_numeric($category) ?
+            ['id' => $category] : ['slug' => $category];
+
+        $tag = Tag::findOne($tagConditions);
+        if (!$tag) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        $query = SafeDataFinder::init(Article::className())
+            ->find()
+            ->joinWith('tags')
+            ->where(['tags.id' => $tag->id])
             ->orderBy(['updated' => SORT_DESC]);
 
         $countQuery = clone $query;

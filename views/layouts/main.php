@@ -65,7 +65,7 @@ AppAsset::register($this);
         </div>
 
         <div class="container">
-            <?= $this->blocks['before_content']; ?>
+            <?= isset($this->blocks['before_content'])? $this->blocks['before_content'] : ''; ?>
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
@@ -75,7 +75,7 @@ AppAsset::register($this);
                     <?= $content ?>
                 </div>
                 <div class="col-sm-2 col-sm-offset-1">
-                    <?= $this->blocks['sidebar'] ;?>
+                    <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
                 </div>
             </div>
         </div>

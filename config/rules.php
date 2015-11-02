@@ -6,6 +6,10 @@ return [
     '<_a:(login|logout)>'                             => 'user/default/<_a>',
     '<_a:test/.*>'                                    => 'test/default/index',
 
+    'article/<id:\d+>'                                => 'article/default/view',
+    'article/category/<category:\w+>'                 => 'article/default/category',
+    'article/<_a:[\w\-]+>/<id:\d+>'                   => 'article/default/<_a>',
+
     '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>'              => '<_m>/<_c>/view',
     '<_m:[\w\-]+>/<_c:[\w\-]+>/<_a:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/<_a>',
     '<_m:[\w\-]+>'                                    => '<_m>/default/index',

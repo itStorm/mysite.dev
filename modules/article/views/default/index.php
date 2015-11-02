@@ -12,6 +12,13 @@ use yii\data\Pagination;
 $this->title = Yii::t('app', 'Articles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php
+$this->beginBlock('sidebar');
+echo $this->render('components/_menu');
+$this->endBlock();
+?>
+
 <div class="article-index">
 
     <div class="h1"><?= Html::encode($this->title) ?></div>
@@ -23,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="list-page">
         <?php foreach ($articles as $article): ?>
-            <a href="<?= $article->getUrl()?>" class="list-page-item article-announcement">
+            <a href="<?= $article->getUrlView() ?>" class="list-page-item article-announcement">
                 <div class="h3"><?= $this->render('components/_title', ['model' => $article]) ?></div>
                 <div><?= $this->render('components/_published_date', ['model' => $article]) ?></div>
                 <span class="preview">
@@ -34,6 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
             </a>
         <?php endforeach; ?>
+        <?php if (!$articles): ?>
+            <div class="alert alert-info" role="alert">
+                <?= Yii::t('app', 'Nothing here yet, but it will be interesting here soon.'); ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <?= LinkPager::widget(['pagination' => $pages]); ?>

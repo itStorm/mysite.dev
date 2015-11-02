@@ -98,6 +98,10 @@ a.desc:after {
     margin: 2px 0px 5px 0px;
 }
 
+.clear {
+    clear: both;
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 .navbar-wrapper {
@@ -207,11 +211,11 @@ a.desc:after {
 
 /* SIDEBAR */
 .sidebar-module {
-    padding: 20px 15px 15px 15px;
+    padding: 15px 15px 15px 15px;
     margin: 0 -15px 15px;
 }
 
-.sidebar-module a {
-    color: #333;
-    text-decoration: none;
+.sidebar-module .tag {
+    margin: 1px;
+    float: left;
 }

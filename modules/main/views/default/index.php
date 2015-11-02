@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Carousel;
 
 /** @var $this yii\web\View */
-/** @var $articles app\modules\article\models\Article[]*/
+/** @var $articles app\modules\article\models\Article[] */
 
 $this->title = Yii::t('app', 'Main');
 ?>
@@ -11,7 +11,7 @@ $this->title = Yii::t('app', 'Main');
 
 <?php
 $this->beginBlock('before_content');
-echo Carousel::widget ( [
+echo Carousel::widget([
     'items' => [
         [
             'content' => '<div class="img"><img src="/img/slide-1.jpeg"/></div>',
@@ -28,9 +28,11 @@ echo Carousel::widget ( [
 $this->endBlock();
 ?>
 
-<?php $this->beginBlock('sidebar') ?>
-    <?php echo $this->render('@modules/article/views/default/components/_menu'); ?>
-<?php $this->endBlock() ?>
+<?php
+$this->beginBlock('sidebar');
+echo $this->render('@modules/article/views/default/components/_menu');
+$this->endBlock()
+?>
 
 <div class="site-index">
     <?php
@@ -48,7 +50,7 @@ $this->endBlock();
                             <?= $article->getShortContent(); ?>
                         </span>
 
-                        <p><?= Html::a(Yii::t('app', 'more') . '... &raquo;', $article->getUrl(), ['class' => 'btn btn-default']) ?></p>
+                        <p><?= Html::a(Yii::t('app', 'more') . '... &raquo;', $article->getUrlView(), ['class' => 'btn btn-default']) ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>

@@ -20,4 +20,5 @@ return [
     'All articles' => 'Все публикации',
     'Update' => 'Обновление',
     'Create' => 'Новая запись',
+    'Nothing here yet, but it will be interesting here soon.' => 'Пока тут пусто, но скоро тут появится что-нибудь интересное.',
 ];
