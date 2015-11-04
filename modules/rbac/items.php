@@ -12,9 +12,9 @@ return [
         'type' => 2,
         'description' => 'Article update',
     ],
-    'file_upload' => [
+    'article_upload_files' => [
         'type' => 2,
-        'description' => 'Work with file upload',
+        'description' => 'Article upload files',
     ],
     'user' => [
         'type' => 1,
@@ -32,7 +32,7 @@ return [
             'user',
             'article_create',
             'article_update',
-            'file_upload',
+            'article_upload_files',
         ],
     ],
     'admin' => [

@@ -60,7 +60,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-
         $articles = SafeDataFinder::init(Article::className())
             ->find()
             ->orderBy(['updated' => SORT_DESC])

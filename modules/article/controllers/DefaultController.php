@@ -3,6 +3,8 @@
 namespace app\modules\article\controllers;
 
 use app\modules\article\models\Tag;
+use common\libs\fileuploader\actions\FileAction;
+use common\libs\fileuploader\actions\FileConnectorAction;
 use Yii;
 use app\modules\article\models\Article;
 use app\modules\article\models\ArticleEditForm;
@@ -15,6 +17,8 @@ use common\libs\safedata\SafeDataFinder;
 /**
  * Class DefaultController
  * @package app\modules\article\controllers
+ * @method string actionFile()
+ * @method string actionFileConnector()
  */
 class DefaultController extends Controller
 {
@@ -28,7 +32,7 @@ class DefaultController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['view', 'create', 'update', 'delete'],
+                'only'  => ['view', 'create', 'update', 'delete', 'file', 'fileconnector'],
                 'rules' => [
                     [
                         'allow'   => true,
@@ -51,7 +55,35 @@ class DefaultController extends Controller
                         'actions' => ['update'],
                         'roles'   => [Article::RULE_UPDATE],
                     ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['file', 'fileconnector'],
+                        'roles'   => [Article::RULE_UPLOAD_FILES],
+                    ],
                 ],
+            ],
+        ];
+    }
+
+    /** @inheritdoc */
+    public function beforeAction($action)
+    {
+        if ($action->id == 'fileconnector') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
+    public function actions()
+    {
+        return [
+            'file'          => [
+                'class' => FileAction::className(),
+            ],
+            'fileconnector' => [
+                'class' => FileConnectorAction::className(),
+                'path'  => 'articles',
             ],
         ];
     }

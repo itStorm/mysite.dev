@@ -37,6 +37,7 @@ class Article extends ActiveRecord implements SafeDataInterface
     const RULE_VIEW = 'article_view';
     const RULE_CREATE = 'article_create';
     const RULE_UPDATE = 'article_update';
+    const RULE_UPLOAD_FILES = 'article_upload_files';
 
 
     public function behaviors()

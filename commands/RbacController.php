@@ -22,17 +22,18 @@ class RbacController extends Controller
         $articleView = $auth->createPermission(Article::RULE_VIEW);
         $articleView->description = 'Article view';
         $auth->add($articleView);
+
         $articleCreate = $auth->createPermission(Article::RULE_CREATE);
         $articleCreate->description = 'Article create';
         $auth->add($articleCreate);
+
         $articleUpdate = $auth->createPermission(Article::RULE_UPDATE);
         $articleUpdate->description = 'Article update';
         $auth->add($articleUpdate);
 
-        // FILE UPLOADER
-        $fileUpload = $auth->createPermission(File::RULE_UPLOAD);
-        $fileUpload->description = 'Work with file upload';
-        $auth->add($fileUpload);
+        $articleFilesUpload = $auth->createPermission(Article::RULE_UPLOAD_FILES);
+        $articleFilesUpload->description = 'Article upload files';
+        $auth->add($articleFilesUpload);
 
         // Rule for checking roles
         $rule = new UserRoleRule();
@@ -61,7 +62,7 @@ class RbacController extends Controller
         $auth->addChild($moderator, $user);
         $auth->addChild($moderator, $articleCreate);
         $auth->addChild($moderator, $articleUpdate);
-        $auth->addChild($moderator, $fileUpload);
+        $auth->addChild($moderator, $articleFilesUpload);
 
         // ..admin
         $auth->addChild($admin, $moderator);

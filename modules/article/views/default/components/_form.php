@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datecontrol\DateControl;
-use app\assets\TinyMCEAsset;
+use common\libs\fileuploader\assets\TinyMCEAsset;
 use app\modules\user\models\User;
 use common\widgets\TagsInputWidget;
 

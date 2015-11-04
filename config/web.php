@@ -66,9 +66,6 @@ $config['modules'] = [
     'article' => [
         'class' => 'app\modules\article\Module',
     ],
-    'file' => [
-        'class' => 'app\modules\file\Module',
-    ],
     'test' => [
         'class' => 'app\modules\test\Module',
     ],
