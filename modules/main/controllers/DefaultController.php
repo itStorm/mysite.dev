@@ -6,7 +6,6 @@ use Yii;
 use yii\captcha\CaptchaAction;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 use app\modules\main\models\ContactForm;
 use app\modules\article\models\Article;
 use app\modules\user\models\User;
@@ -25,13 +24,8 @@ class DefaultController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['logout', 'contact', 'about'],
+                'only'  => ['contact', 'about'],
                 'rules' => [
-                    [
-                        'allow'   => true,
-                        'actions' => ['logout'],
-                        'roles'   => ['@'],
-                    ],
                     [
                         'allow'   => true,
                         'actions' => ['contact'],
@@ -42,12 +36,6 @@ class DefaultController extends Controller
                         'actions' => ['about'],
                         'roles'   => [User::ROLE_NAME_ADMIN],
                     ],
-                ],
-            ],
-            'verbs'  => [
-                'class'   => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
                 ],
             ],
         ];
