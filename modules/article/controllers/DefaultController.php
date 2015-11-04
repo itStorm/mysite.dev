@@ -10,7 +10,7 @@ use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use common\lib\safedata\SafeDataFinder;
+use common\libs\safedata\SafeDataFinder;
 
 /**
  * Class DefaultController

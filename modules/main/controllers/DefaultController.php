@@ -9,7 +9,7 @@ use yii\web\Controller;
 use app\modules\main\models\ContactForm;
 use app\modules\article\models\Article;
 use app\modules\user\models\User;
-use common\lib\safedata\SafeDataFinder;
+use common\libs\safedata\SafeDataFinder;
 use yii\web\ErrorAction;
 
 class DefaultController extends Controller

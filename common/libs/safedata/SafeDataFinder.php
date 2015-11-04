@@ -1,7 +1,7 @@
 <?php
-namespace common\lib\safedata;
+namespace common\libs\safedata;
 
-use common\lib\safedata\interfaces\SafeDataInterface;
+use common\libs\safedata\interfaces\SafeDataInterface;
 use Yii;
 use yii\base\ErrorException;
 use yii\db\ActiveQuery;

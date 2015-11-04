@@ -3,14 +3,14 @@
 namespace app\modules\article\models;
 
 use common\behaviors\BlameableBehavior;
-use common\lib\safedata\SafeDataFinder;
+use common\libs\safedata\SafeDataFinder;
 use Yii;
 use yii\db\ActiveQuery;
 use \yii\db\ActiveRecord;
 use app\modules\user\models\User;
 use common\behaviors\TextCutterBehavior;
 use yii\helpers\Url;
-use common\lib\safedata\interfaces\SafeDataInterface;
+use common\libs\safedata\interfaces\SafeDataInterface;
 
 
 /**
@@ -174,7 +174,6 @@ class Article extends ActiveRecord implements SafeDataInterface
 
             $saveTagsTransaction->commit();
         } catch (\Exception $e) {
-            die('dscds');
             $saveTagsTransaction->rollBack();
         }
     }

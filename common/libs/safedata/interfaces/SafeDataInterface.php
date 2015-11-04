@@ -1,5 +1,5 @@
 <?php
-namespace common\lib\safedata\interfaces;
+namespace common\libs\safedata\interfaces;
 
 use yii\web\User;
 
