@@ -13,9 +13,6 @@ use yii\web\User;
  */
 class BlameableBehavior extends Behavior
 {
-    const CREATED_BY_ATTR = 'createdBy';
-    const UPDATED_BY_ATTR = 'updatedBy';
-
     public $createdBy = 'created_by';
     public $updatedBy = 'updated_by';
 

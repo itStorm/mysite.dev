@@ -16,15 +16,4 @@ class m150930_213919_timestamp_as_integer_for_articles extends Migration
         $this->alterColumn('articles', 'created', Schema::TYPE_TIMESTAMP);
         $this->alterColumn('articles', 'updated', Schema::TYPE_TIMESTAMP);
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

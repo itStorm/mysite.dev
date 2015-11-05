@@ -15,15 +15,4 @@ class m150901_214648_add_role_for_users extends Migration
     {
         $this->dropColumn('users', 'role');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-    
-    public function safeDown()
-    {
-    }
-    */
 }

@@ -3,6 +3,7 @@
 namespace app\modules\article\models;
 
 use common\behaviors\BlameableBehavior;
+use common\behaviors\SlugBehavior;
 use common\libs\safedata\SafeDataFinder;
 use Yii;
 use yii\db\ActiveQuery;
@@ -27,6 +28,7 @@ use common\libs\safedata\interfaces\SafeDataInterface;
  * @property bool $is_enabled
  * @property User $createdBy
  * @property User $updatedBy
+ * @property string $slug
  * @property Tag[] $tags
  *
  * @see common\behaviors\TextCutter::cut()
@@ -50,6 +52,7 @@ class Article extends ActiveRecord implements SafeDataInterface
                 ]
             ],
             'blameable'  => BlameableBehavior::className(),
+            'slug'       => SlugBehavior::className(),
         ];
     }
 

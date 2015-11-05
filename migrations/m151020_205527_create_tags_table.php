@@ -29,15 +29,4 @@ class m151020_205527_create_tags_table extends Migration
         $this->dropTable('article_tag');
         $this->dropTable('tags');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

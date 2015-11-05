@@ -16,15 +16,4 @@ class m151013_205531_is_deleted_and_is_enabled_for_articles extends Migration
         $this->dropColumn('articles', 'is_deleted');
         $this->dropColumn('articles', 'is_enabled');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

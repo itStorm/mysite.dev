@@ -20,15 +20,4 @@ class m150527_214730_create_user_table extends Migration
     {
         $this->dropTable('users');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-    
-    public function safeDown()
-    {
-    }
-    */
 }
