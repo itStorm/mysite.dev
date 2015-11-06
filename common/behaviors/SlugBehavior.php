@@ -63,7 +63,7 @@ class SlugBehavior extends Behavior
         }
 
         $transliteratedText = !$transliteratedText || is_numeric($transliteratedText) ?
-            '' : str_replace([' '], '_', $transliteratedText);
+            '' : preg_replace(['/[\s]/i', '/[^\w-]/i'], ['_', ''], $transliteratedText);
 
         $this->owner->{$this->slug} = $transliteratedText;
     }

@@ -1,13 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use app\modules\article\models\ArticleEditForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\article\models\Article */
+/* @var $model ArticleEditForm */
 
 $this->title = 'Update Article: ' . ' ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articles'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => $model->getModel()->getUrlView()];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="article-update">

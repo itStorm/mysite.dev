@@ -118,15 +118,15 @@ class DefaultController extends Controller
 
     /**
      * Просмотр категории
-     * @param string|int $category
+     * @param string|int $slug
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionCategory($category)
+    public function actionCategory($slug)
     {
         $tagConditions = ['is_main' => Tag::IS_MAIN];
-        $tagConditions += is_numeric($category) ?
-            ['id' => $category] : ['slug' => $category];
+        $tagConditions += is_numeric($slug) ?
+            ['id' => $slug] : ['slug' => $slug];
 
         $tag = Tag::findOne($tagConditions);
         if (!$tag) {

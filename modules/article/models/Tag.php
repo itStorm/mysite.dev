@@ -2,6 +2,7 @@
 
 namespace app\modules\article\models;
 
+use common\behaviors\SlugBehavior;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -26,6 +27,17 @@ class Tag extends ActiveRecord
     // Теги для главных странц, они же рубрики
     const IS_MAIN = 1;
     const NOT_MAIN = 0;
+
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        return [
+            'slug' => [
+                'class' => SlugBehavior::className(),
+                'title' => 'name',
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -100,7 +112,7 @@ class Tag extends ActiveRecord
      */
     public function getUrlView()
     {
-        return Url::to(['/article/default/category', 'category' => $this->slug ?: $this->id]);
+        return Url::to(['/article/default/category', 'slug' => $this->slug ?: $this->id]);
     }
 
 }

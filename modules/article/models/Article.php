@@ -42,6 +42,7 @@ class Article extends ActiveRecord implements SafeDataInterface
     const RULE_UPLOAD_FILES = 'article_upload_files';
 
 
+    /** @inheritdoc */
     public function behaviors()
     {
         return [
@@ -122,9 +123,7 @@ class Article extends ActiveRecord implements SafeDataInterface
      */
     public function getUrlView()
     {
-        $slug = $this->slug ?: $this->id;
-
-        return Url::to(['/article/default/view', 'slug' => $slug]);
+        return Url::to(['/article/default/view', 'slug' => $this->slug ?: $this->id]);
     }
 
     /** @inheritdoc */
