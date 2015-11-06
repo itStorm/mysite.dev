@@ -118,7 +118,7 @@ class ArticleEditForm extends Model implements TagsInterface
     /**
      * @return Article
      */
-    private function getModel()
+    public function getModel()
     {
         if (!$this->model) {
             $this->model = new Article();

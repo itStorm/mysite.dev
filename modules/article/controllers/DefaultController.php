@@ -159,13 +159,13 @@ class DefaultController extends Controller
 
     /**
      * Displays a single Article model.
-     * @param integer $id
+     * @param string|int $slug
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($slug),
         ]);
     }
 
@@ -179,7 +179,7 @@ class DefaultController extends Controller
         $model = new ArticleEditForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->getModel()->getUrlView());
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -200,7 +200,7 @@ class DefaultController extends Controller
         $model->setModel($article);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->getModel()->getUrlView());
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -227,13 +227,15 @@ class DefaultController extends Controller
     /**
      * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $slug
      * @return Article the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($slug)
     {
-        $model = SafeDataFinder::init(Article::className())->findOne($id);
+        $conditions = is_numeric($slug) ? ['id' => $slug] : ['slug' => $slug];
+        $model = SafeDataFinder::init(Article::className())->findOne($conditions);
+
         if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }

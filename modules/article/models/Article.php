@@ -122,7 +122,9 @@ class Article extends ActiveRecord implements SafeDataInterface
      */
     public function getUrlView()
     {
-        return Url::to(['/article/default/view', 'id' => $this->id]);
+        $slug = $this->slug ?: $this->id;
+
+        return Url::to(['/article/default/view', 'slug' => $slug]);
     }
 
     /** @inheritdoc */

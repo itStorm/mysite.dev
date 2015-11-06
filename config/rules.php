@@ -6,7 +6,7 @@ return [
     '<_a:(login|logout)>'                             => 'user/default/<_a>',
     '<_a:test/.*>'                                    => 'test/default/index',
 
-    'article/<id:\d+>'                                => 'article/default/view',
+    'article/<slug:[\w\-]+>'                              => 'article/default/view',
     'article/category/<category:\w+>'                 => 'article/default/category',
     'article/<_a:[\w\-]+>/<id:\d+>'                   => 'article/default/<_a>',
 
