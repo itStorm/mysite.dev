@@ -60,8 +60,11 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $articles = SafeDataFinder::init(Article::className())
-            ->find()
+        $articles = Article::find()
+            ->where([
+                'is_enabled' => SafeDataFinder::IS_ENABLED,
+                'is_deleted' => SafeDataFinder::NOT_DELETED,
+            ])
             ->orderBy(['updated' => SORT_DESC])
             ->limit(self::ARTICLES_COUNT_PER_PAGE)
             ->all();
