@@ -8,8 +8,9 @@ use yii\data\Pagination;
 /** @var $this yii\web\View */
 /** @var $articles Article[] */
 /** @var $pages Pagination */
+/** @var string $title */
 
-$this->title = Yii::t('app', 'Articles');
+$this->title = isset($title) ? $title : Yii::t('app', 'Articles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -30,16 +31,25 @@ $this->endBlock();
 
     <div class="list-page">
         <?php foreach ($articles as $article): ?>
-            <a href="<?= $article->getUrlView() ?>" class="list-page-item article-announcement">
-                <div class="h3"><?= $this->render('components/_title', ['model' => $article]) ?></div>
+            <?php
+            $articleUrl = $article->getUrlView();
+            ?>
+            <div class="list-page-item article-announcement">
+                <a class="open-list-item" href="<?= $articleUrl ?>">
+                    <div class="h3 title"><?= $this->render('components/_title', ['model' => $article]) ?></div>
+                </a>
+
                 <div><?= $this->render('components/_published_date', ['model' => $article]) ?></div>
-                <span class="preview">
-                    <span class="fade-out"></span>
-                    <?= $article->getShortContent(200); ?>
-                </span>
-                &nbsp;&nbsp;&nbsp;
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
-            </a>
+                <div class="tags-block"><?= \common\widgets\TagsWidget::widget(['tags' => $article->tags]); ?></div>
+                <a class="open-list-item" href="<?= $articleUrl ?>">
+                    <span class="preview">
+                        <span class="fade-out"></span>
+                        <?= $article->getShortContent(200); ?>
+                    </span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
+                </a>
+            </div>
         <?php endforeach; ?>
         <?php if (!$articles): ?>
             <div class="alert alert-info" role="alert">

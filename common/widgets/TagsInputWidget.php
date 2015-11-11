@@ -8,6 +8,10 @@ use yii\helpers\Html;
 use common\widgets\interfaces\TagsInterface;
 use yii\base\Model;
 
+/**
+ * Class TagsInputWidget
+ * @package common\widgets
+ */
 class TagsInputWidget extends Widget
 {
     /** @var Model|TagsInterface */

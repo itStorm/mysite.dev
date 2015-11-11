@@ -124,10 +124,10 @@ class DefaultController extends Controller
      */
     public function actionCategory($slug)
     {
-        $tagConditions = ['is_main' => Tag::IS_MAIN];
-        $tagConditions += is_numeric($slug) ?
+        $tagConditions = is_numeric($slug) ?
             ['id' => $slug] : ['slug' => $slug];
 
+        /** @var Tag $tag */
         $tag = Tag::findOne($tagConditions);
         if (!$tag) {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -154,6 +154,7 @@ class DefaultController extends Controller
         return $this->render('index', [
             'articles' => $articles,
             'pages'    => $pages,
+            'title'    => ucfirst($tag->name),
         ]);
     }
 
