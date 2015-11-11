@@ -111,14 +111,17 @@ a.desc:after {
     left: 0;
     z-index: 20;
 }
+
 .navbar-wrapper > .container {
     padding-right: 15px;
     padding-left: 15px;
 }
+
 .navbar-wrapper .navbar {
     padding-right: 15px;
     padding-left: 15px;
 }
+
 .navbar-wrapper .navbar .container {
     width: auto;
 }
@@ -131,6 +134,7 @@ a.desc:after {
     height: 250px;
     margin-bottom: 0px;
 }
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
     z-index: 10;
@@ -209,7 +213,7 @@ a.desc:after {
     display: none;
 }
 
-.list-page .list-page-item .open-list-item:hover .glyphicon-chevron-right{
+.list-page .list-page-item .open-list-item:hover .glyphicon-chevron-right {
     display: inline;
 }
 
