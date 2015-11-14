@@ -7,6 +7,7 @@
 <br><br>
 <?php
     echo common\widgets\SocialButtonsWidget::widget([
-        'url' => '/test/ololo12',
+        'url'   => \yii\helpers\Url::to('/test/ololo14', true),
+        'image' => \yii\helpers\Url::to('/img/social-logo.jpeg', true),
     ]);
 ?>
