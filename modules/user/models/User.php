@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use app\modules\article\models\Article;
 
@@ -171,5 +172,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function getArticles()
     {
         return $this->hasMany(Article::className(), ['user_id' => 'id'])->inverseOf('user');
+    }
+
+
+    /**
+     * Получить Url
+     * @param boolean|string $scheme the URI scheme to use in the generated URL
+     * @return string
+     */
+    public function getUrlView($scheme = false)
+    {
+        return Url::to(['/user/default/view', 'id' => $this->id], $scheme);
     }
 }

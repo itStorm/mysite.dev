@@ -10,6 +10,7 @@ use yii\web\Controller;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegistrationForm;
 use yii\captcha\CaptchaAction;
+use yii\web\NotFoundHttpException;
 
 /**
  * Class DefaultController
@@ -61,6 +62,24 @@ class DefaultController extends Controller
 
         return $this->render('index', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView($id)
+    {
+        if (!$user = User::findOne($id)) {
+            throw new NotFoundHttpException(Yii::t('app', 'User not found' . '...'));
+        } elseif (\Yii::$app->getUser()->id == $user->id) {
+            $this->redirect(['/user']);
+        }
+
+        return $this->render('view', [
+            'model' => $user,
         ]);
     }
 

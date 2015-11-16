@@ -33,7 +33,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     <div class="h1"><?= $this->render('components/_title', ['model' => $model]) ?></div>
     <?= $this->render('components/_published_date', ['model' => $model]) ?>
     &nbsp;&nbsp;&nbsp;
-    <a href="#">
+    <a href="<?= $model->createdBy->getUrlView(); ?>">
         <span class="user-sign">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <?= $model->createdBy->username ?>

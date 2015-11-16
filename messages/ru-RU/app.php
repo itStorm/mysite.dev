@@ -20,5 +20,6 @@ return [
     'All articles' => 'Все публикации',
     'Update' => 'Обновление',
     'Create' => 'Новая запись',
+    'User not found' => 'Пользователь не найден',
     'Nothing here yet, but it will be interesting here soon.' => 'Пока тут пусто, но скоро тут появится что-нибудь интересное.',
 ];
