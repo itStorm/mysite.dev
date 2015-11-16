@@ -43,4 +43,5 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         <?= $model->content ?>
     </div>
     <?= SocialButtonsWidget::widget();?>
+    <br/><br/><br/>
 </div>

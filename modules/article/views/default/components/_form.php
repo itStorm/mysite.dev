@@ -22,9 +22,7 @@ TinyMCEAsset::register($this);
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6, 'class' => 'form-control wisywyg-editor']) ?>
 
-    <?= $form->field($model, 'created')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
-
-    <?= $form->field($model, 'updated')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
+    <?= $form->field($model, 'published_date')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
 
     <?= $form->field($model, 'is_enabled')->checkbox() ?>
 

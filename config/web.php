@@ -52,30 +52,32 @@ $config['components']['formatter'] = [
     'dateFormat'     => 'php:j F, Y',
     'datetimeFormat' => 'php:j F, Y H:i:s',
     'timeFormat'     => 'php:H:i:s',
+    'timeZone'       => 'Europe/Moscow'
 ];
 $config['components']['log']['traceLevel'] = YII_DEBUG ? 3 : 0;
 
 // MODULES
 $config['modules'] = [
-    'main'    => [
+    'main'        => [
         'class' => 'app\modules\main\Module',
     ],
-    'user'    => [
+    'user'        => [
         'class' => 'app\modules\user\Module',
     ],
-    'article' => [
+    'article'     => [
         'class' => 'app\modules\article\Module',
     ],
-    'test' => [
+    'test'        => [
         'class' => 'app\modules\test\Module',
     ],
     'datecontrol' => [
-        'class'        => 'kartik\datecontrol\Module',
-        'saveSettings' => [
+        'class'           => 'kartik\datecontrol\Module',
+        'saveSettings'    => [
             KartikModule::FORMAT_DATE     => 'php:U', // saves as unix timestamp
             KartikModule::FORMAT_TIME     => 'php:H:i:s',
             KartikModule::FORMAT_DATETIME => 'php:U',
         ],
+        'displayTimezone' => 'Europe/Moscow',
     ]
 ];
 

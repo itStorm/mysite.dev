@@ -1,0 +1,3 @@
+Move into /opt/icu/{version icu}
+Add into php-fpm config
+    env[ICU_DATA]=/opt/icu/

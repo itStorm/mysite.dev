@@ -65,7 +65,7 @@ class DefaultController extends Controller
                 'is_enabled' => SafeDataFinder::IS_ENABLED,
                 'is_deleted' => SafeDataFinder::NOT_DELETED,
             ])
-            ->orderBy(['updated' => SORT_DESC])
+            ->orderBy(['published_date' => SORT_DESC])
             ->limit(self::ARTICLES_COUNT_PER_PAGE)
             ->all();
 

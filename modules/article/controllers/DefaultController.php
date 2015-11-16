@@ -96,7 +96,7 @@ class DefaultController extends Controller
     {
         $query = SafeDataFinder::init(Article::className())
             ->find()
-            ->orderBy(['updated' => SORT_DESC]);
+            ->orderBy(['published_date' => SORT_DESC]);
 
         $countQuery = clone $query;
 
@@ -137,7 +137,7 @@ class DefaultController extends Controller
             ->find()
             ->joinWith('tags')
             ->where(['tags.id' => $tag->id])
-            ->orderBy(['updated' => SORT_DESC]);
+            ->orderBy(['published_date' => SORT_DESC]);
 
         $countQuery = clone $query;
 

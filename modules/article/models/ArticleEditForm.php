@@ -19,10 +19,8 @@ class ArticleEditForm extends Model implements TagsInterface
     public $title;
     /** @var  string */
     public $content;
-    /** @var  string */
-    public $created;
-    /** @var  string */
-    public $updated;
+    /** @var  int */
+    public $published_date;
     /** @var bool */
     public $is_deleted = 0;
     /** @var bool */
@@ -48,8 +46,8 @@ class ArticleEditForm extends Model implements TagsInterface
             [['content'], 'filter', 'filter' => 'trim'],
             [['content'], 'string'],
 
-            [['created', 'updated'], 'required'],
-            [['created', 'updated'], 'date', 'format' => 'php:U'],
+            [['published_date'], 'required'],
+            [['published_date'], 'date', 'format' => 'php:U'],
 
             [['is_deleted', 'is_enabled'], 'boolean'],
 
@@ -63,13 +61,12 @@ class ArticleEditForm extends Model implements TagsInterface
     public function attributeLabels()
     {
         return [
-            'title'      => 'Title',
-            'content'    => 'Content',
-            'created'    => 'Created',
-            'updated'    => 'Updated',
-            'is_enabled' => 'Enable',
-            'is_deleted' => 'Deleted',
-            'tags'       => 'Tags',
+            'title'          => 'Title',
+            'content'        => 'Content',
+            'published_date' => 'Published date',
+            'is_enabled'     => 'Enable',
+            'is_deleted'     => 'Deleted',
+            'tags'           => 'Tags',
         ];
     }
 

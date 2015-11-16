@@ -6,6 +6,7 @@ use common\behaviors\BlameableBehavior;
 use common\behaviors\SlugBehavior;
 use common\libs\safedata\SafeDataFinder;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use \yii\db\ActiveRecord;
 use app\modules\user\models\User;
@@ -20,8 +21,9 @@ use common\libs\safedata\interfaces\SafeDataInterface;
  * @property integer $id
  * @property string $title
  * @property string $content
- * @property string $created
- * @property string $updated
+ * @property int $created
+ * @property int $updated
+ * @property int $published_date
  * @property integer $created_by
  * @property integer $updated_by
  * @property bool $is_deleted
@@ -46,6 +48,16 @@ class Article extends ActiveRecord implements SafeDataInterface
     public function behaviors()
     {
         return [
+            'timestamp'  => [
+                'class'      => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'created',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated',
+                ],
+                'value'      => function () {
+                    return time();
+                },
+            ],
             'textCutter' => [
                 'class'  => TextCutterBehavior::className(),
                 'fields' => [
@@ -77,7 +89,7 @@ class Article extends ActiveRecord implements SafeDataInterface
 
             ['content', 'string'],
 
-            [['created_by', 'updated_by', 'created', 'updated'], 'integer'],
+            [['created_by', 'updated_by', 'created', 'updated', 'published_date'], 'integer'],
 
             [['is_deleted', 'is_enabled'], 'boolean'],
         ];
