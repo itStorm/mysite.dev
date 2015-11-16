@@ -18,6 +18,8 @@ class ArticleEditForm extends Model implements TagsInterface
     /** @var  string */
     public $title;
     /** @var  string */
+    public $description;
+    /** @var  string */
     public $content;
     /** @var  int */
     public $published_date;
@@ -41,6 +43,9 @@ class ArticleEditForm extends Model implements TagsInterface
             [['title'], 'required'],
             [['title'], 'filter', 'filter' => 'trim'],
             [['title'], 'string', 'length' => [2, 255]],
+
+            [['description'], 'filter', 'filter' => 'trim'],
+            [['description'], 'string', 'max' => 512],
 
             [['content'], 'required'],
             [['content'], 'filter', 'filter' => 'trim'],

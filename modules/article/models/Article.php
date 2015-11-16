@@ -20,6 +20,7 @@ use common\libs\safedata\interfaces\SafeDataInterface;
  *
  * @property integer $id
  * @property string $title
+ * @property string $description
  * @property string $content
  * @property int $created
  * @property int $updated
@@ -87,6 +88,8 @@ class Article extends ActiveRecord implements SafeDataInterface
 
             [['title'], 'string', 'max' => 255],
 
+            [['description'], 'string', 'max' => 512],
+
             ['content', 'string'],
 
             [['created_by', 'updated_by', 'created', 'updated', 'published_date'], 'integer'],
@@ -131,11 +134,16 @@ class Article extends ActiveRecord implements SafeDataInterface
 
     /**
      * Получить Url к статье
+     * @param boolean|string $scheme the URI scheme to use in the generated URL
+     * @param boolean $useOnlyId Использовать в сссылку только с учетом id
      * @return string
      */
-    public function getUrlView()
+    public function getUrlView($scheme = false, $useOnlyId = false)
     {
-        return Url::to(['/article/default/view', 'slug' => $this->slug ?: $this->id]);
+        return Url::to([
+            '/article/default/view',
+            'slug' => $this->slug && !$useOnlyId ? $this->slug : $this->id
+        ], $scheme);
     }
 
     /** @inheritdoc */

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use app\modules\article\models\Article;
 use common\widgets\SocialButtonsWidget;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
@@ -42,6 +43,11 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     <div class="article-content">
         <?= $model->content ?>
     </div>
-    <?= SocialButtonsWidget::widget();?>
+    <?= SocialButtonsWidget::widget([
+        'url'         => $model->getUrlView(true, true),
+        'title'       => $model->title,
+        'description' => $model->description,
+        'image'       => Url::to('/img/social-logo.jpeg', true),
+    ]); ?>
     <br/><br/><br/>
 </div>
