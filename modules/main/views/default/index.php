@@ -5,7 +5,6 @@ use yii\bootstrap\Carousel;
 /** @var $this yii\web\View */
 /** @var $articles app\modules\article\models\Article[] */
 
-$this->title = Yii::t('app', 'Main');
 ?>
 
 
