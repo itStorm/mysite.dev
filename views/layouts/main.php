@@ -83,6 +83,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
+            <?= Html::a(Yii::t('app', 'Agreement'), ['/main/default/agreement'], ['class' => ['link-no-decorate']]); ?>
             <p class="pull-right">&copy; <?= Yii::$app->params['projectName'] ?> <?= date('Y') ?></p>
         </div>
     </footer>

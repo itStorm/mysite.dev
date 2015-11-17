@@ -126,6 +126,14 @@ a.desc:after {
     width: auto;
 }
 
+.link-no-decorate {
+    color: inherit;
+}
+.link-no-decorate:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 

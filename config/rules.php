@@ -1,8 +1,7 @@
 <?php
 return [
     ''                                                => 'main/default/index',
-    '<_a:(contact|about)>'                            => 'main/default/<_a>',
-    '<_a:error>'                                      => 'main/default/<_a>',
+    '<_a:(contact|about|agreement|error)>'            => 'main/default/<_a>',
     '<_a:(login|logout)>'                             => 'user/default/<_a>',
     '<_a:test/.*>'                                    => 'test/default/index',
 

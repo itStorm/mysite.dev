@@ -100,4 +100,9 @@ class DefaultController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionAgreement()
+    {
+        return $this->render('agreement');
+    }
 }
