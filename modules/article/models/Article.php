@@ -32,6 +32,7 @@ use common\libs\safedata\interfaces\SafeDataInterface;
  * @property User $createdBy
  * @property User $updatedBy
  * @property string $slug
+ * @property string $pseudo_alias
  * @property Tag[] $tags
  *
  * @see common\behaviors\TextCutter::cut()
@@ -86,7 +87,7 @@ class Article extends ActiveRecord implements SafeDataInterface
         return [
             [['title', 'content', 'created_by', 'updated_by', 'created', 'updated'], 'required'],
 
-            [['title'], 'string', 'max' => 255],
+            [['title', 'pseudo_alias'], 'string', 'max' => 255],
 
             [['description'], 'string', 'max' => 512],
 

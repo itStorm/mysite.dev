@@ -26,6 +26,8 @@ TinyMCEAsset::register($this);
 
     <?= $form->field($model, 'published_date')->widget(DateControl::classname(), ['type' => DateControl::FORMAT_DATETIME]) ?>
 
+    <?= $form->field($model, 'pseudo_alias')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'is_enabled')->checkbox() ?>
 
     <div class="form-group">

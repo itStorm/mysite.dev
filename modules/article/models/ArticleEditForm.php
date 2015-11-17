@@ -27,6 +27,8 @@ class ArticleEditForm extends Model implements TagsInterface
     public $is_deleted = 0;
     /** @var bool */
     public $is_enabled = 0;
+    /** @var  string */
+    public $pseudo_alias;
 
     /** @var array */
     public $tags;
@@ -43,6 +45,9 @@ class ArticleEditForm extends Model implements TagsInterface
             [['title'], 'required'],
             [['title'], 'filter', 'filter' => 'trim'],
             [['title'], 'string', 'length' => [2, 255]],
+
+            [['pseudo_alias'], 'filter', 'filter' => 'trim'],
+            [['pseudo_alias'], 'string', 'length' => [2, 255]],
 
             [['description'], 'filter', 'filter' => 'trim'],
             [['description'], 'string', 'max' => 512],
