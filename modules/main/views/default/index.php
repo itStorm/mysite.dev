@@ -19,12 +19,11 @@ echo Carousel::widget([
         ],
         [
             'content' => '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Index page slide_2 -->
+<!-- Index page slide_2_new -->
 <ins class="adsbygoogle"
-     style="display:block"
+     style="display:inline-block;width:1140px;height:250px"
      data-ad-client="ca-pub-4425366864035089"
-     data-ad-slot="6643361253"
-     data-ad-format="auto"></ins>
+     data-ad-slot="3131491655"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>',
@@ -38,12 +37,11 @@ echo Carousel::widget([
         ],
         [
             'content' => '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Index page slide_4 -->
+<!-- Index page slide_4_new -->
 <ins class="adsbygoogle"
-     style="display:block"
+     style="display:inline-block;width:1140px;height:250px"
      data-ad-client="ca-pub-4425366864035089"
-     data-ad-slot="7980493653"
-     data-ad-format="auto"></ins>
+     data-ad-slot="4189422458"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>',
