@@ -39,8 +39,8 @@ class TextCutterBehavior extends Behavior
             return $clearValue;
         }
 
-        $strPart1 = mb_substr($clearValue, 0, $length);
-        $strPart2 = mb_substr($clearValue, $length - 1);
+        $strPart1 = mb_substr($clearValue, 0, $length, 'UTF-8');
+        $strPart2 = mb_substr($clearValue, $length - 1, null, 'UTF-8');
 
         // если есть пробел после - отрезаем до него
         if ($spacePosition = strpos($strPart2, ' ')) {

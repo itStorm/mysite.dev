@@ -11,3 +11,7 @@
         'image' => \yii\helpers\Url::to('/img/social-logo.jpeg', true),
     ]);
 ?>
+
+
+<?php
+echo '<br>'.mb_internal_encoding();
