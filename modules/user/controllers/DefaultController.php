@@ -2,79 +2,135 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\user\models\User;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegistrationForm;
+use yii\captcha\CaptchaAction;
+use yii\web\NotFoundHttpException;
 
+/**
+ * Class DefaultController
+ * @package app\modules\user\controllers
+ */
 class DefaultController extends Controller
 {
-	public function actions()
-	{
-		return [
-			'captcha' => [
-				'class' => 'yii\captcha\CaptchaAction',
-				'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-			],
-		];
-	}
+    public function actions()
+    {
+        return [
+            'captcha' => [
+                'class'           => CaptchaAction::className(),
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+        ];
+    }
 
-	/**
-	 * Профиль пользователя
-	 * @return string
-	 */
-	public function actionIndex()
-	{
-		return $this->render('index');
-	}
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['index', 'logout'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs'  => [
+                'class'   => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
-	/**
-	 * Сраница входа
-	 * @return string|\yii\web\Response
-	 */
-	public function actionLogin()
-	{
-		if (!\Yii::$app->user->isGuest) {
-			return $this->goHome();
-		}
+    /**
+     * Профиль пользователя
+     * @return string
+     */
+    public function actionIndex()
+    {
+        $user = \Yii::$app->getUser();
+        /** @var User $model */
+        $model = $user->getIdentity();
 
-		$model = new LoginForm();
-		if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			return $this->goBack();
-		} else {
-			return $this->render('login', [
-				'model' => $model,
-			]);
-		}
-	}
+        return $this->render('index', [
+            'model' => $model,
+        ]);
+    }
 
-	/**
-	 * Экшен выхода
-	 * @return \yii\web\Response
-	 */
-	public function actionLogout()
-	{
-		Yii::$app->user->logout();
+    /**
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView($id)
+    {
+        if (!$user = User::findOne($id)) {
+            throw new NotFoundHttpException(Yii::t('app', 'User not found' . '...'));
+        } elseif (\Yii::$app->getUser()->id == $user->id) {
+            $this->redirect(['/user']);
+        }
 
-		return $this->goHome();
-	}
+        return $this->render('view', [
+            'model' => $user,
+        ]);
+    }
 
-	/**
-	 * Страница регистрации
-	 * @return string
-	 */
-	public function actionRegistration() {
-		if (!\Yii::$app->user->isGuest) {
-			return $this->goHome();
-		}
+    /**
+     * Сраница входа
+     * @return string|\yii\web\Response
+     */
+    public function actionLogin()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
-		$model = new RegistrationForm();
-		if ($model->load(Yii::$app->request->post()) && $model->registration()) {
-			return $this->render('registration_success');
-		} else {
-			return $this->render('registration', [
-				'model' => $model,
-			]);
-		}
-	}
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Экшен выхода
+     * @return \yii\web\Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
+    }
+
+    /**
+     * Страница регистрации
+     * @return string
+     */
+    public function actionRegistration()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new RegistrationForm();
+        if ($model->load(Yii::$app->request->post()) && $model->registration()) {
+            return $this->render('registration_success');
+        } else {
+            return $this->render('registration', [
+                'model' => $model,
+            ]);
+        }
+    }
 }

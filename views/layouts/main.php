@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\modules\user\models\User;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -17,53 +18,88 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?php echo ($this->title ? Html::encode($this->title) . ' - ' : '') . Yii::$app->params['projectUrl']; ?></title>
     <?php $this->head() ?>
 </head>
 <body>
 
 <?php $this->beginBody() ?>
     <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => 'My Company',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    ['label' => 'Home', 'url' => ['/main/default/index']],
-                    ['label' => 'About', 'url' => ['/main/default/about']],
-                    ['label' => 'Contact', 'url' => ['/main/default/contact']],
-                    Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/user/default/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/user/default/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
-                ],
-            ]);
-            NavBar::end();
-        ?>
+        <div class="navbar-wrapper">
+            <div class="container">
+                <?php
+
+                $navBarItems = [Yii::$app->user->isGuest ?
+                    ['label' => Yii::t('app', 'Login'),
+                     'url'   => ['/user/default/login']] :
+                    ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Html::encode(Yii::$app->user->identity->username),
+                     'url'   => ['/user']],
+                    Yii::$app->user->isGuest ? '' :
+                        ['label'       => '<span class="glyphicon glyphicon-off"></span>',
+                         'url'         => ['/user/default/logout'],
+                         'linkOptions' => ['data-method' => 'post']],
+                ];
+
+                if (Yii::$app->user->can(User::ROLE_NAME_ADMIN)) {
+                    $navBarItems = array_merge([
+                        ['label' => Yii::t('app', 'Home'), 'url' => ['/main/default/index']],
+                        ['label' => Yii::t('app', 'About'), 'url' => ['/main/default/about']],
+                        ['label' => Yii::t('app', 'Contact'), 'url' => ['/main/default/contact']]
+                    ], $navBarItems);
+                }
+
+                NavBar::begin([
+                    'brandLabel' => Yii::$app->params['projectName'],
+                    'brandUrl'   => Yii::$app->homeUrl,
+                    'options'    => [
+                        'class' => 'navbar-inverse  navbar-static-top',
+                    ],
+                ]);
+                echo Nav::widget([
+                    'options'      => ['class' => 'navbar-nav navbar-right'],
+                    'encodeLabels' => false,
+                    'items'        => $navBarItems]);
+                NavBar::end();
+                ?>
+            </div>
+        </div>
 
         <div class="container">
+            <?= isset($this->blocks['before_content'])? $this->blocks['before_content'] : ''; ?>
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
-            <?= $content ?>
+
+            <div class="row">
+                <div class="col-sm-9">
+                    <?= $content ?>
+                </div>
+                <div class="col-sm-2 col-sm-offset-1">
+                    <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Right sidebar -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4425366864035089"
+                         data-ad-slot="2690839656"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+            <?= Html::a(Yii::t('app', 'Agreement'), ['/main/default/agreement'], ['class' => ['link-no-decorate']]); ?>
+            <p class="pull-right">&copy; <?= Yii::$app->params['projectName'] ?> <?= date('Y') ?></p>
         </div>
     </footer>
 
 <?php $this->endBody() ?>
+<noscript><div><img src="https://mc.yandex.ru/watch/33671559" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -7,7 +7,9 @@
 
 namespace app\assets;
 
+use yii\bootstrap\BootstrapAsset;
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
@@ -21,9 +23,17 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'js/ya.js',
+        'js/ga.js',
     ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ];
+
+    public function init()
+    {
+        parent::init();
+
+        $this->depends = [
+            YiiAsset::className(),
+            BootstrapAsset::className(),
+        ];
+    }
 }

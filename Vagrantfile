@@ -3,7 +3,7 @@
 # vi: set ft=ruby :
 # ATTENTION!!! After vagrant up run on virtual machine:
 #   cd /home/vagrant/www/;
-#   composer global require "fxp/composer-asset-plugin:~1.0.0";
+#   composer global require "fxp/composer-asset-plugin:~1.0.1";
 #   composer install;
 
 Vagrant.configure(2) do |config|
