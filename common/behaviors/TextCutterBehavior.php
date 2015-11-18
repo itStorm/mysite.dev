@@ -40,11 +40,11 @@ class TextCutterBehavior extends Behavior
         }
 
         $strPart1 = mb_substr($clearValue, 0, $length, 'UTF-8');
-        $strPart2 = mb_substr($clearValue, $length - 1, null, 'UTF-8');
+        $strPart2 = mb_substr($clearValue, $length, null, 'UTF-8');
 
         // если есть пробел после - отрезаем до него
         if ($spacePosition = strpos($strPart2, ' ')) {
-            return trim($strPart1 . mb_substr($strPart2, 0, $spacePosition));
+            return trim($strPart1 . mb_substr($strPart2, 0, $spacePosition, 'UTF-8'));
         } elseif ($spacePosition = strrpos($strPart1, ' ')) {
             return trim(mb_substr($strPart1, 0, $spacePosition));
         }
