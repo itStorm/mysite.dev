@@ -33,6 +33,7 @@ use common\libs\safedata\interfaces\SafeDataInterface;
  * @property User $updatedBy
  * @property string $slug
  * @property string $pseudo_alias
+ * @property int $view_count
  * @property Tag[] $tags
  *
  * @see common\behaviors\TextCutter::cut()

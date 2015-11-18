@@ -165,8 +165,11 @@ class DefaultController extends Controller
      */
     public function actionView($slug)
     {
+        $model = $this->findModel($slug);
+        $model->updateCounters(['view_count' => 1]);
+
         return $this->render('view', [
-            'model' => $this->findModel($slug),
+            'model' => $model,
         ]);
     }
 
