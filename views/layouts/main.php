@@ -76,6 +76,16 @@ AppAsset::register($this);
                 </div>
                 <div class="col-sm-2 col-sm-offset-1">
                     <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Right sidebar -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4425366864035089"
+                         data-ad-slot="2690839656"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
         </div>

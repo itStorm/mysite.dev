@@ -15,6 +15,20 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php
+$this->beginBlock('before_content');
+echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Article list before_content -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:1140px;height:90px"
+     data-ad-client="ca-pub-4425366864035089"
+     data-ad-slot="8678497659"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>';
+$this->endBlock();
+?>
+
+<?php
 $this->beginBlock('sidebar');
 echo $this->render('components/_menu');
 $this->endBlock();
