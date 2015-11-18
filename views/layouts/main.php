@@ -89,6 +89,7 @@ AppAsset::register($this);
     </footer>
 
 <?php $this->endBody() ?>
+<noscript><div><img src="https://mc.yandex.ru/watch/33671559" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>
 </html>
 <?php $this->endPage() ?>
