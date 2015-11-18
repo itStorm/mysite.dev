@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/ya.js',
+        'js/ga.js',
     ];
 
     public function init()
