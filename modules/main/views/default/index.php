@@ -7,7 +7,6 @@ use yii\bootstrap\Carousel;
 
 ?>
 
-
 <?php
 $this->beginBlock('before_content');
 echo Carousel::widget([
@@ -18,33 +17,7 @@ echo Carousel::widget([
             'options' => []
         ],
         [
-            'content' => '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Index page slide_2_new -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:1140px;height:250px"
-     data-ad-client="ca-pub-4425366864035089"
-     data-ad-slot="3131491655"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
-        ],
-        [
             'content' => '<div class="img"><img src="/img/slide-2.jpeg"></div>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
-        ],
-        [
-            'content' => '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Index page slide_4_new -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:1140px;height:250px"
-     data-ad-client="ca-pub-4425366864035089"
-     data-ad-slot="4189422458"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>',
             'caption' => '<h2></h2><p></p>',
             'options' => []
         ],
