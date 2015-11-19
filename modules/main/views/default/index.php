@@ -9,20 +9,20 @@ use yii\bootstrap\Carousel;
 
 <?php
 $this->beginBlock('before_content');
-echo Carousel::widget([
-    'items' => [
-        [
-            'content' => '<div class="img"><img src="/img/slide-1.jpeg"/></div>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
+echo '<div class="hidden-xs hidden-sm">' . Carousel::widget([
+        'items' => [
+            [
+                'content' => '<div class="img"><img class="img-responsive" src="/img/slide-1.jpeg"/></div>',
+                'caption' => '<h2></h2><p></p>',
+                'options' => []
+            ],
+            [
+                'content' => '<div class="img"><img class="img-responsive" src="/img/slide-2.jpeg"></div>',
+                'caption' => '<h2></h2><p></p>',
+                'options' => []
+            ],
         ],
-        [
-            'content' => '<div class="img"><img src="/img/slide-2.jpeg"></div>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
-        ],
-    ],
-]);
+    ]) . '</div>';
 $this->endBlock();
 ?>
 
