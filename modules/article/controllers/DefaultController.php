@@ -111,8 +111,10 @@ class DefaultController extends Controller
             ->all();
 
         return $this->render('index', [
-            'articles' => $articles,
-            'pages'    => $pages,
+            'articles'      => $articles,
+            'pages'         => $pages,
+            'title'         => Yii::t('app', 'Articles'),
+            'countArticles' => count($articles),
         ]);
     }
 
@@ -152,9 +154,10 @@ class DefaultController extends Controller
             ->all();
 
         return $this->render('index', [
-            'articles' => $articles,
-            'pages'    => $pages,
-            'title'    => ucfirst($tag->name),
+            'articles'      => $articles,
+            'pages'         => $pages,
+            'title'         => ucfirst($tag->name),
+            'countArticles' => count($articles),
         ]);
     }
 
