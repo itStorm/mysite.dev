@@ -24,13 +24,8 @@ class DefaultController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['contact', 'about'],
+                'only'  => ['about'],
                 'rules' => [
-                    [
-                        'allow'   => true,
-                        'actions' => ['contact'],
-                        'roles'   => [User::ROLE_NAME_ADMIN],
-                    ],
                     [
                         'allow'   => true,
                         'actions' => ['about'],

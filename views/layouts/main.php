@@ -45,7 +45,6 @@ AppAsset::register($this);
                     $navBarItems = array_merge([
                         ['label' => Yii::t('app', 'Home'), 'url' => ['/main/default/index']],
                         ['label' => Yii::t('app', 'About'), 'url' => ['/main/default/about']],
-                        ['label' => Yii::t('app', 'Contact'), 'url' => ['/main/default/contact']]
                     ], $navBarItems);
                 }
 
@@ -93,8 +92,11 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <?= Html::a(Yii::t('app', 'Agreement'), ['/main/default/agreement'], ['class' => ['link-no-decorate']]); ?>
-            <p class="pull-right">&copy; <?= Yii::$app->params['projectName'] ?> <?= date('Y') ?></p>
+            <?= Html::a(Yii::t('app', 'Contact us'), ['/main/default/contact'], ['class' => ['link-no-decorate']]); ?>
+            <p class="pull-right">
+                <?= Html::a(Yii::t('app', 'Agreement'), ['/main/default/agreement'], ['class' => ['link-no-decorate']]); ?>
+                &nbsp;&nbsp;&copy; <?= Yii::$app->params['projectName'] ?> <?= date('Y') ?>
+            </p>
         </div>
     </footer>
 

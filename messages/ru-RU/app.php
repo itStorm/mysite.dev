@@ -23,4 +23,8 @@ return [
     'User not found' => 'Пользователь не найден',
     'Nothing here yet, but it will be interesting here soon.' => 'Пока тут пусто, но скоро тут появится что-нибудь интересное.',
     'Agreement' => 'Соглашение',
+    'Contact us' => 'Написать нам',
+    'Your name' => 'Ваше имя',
+    'Subject' => 'Тема',
+    'Message' => 'Сообщение',
 ];
