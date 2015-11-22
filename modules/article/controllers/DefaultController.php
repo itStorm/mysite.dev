@@ -22,10 +22,10 @@ use common\libs\safedata\SafeDataFinder;
  */
 class DefaultController extends Controller
 {
-    /**
-     * Количество статей на странице
-     */
+    /** Количество статей на странице */
     const ARTICLES_COUNT_PER_PAGE = 10;
+    /** Страница со списком статей */
+    const URL_PATH_INDEX = '/article/default/index';
 
     public function behaviors()
     {

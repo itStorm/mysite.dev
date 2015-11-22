@@ -1,7 +1,7 @@
 <?php
 use kartik\datecontrol\Module as KartikModule;
 
-$config = require(__DIR__ . '/main.php');
+$config = require(__DIR__ . DIRECTORY_SEPARATOR . 'main.php');
 
 $config['id'] = 'basic';
 $config['language'] = 'ru-RU'; // set target language to be Russian
@@ -21,12 +21,6 @@ $config['components']['user'] = [
 ];
 $config['components']['errorHandler'] = [
     'errorAction' => 'main/default/error',
-];
-$config['components']['urlManager'] = [
-    'class'           => 'yii\web\UrlManager',
-    'enablePrettyUrl' => true,
-    'showScriptName'  => false,
-    'rules'           => require(__DIR__ . '/rules.php'),
 ];
 $config['components']['mailer'] = [
     'class'            => 'yii\swiftmailer\Mailer',

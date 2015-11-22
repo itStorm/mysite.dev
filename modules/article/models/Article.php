@@ -168,7 +168,7 @@ class Article extends ActiveRecord implements SafeDataInterface
     {
         $this->is_deleted = SafeDataFinder::IS_DELETED;
 
-        return $this->save(false, ['is_deleted']);
+        return $this->save(false, [SafeDataFinder::FIELD_IS_DELETED]);
     }
 
     /**
