@@ -12,9 +12,6 @@ class SocialButtonsWidget extends Widget
     public $description = null;
     public $image = null;
 
-    /** @var View */
-    protected $view = null;
-
     /** @inheritdoc */
     public function run()
     {
@@ -37,19 +34,13 @@ HTML;
      */
     protected function registerJs()
     {
-        $js = <<<JS
-    VK.init({apiId: 5103140, onlyWidgets: true});
-    VK.Widgets.Like("vk_like", {type: "button", height: 20});
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-JS;
         $this->getView()->registerJsFile('//vk.com/js/api/openapi.js?117');
+        $this->getView()->registerJsFile('/js/social.js');
+
+        // Подключение непосредственно к like-блоку
+        $js = <<<JS
+    VK.Widgets.Like("vk_like", {type: "button", height: 20});
+JS;
         $this->getView()->registerJs($js);
 
         return $this;
