@@ -31,3 +31,6 @@ phpunit.phar
 
 # db config
 /config/db.php
+/config/main.php
+/config/console.php
+/web/sitemap.xml

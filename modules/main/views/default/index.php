@@ -5,61 +5,45 @@ use yii\bootstrap\Carousel;
 /** @var $this yii\web\View */
 /** @var $articles app\modules\article\models\Article[] */
 
+$tagsMenu = $this->render('@modules/article/views/default/components/_menu');
 ?>
 
+<?php $this->beginBlock('before_content'); ?>
+    <div class="hidden-xs hidden-sm">
+        <?= Carousel::widget([
+            'items' => [
+                [
+                    'content' => '<div class="img"><img class="img-responsive" src="/img/slide-1.jpeg"/></div>',
+                    'caption' => '<h2></h2><p></p>',
+                    'options' => []
+                ],
+                [
+                    'content' => '<div class="img"><img class="img-responsive" src="/img/slide-2.jpeg"></div>',
+                    'caption' => '<h2></h2><p></p>',
+                    'options' => []
+                ],
+            ],
+        ]) ?>
+    </div>
+    <div class="visible-xs-block">
+        <!-- Adapted banner 2015-11-18 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4425366864035089"
+             data-ad-slot="2690839656"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <?= $tagsMenu ?>
+    </div>
+<?php $this->endBlock(); ?>
 
-<?php
-$this->beginBlock('before_content');
-echo Carousel::widget([
-    'items' => [
-        [
-            'content' => '<div class="img"><img src="/img/slide-1.jpeg"/></div>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
-        ],
-        [
-            'content' => '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Index page slide_2 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4425366864035089"
-     data-ad-slot="6643361253"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
-        ],
-        [
-            'content' => '<div class="img"><img src="/img/slide-2.jpeg"></div>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
-        ],
-        [
-            'content' => '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Index page slide_4 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4425366864035089"
-     data-ad-slot="7980493653"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>',
-            'caption' => '<h2></h2><p></p>',
-            'options' => []
-        ],
-    ],
-]);
-$this->endBlock();
-?>
-
-<?php
-$this->beginBlock('sidebar');
-echo $this->render('@modules/article/views/default/components/_menu');
-$this->endBlock()
-?>
+<?php $this->beginBlock('sidebar'); ?>
+    <div class="hidden-xs">
+        <?= $tagsMenu ?>
+    </div>
+<?php $this->endBlock(); ?>
 
 <div class="site-index">
     <?php

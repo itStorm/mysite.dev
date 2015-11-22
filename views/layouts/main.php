@@ -20,6 +20,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?php echo ($this->title ? Html::encode($this->title) . ' - ' : '') . Yii::$app->params['projectUrl']; ?></title>
     <?php $this->head() ?>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
 
@@ -76,8 +77,7 @@ AppAsset::register($this);
                 </div>
                 <div class="col-sm-2 col-sm-offset-1">
                     <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Right sidebar -->
+                    <!-- Adapted banner 2015-11-18 -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-4425366864035089"

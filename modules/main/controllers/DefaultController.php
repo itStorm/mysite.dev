@@ -62,8 +62,8 @@ class DefaultController extends Controller
     {
         $articles = Article::find()
             ->where([
-                'is_enabled' => SafeDataFinder::IS_ENABLED,
-                'is_deleted' => SafeDataFinder::NOT_DELETED,
+                SafeDataFinder::FIELD_IS_ENABLED => SafeDataFinder::IS_ENABLED,
+                SafeDataFinder::FIELD_IS_DELETED => SafeDataFinder::NOT_DELETED,
             ])
             ->orderBy(['published_date' => SORT_DESC])
             ->limit(self::ARTICLES_COUNT_PER_PAGE)

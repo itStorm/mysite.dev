@@ -1,16 +1,16 @@
 <?php
 
-Yii::setAlias('@common', dirname(__DIR__) . '/common');
-Yii::setAlias('@modules', dirname(__DIR__) . '/modules');
-Yii::setAlias('@files', dirname(__DIR__) . '/web/files');
+Yii::setAlias('@common', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'common');
+Yii::setAlias('@modules', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'modules');
+Yii::setAlias('@files', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'files');
 
 return [
     'basePath'   => dirname(__DIR__),
-    'bootstrap'           => ['log'],
+    'bootstrap'  => ['log'],
     'components' => [
         'db'          => require(__DIR__ . '/db.php'),
-        'class' => 'yii\caching\FileCache',
-        'log'   => [
+        'class'       => 'yii\caching\FileCache',
+        'log'         => [
             'targets' => [
                 [
                     'class'  => 'yii\log\FileTarget',
@@ -26,6 +26,12 @@ return [
             'assignmentFile' => '@modules/rbac/assignments.php',
             'ruleFile'       => '@modules/rbac/rules.php'
         ],
+        'urlManager'  => [
+            'class'           => 'yii\web\UrlManager',
+            'enablePrettyUrl' => true,
+            'showScriptName'  => false,
+            'rules'           => require(__DIR__ . '/rules.php'),
+        ]
     ],
     'params'     => require(__DIR__ . '/params.php'),
 ];

@@ -191,6 +191,12 @@ a.desc:after {
     margin: 20px 0px 20px 0px;
 }
 
+.article-view img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
 .user-sign {
     color: #777;
 }

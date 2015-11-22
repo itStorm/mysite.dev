@@ -6,6 +6,7 @@ use kartik\datecontrol\DateControl;
 use common\libs\fileuploader\assets\TinyMCEAsset;
 use app\modules\user\models\User;
 use common\widgets\TagsInputWidget;
+use common\libs\safedata\SafeDataFinder;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
@@ -28,7 +29,7 @@ TinyMCEAsset::register($this);
 
     <?= $form->field($model, 'pseudo_alias')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_enabled')->checkbox() ?>
+    <?= $form->field($model, SafeDataFinder::FIELD_IS_ENABLED)->checkbox() ?>
 
     <div class="form-group">
         <?= TagsInputWidget::widget(['model' => $model, 'attribute' => 'tags']); ?>
@@ -36,7 +37,7 @@ TinyMCEAsset::register($this);
 
     <?php
     if (Yii::$app->user->can(User::ROLE_NAME_ADMIN)) {
-        echo $form->field($model, 'is_deleted')->checkbox();
+        echo $form->field($model, SafeDataFinder::FIELD_IS_DELETED)->checkbox();
     }
     ?>
 

@@ -27,6 +27,20 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
 }
 ?>
 
+<?php $this->beginBlock('before_content'); ?>
+    <div class="visible-xs-block">
+        <!-- Adapted banner 2015-11-18 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4425366864035089"
+             data-ad-slot="2690839656"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+<?php $this->endBlock(); ?>
+
 <?= $adminButtons ?>
 <div class="article-view">
 
@@ -57,5 +71,15 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         'description' => $model->description,
         'image'       => Url::to('/img/social-logo.jpeg', true),
     ]); ?>
-    <br/><br/><br/>
+    <br/><br/>
+    <div class="hidden-xs">
+        <!-- Desktop horizontal banner 2015-11-21 -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-4425366864035089"
+             data-ad-slot="6412702055"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 </div>

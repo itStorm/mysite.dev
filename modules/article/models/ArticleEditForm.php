@@ -2,6 +2,7 @@
 
 namespace app\modules\article\models;
 
+use common\libs\safedata\SafeDataFinder;
 use common\widgets\interfaces\TagsInterface;
 use Yii;
 use yii\base\Model;
@@ -71,12 +72,12 @@ class ArticleEditForm extends Model implements TagsInterface
     public function attributeLabels()
     {
         return [
-            'title'          => 'Title',
-            'content'        => 'Content',
-            'published_date' => 'Published date',
-            'is_enabled'     => 'Enable',
-            'is_deleted'     => 'Deleted',
-            'tags'           => 'Tags',
+            'title'                          => 'Title',
+            'content'                        => 'Content',
+            'published_date'                 => 'Published date',
+            SafeDataFinder::FIELD_IS_ENABLED => 'Enable',
+            SafeDataFinder::FIELD_IS_DELETED => 'Deleted',
+            'tags'                           => 'Tags',
         ];
     }
 
