@@ -29,8 +29,10 @@ phpunit.phar
 # vagrant files
 .vagrant
 
-# db config
+# real configs
 /config/db.php
 /config/main.php
 /config/console.php
+/config/web.php
+
 /web/sitemap.xml
