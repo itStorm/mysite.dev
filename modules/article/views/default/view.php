@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use app\modules\article\models\Article;
 use common\widgets\SocialButtonsWidget;
 use yii\helpers\Url;
+use common\widgets\SocialCommentWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\article\models\Article */
@@ -11,6 +12,8 @@ use yii\helpers\Url;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$mainUrl = $model->getUrlView(true, true);
 
 $adminButtons = '';
 if (Yii::$app->user->can(Article::RULE_UPDATE)) {
@@ -66,7 +69,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         <?= $model->content ?>
     </div>
     <?= SocialButtonsWidget::widget([
-        'url'         => $model->getUrlView(true, true),
+        'url'         => $mainUrl,
         'title'       => $model->title,
         'description' => $model->description,
         'image'       => Url::to('/img/social-logo.jpeg', true),
@@ -82,4 +85,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
+    <?= SocialCommentWidget::widget([
+        'url' => $mainUrl,
+    ]); ?>
 </div>
