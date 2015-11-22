@@ -32,18 +32,22 @@ class ContactForm extends Model
     }
 
     /**
-     * @return array customized attribute labels
+     * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'name'       => Yii::t('app', 'Your name'),
+            'email'      => Yii::t('app', 'Email'),
+            'subject'    => Yii::t('app', 'Subject'),
+            'body'       => Yii::t('app', 'Message'),
+            'verifyCode' => Yii::t('app', 'Verify Code'),
         ];
     }
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
-     * @param  string  $email the target email address
+     * @param  string $email the target email address
      * @return boolean whether the model passes validation
      */
     public function contact($email)
@@ -51,7 +55,7 @@ class ContactForm extends Model
         if ($this->validate()) {
             Yii::$app->mailer->compose()
                 ->setTo($email)
-                ->setFrom([$this->email => $this->name])
+                ->setFrom([Yii::$app->params['infoEmail'] => $this->name . '[' . $this->email . ']'])
                 ->setSubject($this->subject)
                 ->setTextBody($this->body)
                 ->send();

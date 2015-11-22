@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'adminEmail' => 'vl.itstorm@gmail.com',
+    'adminEmail'  => 'vl.itstorm@gmail.com',
+    'infoEmail'   => 'info@racocat.com',
     'projectName' => 'RACOCAT',
-    'projectUrl' => 'racocat.com',
+    'projectUrl'  => 'racocat.com',
 ];
