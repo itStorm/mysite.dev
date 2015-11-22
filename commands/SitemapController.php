@@ -36,6 +36,7 @@ class SitemapController extends Controller
 
     protected $sitemapData = [];
 
+    /** @inheritdoc */
     public function init()
     {
         parent::init();
@@ -43,6 +44,9 @@ class SitemapController extends Controller
         $this->sitemapFilenameNewPath = \Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . $this->sitemapFilenameNew;
     }
 
+    /**
+     * Генерация sitemap.xml - php yii sitemap
+     */
     public function actionIndex()
     {
         $this->pushItem(
@@ -60,6 +64,7 @@ class SitemapController extends Controller
         );
 
         /** COLLECT ARTICLES */
+
         /** @var Article[] $articles */
         $articles = Article::findAll([
             SafeDataFinder::FIELD_IS_ENABLED => SafeDataFinder::IS_ENABLED,
@@ -76,6 +81,7 @@ class SitemapController extends Controller
         }
         /** END COLLECT ARTICLES */
 
+        // Непосредственно генерация карты
         $writer = new \XMLWriter();
         $writer->openURI($this->sitemapFilenameNewPath);
         $writer->startDocument('1.0', 'UTF-8');
@@ -104,6 +110,7 @@ class SitemapController extends Controller
     }
 
     /**
+     * Добавить новый элемент в карту
      * @param string $loc
      * @param string $lastmod
      * @param string $changefreq
