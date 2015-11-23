@@ -50,6 +50,9 @@ class Article extends ActiveRecord implements SafeDataInterface
     const CONTENT_FILE_PATH = 'articles';
     const CONTENT_FILE_LOGO_PATH = 'articles_logo';
 
+    const FILE_LOGO_MIN_WIDTH = '450';
+    const FILE_LOGO_MIN_HEIGHT = '300';
+
 
     /** @inheritdoc */
     public function behaviors()

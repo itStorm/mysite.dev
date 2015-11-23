@@ -14,7 +14,6 @@ use yii\web\UploadedFile;
  */
 class ArticleEditForm extends Model implements TagsInterface
 {
-
     /** @var  integer */
     public $id;
     /** @var  string */
@@ -115,6 +114,23 @@ class ArticleEditForm extends Model implements TagsInterface
         $this->logo_file = UploadedFile::getInstance($this, 'logo_file');
 
         return $result;
+    }
+
+    /** @inheritdoc */
+    public function validate()
+    {
+        $result = parent::validate();
+        $isLogoFileGood = true;
+
+        if ($this->logo_file) {
+            list($width, $height) = getimagesize($this->logo_file->tempName);
+            if ($width < Article::FILE_LOGO_MIN_WIDTH || $height < Article::FILE_LOGO_MIN_HEIGHT) {
+                $this->addError('logo_file', sprintf('Bad file. Minimal size W=%d x H=%d', $width, $height));
+                $isLogoFileGood = false;
+            }
+        }
+
+        return $result && $isLogoFileGood;
     }
 
     /**
