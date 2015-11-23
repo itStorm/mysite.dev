@@ -12,4 +12,6 @@ echo common\widgets\SocialButtonsWidget::widget([
 ]);
 
 echo '<br>' . mb_internal_encoding();
+
+phpinfo();
 ?>

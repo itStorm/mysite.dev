@@ -83,7 +83,7 @@ class DefaultController extends Controller
             ],
             'fileconnector' => [
                 'class' => FileConnectorAction::className(),
-                'path'  => 'articles',
+                'path'  => Article::CONTENT_FILE_PATH,
             ],
         ];
     }
