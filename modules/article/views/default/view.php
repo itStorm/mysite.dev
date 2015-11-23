@@ -72,7 +72,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         'url'         => $mainUrl,
         'title'       => $model->title,
         'description' => $model->description,
-        'image'       => Url::to('/img/social-logo.jpeg', true),
+        'image'       => $model->getUrlFileLogo(true)?: Url::to('/img/social-logo.jpeg', true),
     ]); ?>
     <br/><br/>
     <div class="hidden-xs">

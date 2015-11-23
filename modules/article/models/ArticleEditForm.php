@@ -6,6 +6,7 @@ use common\libs\safedata\SafeDataFinder;
 use common\widgets\interfaces\TagsInterface;
 use Yii;
 use yii\base\Model;
+use yii\web\UploadedFile;
 
 /**
  * Class ArticleEditForm
@@ -13,7 +14,6 @@ use yii\base\Model;
  */
 class ArticleEditForm extends Model implements TagsInterface
 {
-
     /** @var  integer */
     public $id;
     /** @var  string */
@@ -30,6 +30,10 @@ class ArticleEditForm extends Model implements TagsInterface
     public $is_enabled = 0;
     /** @var  string */
     public $pseudo_alias;
+    /** @var UploadedFile */
+    public $logo_file;
+    /** @var  bool */
+    public $delete_logo_file = 0;
 
     /** @var array */
     public $tags;
@@ -60,7 +64,9 @@ class ArticleEditForm extends Model implements TagsInterface
             [['published_date'], 'required'],
             [['published_date'], 'date', 'format' => 'php:U'],
 
-            [['is_deleted', 'is_enabled'], 'boolean'],
+            [['is_deleted', 'is_enabled', 'delete_logo_file'], 'boolean'],
+
+            [['logo_file'], 'file', 'extensions' => ['png', 'jpg', 'jpeg', 'gif'], 'mimeTypes' => ['image/jpeg', 'image/gif', 'image/png'], 'maxSize' => 1024 * 1024],
 
             [['tags'], 'safe'],
         ];
@@ -78,6 +84,7 @@ class ArticleEditForm extends Model implements TagsInterface
             SafeDataFinder::FIELD_IS_ENABLED => 'Enable',
             SafeDataFinder::FIELD_IS_DELETED => 'Deleted',
             'tags'                           => 'Tags',
+            'logo_file'                      => 'Logo file',
         ];
     }
 
@@ -100,6 +107,32 @@ class ArticleEditForm extends Model implements TagsInterface
         return $this->tags;
     }
 
+    /** @inheritdoc */
+    public function load($data, $formName = null)
+    {
+        $result = parent::load($data, $formName);
+        $this->logo_file = UploadedFile::getInstance($this, 'logo_file');
+
+        return $result;
+    }
+
+    /** @inheritdoc */
+    public function validate()
+    {
+        $result = parent::validate();
+        $isLogoFileGood = true;
+
+        if ($this->logo_file) {
+            list($width, $height) = getimagesize($this->logo_file->tempName);
+            if ($width < Article::FILE_LOGO_MIN_WIDTH || $height < Article::FILE_LOGO_MIN_HEIGHT) {
+                $this->addError('logo_file', sprintf('Bad file. Minimal size W=%d x H=%d', $width, $height));
+                $isLogoFileGood = false;
+            }
+        }
+
+        return $result && $isLogoFileGood;
+    }
+
     /**
      * Сохранить статью
      * @return bool
@@ -113,14 +146,38 @@ class ArticleEditForm extends Model implements TagsInterface
         $article = $this->getModel();
         $article->setAttributes($this->getAttributes());
 
-        if ($article->save(false)) {
+        $saveArticleTransaction = Article::getDb()->beginTransaction();
+        try {
+            $article->save(false);
             $article->saveTags($this->tags);
-            $this->id = $article->id;
 
-            return true;
+            $filePath = Yii::getAlias('@files') . DIRECTORY_SEPARATOR . Article::CONTENT_FILE_LOGO_PATH . DIRECTORY_SEPARATOR;
+
+            // Если удаление прочекано
+            if ($this->delete_logo_file && $article->logo_filename) {
+                $fileName = $article->logo_filename;
+                $article->logo_filename = '';
+                $article->save(false, ['logo_filename']);
+                unlink($filePath . $fileName);
+            }
+
+            // Если есть логотип - то пересохраняем
+            if ($this->logo_file) {
+                $fileName = md5(Article::tableName() . $article->id) . '.' . $this->logo_file->extension;
+                $this->logo_file->saveAs($filePath . $fileName);
+                $article->logo_filename = $fileName;
+                $article->save(false, ['logo_filename']);
+            }
+            $this->id = $article->id;
+        } catch (\Exception $e) {
+            $saveArticleTransaction->rollBack();
+
+            return false;
         }
 
-        return false;
+        $saveArticleTransaction->commit();
+
+        return true;
     }
 
     /**

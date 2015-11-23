@@ -34,6 +34,7 @@ use common\libs\safedata\interfaces\SafeDataInterface;
  * @property string $slug
  * @property string $pseudo_alias
  * @property int $view_count
+ * @property string $logo_filename
  * @property Tag[] $tags
  *
  * @see common\behaviors\TextCutter::cut()
@@ -45,6 +46,12 @@ class Article extends ActiveRecord implements SafeDataInterface
     const RULE_CREATE = 'article_create';
     const RULE_UPDATE = 'article_update';
     const RULE_UPLOAD_FILES = 'article_upload_files';
+
+    const CONTENT_FILE_PATH = 'articles';
+    const CONTENT_FILE_LOGO_PATH = 'articles_logo';
+
+    const FILE_LOGO_MIN_WIDTH = '450';
+    const FILE_LOGO_MIN_HEIGHT = '300';
 
 
     /** @inheritdoc */
@@ -214,5 +221,20 @@ class Article extends ActiveRecord implements SafeDataInterface
         foreach ($this->tags as $tag) {
             $this->unlink('tags', $tag, true);
         }
+    }
+
+    /**
+     * @param boolean|string $scheme the URI scheme to use in the generated URL
+     * @return string|null
+     */
+    public function getUrlFileLogo($scheme = false)
+    {
+        if (!$this->logo_filename) {
+            return null;
+        }
+
+        return Url::to([
+            '/files/' . self::CONTENT_FILE_LOGO_PATH . '/' . $this->logo_filename
+        ], $scheme);
     }
 }

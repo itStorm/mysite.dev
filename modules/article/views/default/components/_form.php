@@ -7,9 +7,10 @@ use common\libs\fileuploader\assets\TinyMCEAsset;
 use app\modules\user\models\User;
 use common\widgets\TagsInputWidget;
 use common\libs\safedata\SafeDataFinder;
+use kartik\widgets\FileInput;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\article\models\Article */
+/* @var $model app\modules\article\models\ArticleEditForm */
 /* @var $form yii\widgets\ActiveForm */
 
 TinyMCEAsset::register($this);
@@ -17,7 +18,7 @@ TinyMCEAsset::register($this);
 
 <div class="article-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -30,6 +31,36 @@ TinyMCEAsset::register($this);
     <?= $form->field($model, 'pseudo_alias')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, SafeDataFinder::FIELD_IS_ENABLED)->checkbox() ?>
+
+    <?php
+    $fileWidgetOptions = [
+        'class' => 'olololo',
+        'pluginOptions' => [
+            'showPreview'          => true,
+            'showCaption'          => true,
+            'showRemove'           => true,
+            'showUpload'           => false,
+        ]
+    ];
+
+    if ($fileLogo = $model->getModel()->getUrlFileLogo(true)) {
+        $fileWidgetOptions['pluginOptions']['initialPreview'] = [
+            Html::img($fileLogo, ['class' => 'file-preview-image', 'alt' => 'Logo', 'title' => 'Logo']),
+        ];
+    }
+    echo $form->field($model, 'logo_file')->widget(FileInput::className(), $fileWidgetOptions);
+
+    $classLogoFile = 'field-'.Html::getInputId($model, 'logo_file');
+    $idDeleteLogoFile = Html::getInputId($model, 'delete_logo_file');
+    $js = <<<JS
+    $('.{$classLogoFile} .fileinput-remove').bind('click', function(){
+        $('#{$idDeleteLogoFile}').val(1);
+    });
+JS;
+    $this->registerJs($js);
+    ?>
+
+    <?= $form->field($model, 'delete_logo_file')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= TagsInputWidget::widget(['model' => $model, 'attribute' => 'tags']); ?>

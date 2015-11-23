@@ -20,7 +20,7 @@ class FileConnectorAction extends Action
     {
         parent::init();
 
-        $this->basePath = Yii::getAlias('@files') . '/';
+        $this->basePath = Yii::getAlias('@files') . DIRECTORY_SEPARATOR;
     }
 
     public function run()
@@ -31,7 +31,7 @@ class FileConnectorAction extends Action
             'roots' => [
                 [
                     'driver' => 'LocalFileSystem',
-                    'path'   => $this->basePath . $this->path . '/',
+                    'path'   => $this->basePath . $this->path . DIRECTORY_SEPARATOR,
                     'URL'    => Yii::$app->getRequest()->getHostInfo() . '/files/' . $this->path . '/',
                 ]
             ]
