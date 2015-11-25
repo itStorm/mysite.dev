@@ -26,15 +26,6 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
         ]) ?>
     </div>
     <div class="visible-xs-block">
-        <!-- Adapted banner 2015-11-18 -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-4425366864035089"
-             data-ad-slot="2690839656"
-             data-ad-format="auto"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
         <?= $tagsMenu ?>
     </div>
 <?php $this->endBlock(); ?>
