@@ -51,6 +51,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         </span>
         </a>
     <?php endif;?>
+    <div class="tags-block"><?= \common\widgets\TagsWidget::widget(['tags' => $model->tags]); ?></div>
 
     <div class="article-content">
         <?= $model->content ?>
