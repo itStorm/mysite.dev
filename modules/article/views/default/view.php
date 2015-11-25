@@ -30,21 +30,8 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
 }
 ?>
 
-<?php $this->beginBlock('before_content'); ?>
-    <div class="visible-xs-block">
-        <!-- Adapted banner 2015-11-18 -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-4425366864035089"
-             data-ad-slot="2690839656"
-             data-ad-format="auto"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-<?php $this->endBlock(); ?>
-
 <?= $adminButtons ?>
+
 <div class="article-view">
 
     <div class="h1"><?= $this->render('components/_title', ['model' => $model]) ?></div>
@@ -68,6 +55,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     <div class="article-content">
         <?= $model->content ?>
     </div>
+
     <?= SocialButtonsWidget::widget([
         'url'         => $mainUrl,
         'title'       => $model->title,
@@ -75,16 +63,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         'image'       => $model->getUrlFileLogo(true)?: Url::to('/img/social-logo.jpeg', true),
     ]); ?>
     <br/><br/>
-    <div class="hidden-xs">
-        <!-- Desktop horizontal banner 2015-11-21 -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:728px;height:90px"
-             data-ad-client="ca-pub-4425366864035089"
-             data-ad-slot="6412702055"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
+
     <?= SocialCommentWidget::widget([
         'url' => $mainUrl,
     ]); ?>

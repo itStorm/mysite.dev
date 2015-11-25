@@ -18,15 +18,6 @@ $tagsMenu = $this->render('components/_menu');
 ?>
 
 <?php $this->beginBlock('before_content'); ?>
-    <!-- Adapted banner 2015-11-18 -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-4425366864035089"
-         data-ad-slot="2690839656"
-         data-ad-format="auto"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
     <div class="visible-xs-block">
         <?= $tagsMenu ?>
     </div>
@@ -51,10 +42,7 @@ $tagsMenu = $this->render('components/_menu');
     <div class="list-page">
 
         <?php
-        // позиция для размещения баннера для Pad устройств, в виде индекса, в массиве
-        $mobileBannerPosition = $countArticles > 7 ? floor(10 / 2) - 1 : null;
-
-        foreach ($articles as $i => $article): // перебираем статьи
+        foreach ($articles as $article): // перебираем статьи
         $articleUrl = $article->getUrlView();
         ?>
             <div class="list-page-item article-announcement">
@@ -73,21 +61,8 @@ $tagsMenu = $this->render('components/_menu');
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
                 </a>
             </div>
-            <?php
-            if ($i === $mobileBannerPosition): // если можно - втыкаем баннер
-            ?>
-                <div class="visible-xs-block">
-                    <!-- Mobile horizontal banner 2015-11-21 -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:320px;height:50px"
-                         data-ad-client="ca-pub-4425366864035089"
-                         data-ad-slot="5633972851"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            <?php endif; ?>
         <?php endforeach; ?>
+
         <?php if (!$articles): ?>
             <div class="alert alert-info" role="alert">
                 <?= Yii::t('app', 'Nothing here yet, but it will be interesting here soon.'); ?>
