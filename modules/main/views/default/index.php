@@ -2,8 +2,11 @@
 use yii\helpers\Html;
 use yii\bootstrap\Carousel;
 
-/** @var $this yii\web\View */
+/** @var $this common\View */
 /** @var $articles app\modules\article\models\Article[] */
+
+$this->addKeywords('журнал, интернет-журнал, газета, независимый журнал, новости, публикации, статьи, события, отзывы, лайфхаки');
+$this->setDescription('Интернет-журнал RACOCAT - интересные публикации, полезные советы, лайфхаки');
 
 $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
 ?>

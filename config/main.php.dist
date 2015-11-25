@@ -31,7 +31,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => require(__DIR__ . '/rules.php'),
-        ]
+        ],
+        'view' => 'common\View',
     ],
     'params'     => require(__DIR__ . '/params.php'),
 ];
