@@ -6,7 +6,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\modules\user\models\User;
 
-/* @var $this \yii\web\View */
+/* @var $this common\View */
 /* @var $content string */
 
 AppAsset::register($this);
