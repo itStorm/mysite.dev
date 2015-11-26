@@ -5,4 +5,5 @@ return [
     'infoEmail'   => 'info@racocat.com',
     'projectName' => 'RACOCAT',
     'projectUrl'  => 'racocat.com',
+    'salt'        => 'SaltThisShit',
 ];

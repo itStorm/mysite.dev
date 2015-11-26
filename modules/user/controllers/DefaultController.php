@@ -2,6 +2,7 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\user\models\GetConfirmationLinkForm;
 use app\modules\user\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -10,6 +11,7 @@ use yii\web\Controller;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\RegistrationForm;
 use yii\captcha\CaptchaAction;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -33,11 +35,16 @@ class DefaultController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['index', 'logout'],
+                'only'  => ['index', 'logout', 'get-confirmation-link'],
                 'rules' => [
                     [
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['get-confirmation-link'],
+                        'roles'   => ['?'],
                     ],
                 ],
             ],
@@ -56,12 +63,11 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $user = \Yii::$app->getUser();
-        /** @var User $model */
-        $model = $user->getIdentity();
+        /** @var User $user */
+        $user = \Yii::$app->getUser()->getIdentity();
 
         return $this->render('index', [
-            'model' => $model,
+            'model' => $user,
         ]);
     }
 
@@ -132,5 +138,55 @@ class DefaultController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Подтвержение почты
+     * @param string $emailConfirm
+     * @param string $email
+     * @return string string
+     * @throws NotFoundHttpException
+     */
+    public function actionEmailConfirm($emailConfirm, $email)
+    {
+        /** @var User $user */
+        if (!$email) {
+            throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
+        } elseif (!($user = User::findByEmail($email))) {
+            throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
+        }
+
+        if ($user->is_enabled) {
+            \Yii::$app->getSession()->setFlash('userAlreadyActivated');
+        } elseif ($emailConfirm == $user->email_confirm) {
+            \Yii::$app->getSession()->setFlash('successActivation');
+            $user->confirm();
+        } else {
+            \Yii::$app->getSession()->setFlash('errorActivationCode');
+            $this->redirect(['/user/default/get-confirmation-link']);
+        }
+
+        return $this->render('email_confirm');
+    }
+
+    /**
+     * Посторная отправка ссылки
+     * @return string
+     * @throws ForbiddenHttpException
+     */
+    public function actionGetConfirmationLink()
+    {
+        if (!\Yii::$app->getUser()->isGuest) {
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+        }
+
+        $model = new GetConfirmationLinkForm();
+        if ($model->load(Yii::$app->request->post()) && $model->sendNewConfirmationLink()) {
+            \Yii::$app->getSession()->setFlash('sentNewConfirmationLink');
+        }
+
+        return $this->render('get_confirmation_link', [
+            'model' => $model,
+        ]);
     }
 }
