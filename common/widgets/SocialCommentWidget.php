@@ -27,6 +27,11 @@ class SocialCommentWidget extends Widget
     /** @inheritdoc */
     public function run()
     {
+        $this->getView()->registerMetaTag([
+            'property' => 'fb:app_id',
+            'content'  => '778342298941480',
+        ]);
+
         $this->registerJs();
 
         $tabs = new Tabs();
