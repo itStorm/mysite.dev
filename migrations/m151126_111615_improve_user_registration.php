@@ -9,7 +9,7 @@ class m151126_111615_improve_user_registration extends Migration
     {
         $this->addColumn('users', 'created', Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0');
         $this->addColumn('users', 'updated', Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0');
-        $this->db->createCommand('UPDATE users SET created = 1447707600')->execute();
+        $this->db->createCommand('UPDATE users SET created = 1447707600, updated = 1447707600')->execute();
 
         $this->addColumn('users', 'is_deleted', Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT FALSE');
         $this->addColumn('users', 'is_enabled', Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT FALSE');

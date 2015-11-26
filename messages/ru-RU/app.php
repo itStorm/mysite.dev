@@ -27,4 +27,5 @@ return [
     'Your name' => 'Ваше имя',
     'Subject' => 'Тема',
     'Message' => 'Сообщение',
+    'Incorrect email or password.' => 'Неверная почта или пароль.'
 ];

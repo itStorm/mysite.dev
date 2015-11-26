@@ -24,6 +24,7 @@ use yii\captcha\Captcha;
             <div class="alert alert-danger">
                 Sorry! Bad link, try get another link.
             </div>
+
         <?php endif; ?>
 
         <h1>Get again confirmation link</h1>
