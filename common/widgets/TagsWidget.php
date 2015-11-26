@@ -16,7 +16,7 @@ class TagsWidget extends Widget
     {
         $html = '';
         foreach ($this->tags as $tag) {
-            $html .= $this->renderTagItem($tag);
+            $html .= '&#010;'.$this->renderTagItem($tag);
         }
 
         return $html;
