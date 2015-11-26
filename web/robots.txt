@@ -1,2 +1,17 @@
 User-agent: *
-Disallow:
+Disallow: /login
+Disallow: /registration
+Disallow: /user
+
+User-agent: Yandex
+Disallow: /login
+Disallow: /registration
+Disallow: /user
+
+User-agent: Googlebot
+Disallow: /login
+Disallow: /registration
+Disallow: /user
+
+Sitemap: http://racocat.com/sitemap.xml
+Host: racocat.com
