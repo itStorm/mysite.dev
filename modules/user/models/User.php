@@ -2,8 +2,10 @@
 
 namespace app\modules\user\models;
 
+use common\libs\safedata\SafeDataFinder;
 use Yii;
 use yii\base\NotSupportedException;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
@@ -18,6 +20,11 @@ use app\modules\article\models\Article;
  * @property string $email
  * @property string $password_hash
  * @property string $auth_key
+ * @property string $email_confirm
+ * @property bool $is_enabled
+ * @property bool $is_deleted
+ * @property int $created
+ * @property int $updated
  * @property int $role
  * @property Article[] $articles
  */
@@ -37,6 +44,23 @@ class User extends ActiveRecord implements IdentityInterface
     public static function tableName()
     {
         return 'users';
+    }
+
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class'      => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'created',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated',
+                ],
+                'value'      => function () {
+                    return time();
+                },
+            ],
+        ];
     }
 
     /**
@@ -72,15 +96,25 @@ class User extends ActiveRecord implements IdentityInterface
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            // Для новой записи пишем всегда какой-нибудь ключ
+            // Для новой записи пишем всегда какой-нибудь ключ и email confirmations
             if ($insert) {
-                $this->setNewAuthKey();
+                $this->setNewAuthKey()
+                    ->setEmailConfirm();
             }
 
             return true;
         }
 
         return false;
+    }
+
+    /** @inheritdoc */
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            $this->sendEmailConfirm();
+        }
     }
 
     /**
@@ -115,7 +149,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
+        return \Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     /**
@@ -160,10 +194,13 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Генерация ключа для авторизации по cookie
+     * @return $this
      */
     public function setNewAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
+
+        return $this;
     }
 
     /**
@@ -174,6 +211,48 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Article::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
+    /**
+     * Генерация токена для подтверждение почты
+     * @return $this
+     */
+    public function setEmailConfirm()
+    {
+        $this->email_confirm = Yii::$app->security->generateRandomString();
+
+        return $this;
+    }
+
+    /**
+     * Отправить письмо с подтверждением email, если есть токен
+     * @return bool
+     */
+    public function sendEmailConfirm()
+    {
+        if (!$this->email_confirm) {
+            return false;
+        }
+
+        return Yii::$app->mailer->compose('confirm_email', [
+            'email' => $this->email,
+            'link'  => $this->getUrlEmailConfirm(),
+        ])
+            ->setTo($this->email)
+            ->setFrom([Yii::$app->params['infoEmail'] => $this->email])
+            ->setSubject('Email confirmation')
+            ->send();
+    }
+
+    /**
+     * Подтвердить пользователя
+     * @return bool
+     */
+    public function confirm()
+    {
+        $this->is_enabled = SafeDataFinder::IS_ENABLED;
+        $this->email_confirm = '';
+
+        return $this->save();
+    }
 
     /**
      * Получить Url
@@ -183,5 +262,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function getUrlView($scheme = false)
     {
         return Url::to(['/user/default/view', 'id' => $this->id], $scheme);
+    }
+
+    /**
+     * Получить Url подтверждения регистрации
+     * @param boolean|string $scheme the URI scheme to use in the generated URL
+     * @return string
+     */
+    public function getUrlEmailConfirm($scheme = true)
+    {
+        return Url::to(['/user/default/email-confirm', 'emailConfirm' => $this->email_confirm, 'email' => $this->email], $scheme);
     }
 }

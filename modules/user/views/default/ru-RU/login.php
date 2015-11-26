@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if (Yii::$app->session->hasFlash('userNotActivate')): ?>
 
         <div class="alert alert-warning">
-            Account not activate. You should <?= Html::a('approve you email', ['/user/default/get-confirmation-link']); ?> by link in our letter.
+            Аккаунт не активирован. Вам необходимо <?= Html::a('подвердить email', ['/user/default/get-confirmation-link']); ?> по ссылке в письме.
         </div>
 
     <?php elseif(Yii::$app->session->hasFlash('userIsDeleted')): ?>

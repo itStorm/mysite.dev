@@ -1,7 +1,6 @@
-<div class="user-default-index">
-    <h1>You are welcome!</h1>
-
+<div class="user-registration-success">
+    <h1>Congratulations!</h1>
     <p>
-        <img alt="Welcome" src="/img/welcome.jpeg"/>
+        Your account registered, but for fully activation your should approve your email by link in letter.
     </p>
 </div>

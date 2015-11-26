@@ -3,6 +3,8 @@ return [
     ''                                                => 'main/default/index',
     '<_a:(contact|about|agreement|error)>'            => 'main/default/<_a>',
     '<_a:(login|logout|registration)>'                => 'user/default/<_a>',
+    'emailconfirm/<emailConfirm:[\w\-]{32}>'          => 'user/default/email-confirm',
+    'get-confirmation-link'                           => 'user/default/get-confirmation-link',
     '<_a:test/.*>'                                    => 'test/default/index',
 
     'user/<id:\d+>'                                   => 'user/default/view',
