@@ -58,7 +58,7 @@ class SocialCommentWidget extends Widget
 
         // Подключение непосредственно к comment-блоку
         $js = <<<JS
-    VK.Widgets.Comments("vk_comments", {limit: 10, width: "auto", attach: "photo,video,audio"}, "{$this->urlHash}");
+    VK.Widgets.Comments("vk_comments", {limit: 10, width: "auto", attach: "photo,video,audio", autoPublish: 0}, "{$this->urlHash}");
 JS;
         $this->getView()->registerJs($js);
 
