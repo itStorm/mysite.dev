@@ -34,5 +34,6 @@ phpunit.phar
 /config/main.php
 /config/console.php
 /config/web.php
+/config/params.php
 
 /web/sitemap.xml
