@@ -19,15 +19,27 @@ $tagsMenu = $this->render('components/_menu');
 
 <?php $this->beginBlock('before_content'); ?>
     <div class="visible-xs-block">
+
+        <!-- admitad.banner: po4p9ymmvobb01616dab8b0fa31d56 Aviasales.ru -->
+        <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/po4p9ymmvobb01616dab8b0fa31d56/?i=4">
+            <img class="img-responsive" width="468" height="60" border="0" src="https://ad.admitad.com/b/po4p9ymmvobb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
+        </a>
+        <!-- /admitad.banner -->
+
         <?= $tagsMenu ?>
     </div>
 <?php $this->endBlock(); ?>
 
 
 <?php $this->beginBlock('sidebar'); ?>
-    <div class="hidden-xs">
-        <?= $tagsMenu ?>
-    </div>
+    <?= $tagsMenu ?>
+
+    <!-- admitad.banner: 096c4f4d1bbb01616dab8b0fa31d56 Aviasales.ru -->
+    <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/096c4f4d1bbb01616dab8b0fa31d56/?i=4">
+        <img class="img-responsive" width="120" height="600" border="0" src="https://ad.admitad.com/b/096c4f4d1bbb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
+    </a>
+    <!-- /admitad.banner -->
+
 <?php $this->endBlock(); ?>
 
 <div class="article-index">
@@ -74,3 +86,9 @@ $tagsMenu = $this->render('components/_menu');
     <?= LinkPager::widget(['pagination' => $pages]); ?>
 
 </div>
+
+<!-- admitad.banner: 56fbd3206dbb01616dab3a3184f61a М.Видео -->
+<a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/56fbd3206dbb01616dab3a3184f61a/?i=4">
+    <img class="img-responsive" width="728" height="90" border="0" src="https://ad.admitad.com/b/56fbd3206dbb01616dab3a3184f61a/" alt="М.Видео"/>
+</a>
+<!-- /admitad.banner -->

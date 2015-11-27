@@ -30,6 +30,29 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
 }
 ?>
 
+
+<?php $this->beginBlock('before_content'); ?>
+
+    <div class="visible-xs-block">
+        <!-- admitad.banner: baaa52887bbb01616dab3a3184f61a М.Видео -->
+        <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/baaa52887bbb01616dab3a3184f61a/?i=4">
+            <img class="img-responsive" width="468" height="60" border="0" src="https://ad.admitad.com/b/baaa52887bbb01616dab3a3184f61a/" alt="М.Видео"/>
+        </a>
+        <!-- /admitad.banner -->
+    </div>
+
+<?php $this->endBlock(); ?>
+
+
+<?php $this->beginBlock('sidebar'); ?>
+    <!-- admitad.banner: 6928d8b99cbb01616dab3a3184f61a М.Видео -->
+    <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/6928d8b99cbb01616dab3a3184f61a/?i=4">
+        <img class="img-responsive" width="160" height="600" border="0" src="https://ad.admitad.com/b/6928d8b99cbb01616dab3a3184f61a/" alt="М.Видео"/>
+    </a>
+    <!-- /admitad.banner -->
+
+<?php $this->endBlock(); ?>
+
 <?= $adminButtons ?>
 
 <div class="article-view">

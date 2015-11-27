@@ -74,7 +74,9 @@ AppAsset::register($this);
                     <?= $content ?>
                 </div>
                 <div class="col-sm-2 col-sm-offset-1">
-                    <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
+                    <div class="hidden-xs">
+                        <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
+                    </div>
                 </div>
             </div>
         </div>
