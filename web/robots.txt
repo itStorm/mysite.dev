@@ -2,16 +2,22 @@ User-agent: *
 Disallow: /login
 Disallow: /registration
 Disallow: /user
+Disallow: /get-confirmation-link
+Disallow: /emailconfirm
 
 User-agent: Yandex
 Disallow: /login
 Disallow: /registration
 Disallow: /user
+Disallow: /get-confirmation-link
+Disallow: /emailconfirm
 
 User-agent: Googlebot
 Disallow: /login
 Disallow: /registration
 Disallow: /user
+Disallow: /get-confirmation-link
+Disallow: /emailconfirm
 
 Sitemap: http://racocat.com/sitemap.xml
 Host: racocat.com
