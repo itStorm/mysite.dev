@@ -12,7 +12,7 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
 ?>
 
 <?php $this->beginBlock('before_content'); ?>
-    <div class="hidden-xs hidden-sm">
+    <div class="hidden-xs">
         <?= Carousel::widget([
             'items' => [
                 [
@@ -29,14 +29,22 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
         ]) ?>
     </div>
     <div class="visible-xs-block">
+        <!-- admitad.banner: 52u6hw0nbmbb01616dab8b0fa31d56 Aviasales.ru -->
+        <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/52u6hw0nbmbb01616dab8b0fa31d56/?i=4">
+            <img class="img-responsive" border="0" src="https://ad.admitad.com/b/52u6hw0nbmbb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
+        </a>
+        <!-- /admitad.banner -->
         <?= $tagsMenu ?>
     </div>
 <?php $this->endBlock(); ?>
 
 <?php $this->beginBlock('sidebar'); ?>
-    <div class="hidden-xs">
-        <?= $tagsMenu ?>
-    </div>
+<?= $tagsMenu ?>
+<!-- admitad.banner: 6e3e68f66abb01616dab8b0fa31d56 Aviasales.ru -->
+<a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/6e3e68f66abb01616dab8b0fa31d56/?i=4">
+    <img class="img-responsive" width="120" height="240" border="0" src="https://ad.admitad.com/b/6e3e68f66abb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
+</a>
+<!-- /admitad.banner -->
 <?php $this->endBlock(); ?>
 
 <div class="site-index">
