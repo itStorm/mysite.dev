@@ -263,3 +263,8 @@ a.desc:after {
 .even-less-40 {
     font-size: 40%;
 }
+
+/* SOCIAL */
+.social-buttons-item {
+    float: left;
+}

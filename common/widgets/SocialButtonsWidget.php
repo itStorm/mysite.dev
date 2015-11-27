@@ -16,8 +16,7 @@ class SocialButtonsWidget extends Widget
     public function run()
     {
         $this->registerJs()
-            ->registerMetaTags()
-            ->registerCss();
+            ->registerMetaTags();
 
         $html = <<<HTML
     <div class="social-buttons">
@@ -74,21 +73,6 @@ JS;
                 'content'  => $value
             ]);
         }
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    protected function registerCss()
-    {
-        $css = <<<CSS
-.social-buttons-item {
-    float: left;
-}
-CSS;
-        $this->getView()->registerCss($css);
 
         return $this;
     }

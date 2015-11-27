@@ -31,6 +31,10 @@ class SocialCommentWidget extends Widget
             'property' => 'fb:app_id',
             'content'  => '778342298941480',
         ]);
+        $this->getView()->registerMetaTag([
+            'property' => 'fb:admins',
+            'content'  => '100001903720631',
+        ]);
 
         $this->registerJs();
 
