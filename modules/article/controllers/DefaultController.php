@@ -126,13 +126,14 @@ class DefaultController extends Controller
      */
     public function actionCategory($slug)
     {
-        $tagConditions = is_numeric($slug) ?
-            ['id' => $slug] : ['slug' => $slug];
+        $tagConditions = is_numeric($slug) ? ['id' => $slug] : ['slug' => $slug];
 
         /** @var Tag $tag */
         $tag = Tag::findOne($tagConditions);
         if (!$tag) {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
+        } elseif (is_numeric($slug) && $tag->slug) {
+            $this->redirect($tag->getUrlView());
         }
 
         $query = SafeDataFinder::init(Article::className())
@@ -169,6 +170,10 @@ class DefaultController extends Controller
     public function actionView($slug)
     {
         $model = $this->findModel($slug);
+        if (is_numeric($slug) && $model->slug) {
+            $this->redirect($model->getUrlView());
+        }
+
         $model->updateCounters(['view_count' => 1]);
 
         return $this->render('view', [
@@ -244,7 +249,7 @@ class DefaultController extends Controller
         $model = SafeDataFinder::init(Article::className())->findOne($conditions);
 
         if ($model === null) {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
         }
 
         return $model;
