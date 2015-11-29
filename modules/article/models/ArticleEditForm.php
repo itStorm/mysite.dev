@@ -3,6 +3,7 @@
 namespace app\modules\article\models;
 
 use app\modules\filestorage\models\File;
+use common\behaviors\ImageResizeBehavior;
 use common\libs\safedata\SafeDataFinder;
 use common\widgets\interfaces\TagsInterface;
 use Yii;
@@ -41,6 +42,22 @@ class ArticleEditForm extends Model implements TagsInterface
 
     /** @var Article */
     private $model;
+
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        return [
+            'imageResize' => [
+                'class'  => ImageResizeBehavior::className(),
+                'images' => [
+                    'logo_file' => [
+                        'w' => Article::FILE_LOGO_MIN_WIDTH,
+                        'h' => Article::FILE_LOGO_MIN_HEIGHT,
+                    ],
+                ]
+            ],
+        ];
+    }
 
     /**
      * @return array the validation rules.
@@ -126,7 +143,7 @@ class ArticleEditForm extends Model implements TagsInterface
         if ($this->logo_file) {
             list($width, $height) = getimagesize($this->logo_file->tempName);
             if ($width < Article::FILE_LOGO_MIN_WIDTH || $height < Article::FILE_LOGO_MIN_HEIGHT) {
-                $this->addError('logo_file', sprintf('Bad file. Minimal size W=%d x H=%d', Article::FILE_LOGO_MIN_WIDTH, Article::FILE_LOGO_MIN_HEIGHT));
+                $this->addError('logo_file', sprintf('Bad file. Minimal size width = %d x height = %d', Article::FILE_LOGO_MIN_WIDTH, Article::FILE_LOGO_MIN_HEIGHT));
                 $isLogoFileGood = false;
             }
         }
