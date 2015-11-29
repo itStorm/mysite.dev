@@ -3,6 +3,7 @@
 Yii::setAlias('@common', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'common');
 Yii::setAlias('@modules', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'modules');
 Yii::setAlias('@files', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'files');
+Yii::setAlias('@filestorage', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'filestorage');
 
 return [
     'basePath'   => dirname(__DIR__),

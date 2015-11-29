@@ -43,7 +43,7 @@ TinyMCEAsset::register($this);
         ]
     ];
 
-    if ($fileLogo = $model->getModel()->getUrlFileLogo(true)) {
+    if ($fileLogo = $model->getModel()->getUrlLogoImageFile(true)) {
         $fileWidgetOptions['pluginOptions']['initialPreview'] = [
             Html::img($fileLogo, ['class' => 'file-preview-image', 'alt' => 'Logo', 'title' => 'Logo']),
         ];

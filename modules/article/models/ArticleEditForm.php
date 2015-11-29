@@ -2,6 +2,7 @@
 
 namespace app\modules\article\models;
 
+use app\modules\filestorage\models\File;
 use common\libs\safedata\SafeDataFinder;
 use common\widgets\interfaces\TagsInterface;
 use Yii;
@@ -145,30 +146,39 @@ class ArticleEditForm extends Model implements TagsInterface
 
         $article = $this->getModel();
         $article->setAttributes($this->getAttributes());
+        $oldLogoImageFile = $article->logoImageFile;
 
         $saveArticleTransaction = Article::getDb()->beginTransaction();
         try {
             $article->save(false);
             $article->saveTags($this->tags);
 
-            $filePath = Yii::getAlias('@files') . DIRECTORY_SEPARATOR . Article::CONTENT_FILE_LOGO_PATH . DIRECTORY_SEPARATOR;
-
-            // Если удаление прочекано
-            if ($this->delete_logo_file && $article->logo_filename) {
+            // @todo это блок удалить
+            if ($article->logo_filename) {
+                $filePath = Yii::getAlias('@files') . DIRECTORY_SEPARATOR . Article::CONTENT_FILE_LOGO_PATH . DIRECTORY_SEPARATOR;
                 $fileName = $article->logo_filename;
                 $article->logo_filename = '';
                 $article->save(false, ['logo_filename']);
                 unlink($filePath . $fileName);
             }
 
-            // Если есть логотип - то пересохраняем
+            // Если есть логотип - то сохраняем
             if ($this->logo_file) {
-                $fileName = md5(Article::tableName() . $article->id) . '.' . $this->logo_file->extension;
-                $this->logo_file->saveAs($filePath . $fileName);
-                $article->logo_filename = $fileName;
-                $article->save(false, ['logo_filename']);
+                if ($file = File::createFromUploaded($this->logo_file, Article::CONTENT_FILE_LOGO_PATH)) {
+                    $article->setLogoImageFile($file);
+                    $article->save(false);
+                } else {
+                    throw new \Exception('Can\'t save logo file');
+                }
             }
-            $this->id = $article->id;
+
+            /*
+             * Удаление старого логотипа если прочекано скртытое поле удаления
+             * или загружен новый логотип, при условии что есть что удалять
+             */
+            if (($this->delete_logo_file || $this->logo_file) && $oldLogoImageFile) {
+                $oldLogoImageFile->delete();
+            }
         } catch (\Exception $e) {
             $saveArticleTransaction->rollBack();
 
@@ -176,6 +186,7 @@ class ArticleEditForm extends Model implements TagsInterface
         }
 
         $saveArticleTransaction->commit();
+        $this->id = $article->id;
 
         return true;
     }
