@@ -7,7 +7,7 @@ use app\modules\article\models\Article;
 use yii\helpers\HtmlPurifier;
 
 /**
- * Class TextCutter
+ * Class TextCutterBehavior
  * @package common\behaviors
  */
 class TextCutterBehavior extends Behavior

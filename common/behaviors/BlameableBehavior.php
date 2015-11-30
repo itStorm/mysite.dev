@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\User;
 
 /**
- * Class Blameable
+ * Class BlameableBehavior
  * @package common\behaviors
  */
 class BlameableBehavior extends Behavior

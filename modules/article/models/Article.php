@@ -13,6 +13,7 @@ use app\modules\user\models\User;
 use common\behaviors\TextCutterBehavior;
 use yii\helpers\Url;
 use common\libs\safedata\interfaces\SafeDataInterface;
+use app\modules\filestorage\models\File;
 
 
 /**
@@ -34,7 +35,10 @@ use common\libs\safedata\interfaces\SafeDataInterface;
  * @property string $slug
  * @property string $pseudo_alias
  * @property int $view_count
+ * @todo удалить потом $logo_filename
  * @property string $logo_filename
+ * @property int $logo_image_file_id
+ * @property File $logoImageFile
  * @property Tag[] $tags
  *
  * @see common\behaviors\TextCutter::cut()
@@ -95,13 +99,13 @@ class Article extends ActiveRecord implements SafeDataInterface
         return [
             [['title', 'content', 'created_by', 'updated_by', 'created', 'updated'], 'required'],
 
-            [['title', 'pseudo_alias'], 'string', 'max' => 255],
+            [['title', 'pseudo_alias', 'slug'], 'string', 'max' => 255],
 
             [['description'], 'string', 'max' => 512],
 
             ['content', 'string'],
 
-            [['created_by', 'updated_by', 'created', 'updated', 'published_date'], 'integer'],
+            [['created_by', 'updated_by', 'created', 'updated', 'published_date', 'view_count', 'logo_image_file_id'], 'integer'],
 
             [['is_deleted', 'is_enabled'], 'boolean'],
         ];
@@ -224,17 +228,31 @@ class Article extends ActiveRecord implements SafeDataInterface
     }
 
     /**
+     * @return ActiveQuery
+     */
+    public function getLogoImageFile()
+    {
+        return $this->hasOne(File::className(), ['id' => 'logo_image_file_id']);
+    }
+
+    /**
+     * @param File $file
+     */
+    public function setLogoImageFile(File $file)
+    {
+        $this->logo_image_file_id = $file->id;
+    }
+
+    /**
      * @param boolean|string $scheme the URI scheme to use in the generated URL
      * @return string|null
      */
-    public function getUrlFileLogo($scheme = false)
+    public function getUrlLogoImageFile($scheme = false)
     {
-        if (!$this->logo_filename) {
+        if (!$this->logoImageFile) {
             return null;
         }
 
-        return Url::to([
-            '/files/' . self::CONTENT_FILE_LOGO_PATH . '/' . $this->logo_filename
-        ], $scheme);
+        return $this->logoImageFile->getUrl($scheme);
     }
 }
