@@ -170,15 +170,6 @@ class ArticleEditForm extends Model implements TagsInterface
             $article->save(false);
             $article->saveTags($this->tags);
 
-            // @todo это блок удалить
-            if ($article->logo_filename) {
-                $filePath = Yii::getAlias('@files') . DIRECTORY_SEPARATOR . Article::CONTENT_FILE_LOGO_PATH . DIRECTORY_SEPARATOR;
-                $fileName = $article->logo_filename;
-                $article->logo_filename = '';
-                $article->save(false, ['logo_filename']);
-                unlink($filePath . $fileName);
-            }
-
             // Если есть логотип - то сохраняем
             if ($this->logo_file) {
                 if ($file = File::createFromUploaded($this->logo_file, Article::CONTENT_FILE_LOGO_PATH)) {
