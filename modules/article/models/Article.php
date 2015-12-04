@@ -35,8 +35,6 @@ use app\modules\filestorage\models\File;
  * @property string $slug
  * @property string $pseudo_alias
  * @property int $view_count
- * @todo удалить потом $logo_filename
- * @property string $logo_filename
  * @property int $logo_image_file_id
  * @property File $logoImageFile
  * @property Tag[] $tags
