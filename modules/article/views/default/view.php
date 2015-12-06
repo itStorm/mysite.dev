@@ -34,22 +34,45 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
 <?php $this->beginBlock('before_content'); ?>
 
     <div class="visible-xs-block">
-        <!-- admitad.banner: baaa52887bbb01616dab3a3184f61a М.Видео -->
-        <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/baaa52887bbb01616dab3a3184f61a/?i=4">
-            <img class="img-responsive" width="468" height="60" border="0" src="https://ad.admitad.com/b/baaa52887bbb01616dab3a3184f61a/" alt="М.Видео"/>
-        </a>
-        <!-- /admitad.banner -->
+
+        <script type='text/javascript'>(function() {
+                /* Optional settings (these lines can be removed): */
+                subID = "";  // - local banner key;
+                injectTo = "";  // - #id of html element (ex., "top-banner").
+                /* End settings block */
+
+                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+                document.write('<div id="'+injectTo+'"></div>');
+                var s = document.createElement('script');
+                s.type = 'text/javascript'; s.async = true;
+                s.src = 'https://ad.admitad.com/shuffle/aa712d5723/'+subid_block+'?inject_to='+injectTo;
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();</script>
+
     </div>
 
 <?php $this->endBlock(); ?>
 
 
 <?php $this->beginBlock('sidebar'); ?>
-    <!-- admitad.banner: 6928d8b99cbb01616dab3a3184f61a М.Видео -->
-    <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/6928d8b99cbb01616dab3a3184f61a/?i=4">
-        <img class="img-responsive" width="160" height="600" border="0" src="https://ad.admitad.com/b/6928d8b99cbb01616dab3a3184f61a/" alt="М.Видео"/>
-    </a>
-    <!-- /admitad.banner -->
+
+<script type='text/javascript'>(function() {
+        /* Optional settings (these lines can be removed): */
+        subID = "";  // - local banner key;
+        injectTo = "";  // - #id of html element (ex., "top-banner").
+        /* End settings block */
+
+        if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+        if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+        document.write('<div id="'+injectTo+'"></div>');
+        var s = document.createElement('script');
+        s.type = 'text/javascript'; s.async = true;
+        s.src = 'https://ad.admitad.com/shuffle/1a643057aa/'+subid_block+'?inject_to='+injectTo;
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    })();</script>
 
 <?php $this->endBlock(); ?>
 
@@ -86,8 +109,27 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         'description' => $model->description,
         'image'       => $model->getUrlLogoImageFile(true)?: Url::to('/img/social-logo.jpeg', true),
     ]); ?>
-    <br/><br/>
+    <br/>
+    <div class="hidden-xs">
 
+        <script type='text/javascript'>(function() {
+                /* Optional settings (these lines can be removed): */
+                subID = "";  // - local banner key;
+                injectTo = "";  // - #id of html element (ex., "top-banner").
+                /* End settings block */
+
+                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+                document.write('<div id="'+injectTo+'"></div>');
+                var s = document.createElement('script');
+                s.type = 'text/javascript'; s.async = true;
+                s.src = 'https://ad.admitad.com/shuffle/42eafc472c/'+subid_block+'?inject_to='+injectTo;
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();</script>
+
+    </div>
+    <br/>
     <?= SocialCommentWidget::widget([
         'url' => $mainUrl,
     ]); ?>

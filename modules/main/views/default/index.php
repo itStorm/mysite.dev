@@ -29,22 +29,46 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
         ]) ?>
     </div>
     <div class="visible-xs-block">
-        <!-- admitad.banner: 52u6hw0nbmbb01616dab8b0fa31d56 Aviasales.ru -->
-        <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/52u6hw0nbmbb01616dab8b0fa31d56/?i=4">
-            <img class="img-responsive" border="0" src="https://ad.admitad.com/b/52u6hw0nbmbb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
-        </a>
-        <!-- /admitad.banner -->
+
+        <script type='text/javascript'>(function() {
+                /* Optional settings (these lines can be removed): */
+                subID = "";  // - local banner key;
+                injectTo = "";  // - #id of html element (ex., "top-banner").
+                /* End settings block */
+
+                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+                document.write('<div id="'+injectTo+'"></div>');
+                var s = document.createElement('script');
+                s.type = 'text/javascript'; s.async = true;
+                s.src = 'https://ad.admitad.com/shuffle/aa712d5723/'+subid_block+'?inject_to='+injectTo;
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();</script>
+
         <?= $tagsMenu ?>
     </div>
 <?php $this->endBlock(); ?>
 
 <?php $this->beginBlock('sidebar'); ?>
 <?= $tagsMenu ?>
-<!-- admitad.banner: 6e3e68f66abb01616dab8b0fa31d56 Aviasales.ru -->
-<a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/6e3e68f66abb01616dab8b0fa31d56/?i=4">
-    <img class="img-responsive" width="120" height="240" border="0" src="https://ad.admitad.com/b/6e3e68f66abb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
-</a>
-<!-- /admitad.banner -->
+
+<script type='text/javascript'>(function() {
+        /* Optional settings (these lines can be removed): */
+        subID = "";  // - local banner key;
+        injectTo = "";  // - #id of html element (ex., "top-banner").
+        /* End settings block */
+
+        if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+        if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+        document.write('<div id="'+injectTo+'"></div>');
+        var s = document.createElement('script');
+        s.type = 'text/javascript'; s.async = true;
+        s.src = 'https://ad.admitad.com/shuffle/7e47627c4a/'+subid_block+'?inject_to='+injectTo;
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    })();</script>
+
 <?php $this->endBlock(); ?>
 
 <div class="site-index">
