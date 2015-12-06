@@ -18,13 +18,46 @@ $tagsMenu = $this->render('components/_menu');
 ?>
 
 <?php $this->beginBlock('before_content'); ?>
+
+
+    <div class="hidden-xs">
+
+        <script type='text/javascript'>(function() {
+                /* Optional settings (these lines can be removed): */
+                subID = "";  // - local banner key;
+                injectTo = "";  // - #id of html element (ex., "top-banner").
+                /* End settings block */
+
+                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+                document.write('<div id="'+injectTo+'"></div>');
+                var s = document.createElement('script');
+                s.type = 'text/javascript'; s.async = true;
+                s.src = 'https://ad.admitad.com/shuffle/42eafc472c/'+subid_block+'?inject_to='+injectTo;
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();</script>
+
+    </div>
+
+
     <div class="visible-xs-block">
 
-        <!-- admitad.banner: po4p9ymmvobb01616dab8b0fa31d56 Aviasales.ru -->
-        <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/po4p9ymmvobb01616dab8b0fa31d56/?i=4">
-            <img class="img-responsive" width="468" height="60" border="0" src="https://ad.admitad.com/b/po4p9ymmvobb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
-        </a>
-        <!-- /admitad.banner -->
+        <script type='text/javascript'>(function() {
+                /* Optional settings (these lines can be removed): */
+                subID = "";  // - local banner key;
+                injectTo = "";  // - #id of html element (ex., "top-banner").
+                /* End settings block */
+
+                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+                document.write('<div id="'+injectTo+'"></div>');
+                var s = document.createElement('script');
+                s.type = 'text/javascript'; s.async = true;
+                s.src = 'https://ad.admitad.com/shuffle/aa712d5723/'+subid_block+'?inject_to='+injectTo;
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();</script>
 
         <?= $tagsMenu ?>
     </div>
@@ -34,11 +67,21 @@ $tagsMenu = $this->render('components/_menu');
 <?php $this->beginBlock('sidebar'); ?>
     <?= $tagsMenu ?>
 
-    <!-- admitad.banner: 096c4f4d1bbb01616dab8b0fa31d56 Aviasales.ru -->
-    <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/096c4f4d1bbb01616dab8b0fa31d56/?i=4">
-        <img class="img-responsive" width="120" height="600" border="0" src="https://ad.admitad.com/b/096c4f4d1bbb01616dab8b0fa31d56/" alt="Aviasales.ru"/>
-    </a>
-    <!-- /admitad.banner -->
+<script type='text/javascript'>(function() {
+        /* Optional settings (these lines can be removed): */
+        subID = "";  // - local banner key;
+        injectTo = "";  // - #id of html element (ex., "top-banner").
+        /* End settings block */
+
+        if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+        if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+        document.write('<div id="'+injectTo+'"></div>');
+        var s = document.createElement('script');
+        s.type = 'text/javascript'; s.async = true;
+        s.src = 'https://ad.admitad.com/shuffle/1a643057aa/'+subid_block+'?inject_to='+injectTo;
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    })();</script>
 
 <?php $this->endBlock(); ?>
 
@@ -86,9 +129,3 @@ $tagsMenu = $this->render('components/_menu');
     <?= LinkPager::widget(['pagination' => $pages]); ?>
 
 </div>
-
-<!-- admitad.banner: 56fbd3206dbb01616dab3a3184f61a М.Видео -->
-<a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/56fbd3206dbb01616dab3a3184f61a/?i=4">
-    <img class="img-responsive" width="728" height="90" border="0" src="https://ad.admitad.com/b/56fbd3206dbb01616dab3a3184f61a/" alt="М.Видео"/>
-</a>
-<!-- /admitad.banner -->
