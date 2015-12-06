@@ -268,3 +268,44 @@ a.desc:after {
 .social-buttons-item {
     float: left;
 }
+
+/* MAIN */
+.tile-item {
+    margin: 20px 0 10px 0px;
+    max-width: 450px;
+}
+
+.tile-item .logo-image {
+    position: relative;
+}
+
+.tile-item .logo-image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    -webkit-filter: grayscale(100%);
+}
+
+.tile-item .logo-image .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.3;
+}
+
+.tile-item a {
+    display: block;
+    text-decoration: none;
+    color: #555;
+}
+
+.tile-item a:hover .logo-image .shadow {
+    opacity: 0.1;
+}
+
+.tile-item a:hover .logo-image img {
+    -webkit-filter: grayscale(0%);
+}
