@@ -56,14 +56,22 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
             /** @var  $row app\modules\article\models\Article[] */
             foreach ($row as $article): ?>
                 <div class="col-sm-4">
-                    <div class="article-announcement">
-                        <div class="h2 title"><?= $article->title; ?></div>
-                        <span class="preview">
-                            <span class="fade-out"></span>
-                            <?= $article->getShortContent(); ?>
-                        </span>
-
-                        <p><?= Html::a(Yii::t('app', 'more') . '... &raquo;', $article->getUrlView(), ['class' => 'btn btn-default']) ?></p>
+                    <div class="tile-item">
+                        <a href="<?= $article->getUrlView()?>">
+                            <?php if($logoImageUrl = $article->getUrlLogoImageFile()): ?>
+                                <div class="logo-image">
+                                    <img src="<?= $logoImageUrl?>">
+                                    <div class="shadow"></div>
+                                </div>
+                            <?php endif; ?>
+                            <div class="article-announcement">
+                                <div class="h2 title" style="margin: 0;"><?= $article->title; ?></div>
+                                <span class="preview">
+                                    <span class="fade-out"></span>
+                                    <?= $article->getShortContent(); ?>
+                                </span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
