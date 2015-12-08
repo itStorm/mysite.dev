@@ -100,6 +100,32 @@ $tagsMenu = $this->render('components/_menu');
         foreach ($articles as $article): // перебираем статьи
         $articleUrl = $article->getUrlView();
         ?>
+
+            <div class="list-page-item article-announcement">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="open-list-item" href="<?= $articleUrl ?>">
+                            <img src="<?= $article->getUrlLogoImageFile(true) ?>">
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        <a class="open-list-item" href="<?= $articleUrl ?>">
+                            <div class="h3 title"><?= $this->render('components/_title', ['model' => $article]) ?></div>
+                            <div><?= $this->render('components/_published_date', ['model' => $article]) ?></div>
+                        </a>
+                            <div class="tags-block"><?= \common\widgets\TagsWidget::widget(['tags' => $article->tags]); ?></div>
+                        <a class="open-list-item" href="<?= $articleUrl ?>">
+                            <span class="preview">
+                                <span class="fade-out"></span>
+                                <?= $article->getShortContent(200); ?>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+<?php
+/*
+            ?>
             <div class="list-page-item article-announcement">
                 <a class="open-list-item" href="<?= $articleUrl ?>">
                     <div class="h3 title"><?= $this->render('components/_title', ['model' => $article]) ?></div>
@@ -116,6 +142,10 @@ $tagsMenu = $this->render('components/_menu');
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
                 </a>
             </div>
+*/
+?>
+
+
         <?php endforeach; ?>
 
         <?php if (!$articles): ?>
