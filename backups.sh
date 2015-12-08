@@ -1,0 +1,28 @@
+#!/bin/bash
+
+script_name=$0
+backups_path=$1
+db_user=$2
+db_pasword=$3
+db_name=$4
+
+path_to_dump=$backups_path/$db_name.sql.gz
+path_to_files_bakup_tmp=$backups_path/files
+
+
+echo "Start $script_name"
+
+echo ".. backup database"
+mysqldump -u $db_user -p$db_pasword $db_name | gzip > $path_to_dump
+echo ".. dump done ($path_to_dump)"
+
+echo ".. copy files data"
+mkdir $path_to_files_bakup_tmp
+cp -R ./filestorage $path_to_files_bakup_tmp
+cp -R ./web/files/ $path_to_files_bakup_tmp
+cd $backups_path
+tar -cvzf $path_to_files_bakup_tmp.tar.gz $path_to_files_bakup_tmp
+rm -R $path_to_files_bakup_tmp
+echo ".. copy files done ($path_to_files_bakup_tmp.tar.gz)"
+
+echo "End $script_name"
