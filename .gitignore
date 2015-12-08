@@ -36,4 +36,7 @@ phpunit.phar
 /config/web.php
 /config/params.php
 
+#backup script
+/backups.sh
+
 /web/sitemap.xml
