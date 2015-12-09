@@ -89,7 +89,7 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
                                 </div>
                             <?php endif; ?>
                             <div class="article-announcement">
-                                <div class="h2 title" style="margin: 0;"><?= $article->title; ?></div>
+                                <div class="h2 title"><?= $article->title; ?></div>
                                 <span class="preview">
                                     <span class="fade-out"></span>
                                     <?= $article->getShortContent(); ?>
