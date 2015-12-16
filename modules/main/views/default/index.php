@@ -1,10 +1,10 @@
 <?php
-use yii\helpers\Html;
 use yii\bootstrap\Carousel;
 
 /** @var $this common\View */
 /** @var $articles app\modules\article\models\Article[] */
 
+$this->title = 'Интернет-журнал RACOCAT, публикации, статьи, лайфхаки';
 $this->addKeywords('журнал, интернет-журнал, газета, независимый журнал, новости, публикации, статьи, события, отзывы, лайфхаки');
 $this->setDescription('Интернет-журнал RACOCAT - интересные публикации, полезные советы, лайфхаки');
 

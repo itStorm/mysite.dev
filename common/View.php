@@ -59,7 +59,7 @@ class View extends BaseView
         if (!$this->description)
             return;
         $this->registerMetaTag([
-            'property' => 'keywords',
+            'property' => 'description',
             'content'  => $this->description,
         ]);
     }

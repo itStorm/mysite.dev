@@ -80,7 +80,7 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
 
 <div class="article-view">
 
-    <div class="h1"><?= $this->render('components/_title', ['model' => $model]) ?></div>
+    <h1><?= $this->render('components/_title', ['model' => $model]) ?></h1>
     <?= $this->render('components/_published_date', ['model' => $model]) ?>
     &nbsp;&nbsp;&nbsp;
 

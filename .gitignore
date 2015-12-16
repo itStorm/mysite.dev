@@ -28,6 +28,7 @@ phpunit.phar
 
 # vagrant files
 .vagrant
+Vagrantfile
 
 # real configs
 /config/db.php

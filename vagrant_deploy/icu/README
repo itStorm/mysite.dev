@@ -1,3 +1,4 @@
+php -r 'echo "PHP: " . PHP_VERSION . "<br>\n"; echo "ICU: " . INTL_ICU_VERSION . "<br>\n";';
 Move into /opt/icu/{version icu}
 Add into php-fpm config
     env[ICU_DATA]=/opt/icu/
