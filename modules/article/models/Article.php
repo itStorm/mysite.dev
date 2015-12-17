@@ -36,6 +36,9 @@ use app\modules\filestorage\models\File;
  * @property string $pseudo_alias
  * @property int $view_count
  * @property int $logo_image_file_id
+ * @property string $seo_description
+ * @property string $seo_keywords
+ *
  * @property File $logoImageFile
  * @property Tag[] $tags
  *
@@ -99,7 +102,9 @@ class Article extends ActiveRecord implements SafeDataInterface
 
             [['title', 'pseudo_alias', 'slug'], 'string', 'max' => 255],
 
-            [['description'], 'string', 'max' => 512],
+            [['description', 'seo_keywords'], 'string', 'max' => 512],
+
+            [['description', 'seo_description'], 'string', 'max' => 1024],
 
             ['content', 'string'],
 

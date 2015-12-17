@@ -30,8 +30,6 @@ TinyMCEAsset::register($this);
 
     <?= $form->field($model, 'pseudo_alias')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, SafeDataFinder::FIELD_IS_ENABLED)->checkbox() ?>
-
     <?php
     $fileWidgetOptions = [
         'class' => 'olololo',
@@ -65,6 +63,12 @@ JS;
     <div class="form-group">
         <?= TagsInputWidget::widget(['model' => $model, 'attribute' => 'tags']); ?>
     </div>
+
+    <?= $form->field($model, 'seo_description')->textarea() ?>
+
+    <?= $form->field($model, 'seo_keywords')->textarea() ?>
+
+    <?= $form->field($model, SafeDataFinder::FIELD_IS_ENABLED)->checkbox() ?>
 
     <?php
     if (Yii::$app->user->can(User::ROLE_NAME_ADMIN)) {
