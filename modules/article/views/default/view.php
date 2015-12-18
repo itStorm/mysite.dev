@@ -6,10 +6,12 @@ use common\widgets\SocialButtonsWidget;
 use yii\helpers\Url;
 use common\widgets\SocialCommentWidget;
 
-/* @var $this yii\web\View */
+/* @var $this common\View */
 /* @var $model app\modules\article\models\Article */
 
 $this->title = $model->title;
+$this->addKeywords($model->seo_keywords);
+$this->setDescription($model->seo_description);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 

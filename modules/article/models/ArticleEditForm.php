@@ -36,6 +36,10 @@ class ArticleEditForm extends Model implements TagsInterface
     public $logo_file;
     /** @var  bool */
     public $delete_logo_file = 0;
+    /** @var  string */
+    public $seo_description;
+    /** @var  string */
+    public $seo_keywords;
 
     /** @var array */
     public $tags;
@@ -72,8 +76,9 @@ class ArticleEditForm extends Model implements TagsInterface
             [['pseudo_alias'], 'filter', 'filter' => 'trim'],
             [['pseudo_alias'], 'string', 'length' => [2, 255]],
 
-            [['description'], 'filter', 'filter' => 'trim'],
-            [['description'], 'string', 'max' => 512],
+            [['description', 'seo_description', 'seo_keywords'], 'filter', 'filter' => 'trim'],
+            [['description', 'seo_keywords'], 'string', 'max' => 512],
+            [['description', 'seo_description'], 'string', 'max' => 1024],
 
             [['content'], 'required'],
             [['content'], 'filter', 'filter' => 'trim'],
@@ -99,7 +104,7 @@ class ArticleEditForm extends Model implements TagsInterface
             'title'                          => 'Title',
             'content'                        => 'Content',
             'published_date'                 => 'Published date',
-            SafeDataFinder::FIELD_IS_ENABLED => 'Enable',
+            SafeDataFinder::FIELD_IS_ENABLED => 'Show article',
             SafeDataFinder::FIELD_IS_DELETED => 'Deleted',
             'tags'                           => 'Tags',
             'logo_file'                      => 'Logo file',
