@@ -31,7 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'code:ntext',
-            'area_id',
+            [
+                'label' => $model->getAttributeLabel('area_id'),
+                'value' => $model->area->name,
+            ]
         ],
     ]) ?>
 

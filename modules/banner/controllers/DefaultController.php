@@ -5,24 +5,48 @@ namespace app\modules\banner\controllers;
 use Yii;
 use app\modules\banner\models\Banner;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * DefaultController implements the CRUD actions for Banner model.
  */
 class DefaultController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'allow'   => true,
+                        'actions' => ['index', 'view'],
+                        'roles'   => [Banner::RULE_VIEW],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['delete'],
+                        'verbs'   => ['POST'],
+                        'roles'   => [Banner::RULE_UPDATE],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['create'],
+                        'roles'   => [Banner::RULE_CREATE],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['update'],
+                        'roles'   => [Banner::RULE_UPDATE],
+                    ],
+                ]
+            ]
         ];
     }
 

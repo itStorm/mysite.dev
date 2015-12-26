@@ -9,7 +9,7 @@ class m151222_215701_banners_tables extends Migration
     {
         $this->createTable('banner_areas', [
             'id'    => Schema::TYPE_PK,
-            'alias' => Schema::TYPE_STRING . '(255) NOT NULL',
+            'alias' => Schema::TYPE_STRING . '(128) NOT NULL',
             'name'  => Schema::TYPE_STRING . '(255) NOT NULL',
         ]);
 

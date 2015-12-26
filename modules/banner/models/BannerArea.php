@@ -15,6 +15,10 @@ use Yii;
  */
 class BannerArea extends \yii\db\ActiveRecord
 {
+    const RULE_VIEW = 'banner_area_view';
+    const RULE_CREATE = 'banner_area_create';
+    const RULE_UPDATE = 'banner_area_update';
+
     /**
      * @inheritdoc
      */
@@ -29,8 +33,12 @@ class BannerArea extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['alias', 'name'], 'required'],
-            [['alias', 'name'], 'string', 'max' => 255]
+            ['alias', 'required'],
+            ['alias', 'string', 'max' => 128],
+            ['alias', 'unique'],
+
+            ['name', 'required'],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 

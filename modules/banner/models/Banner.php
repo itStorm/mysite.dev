@@ -16,6 +16,11 @@ use Yii;
  */
 class Banner extends \yii\db\ActiveRecord
 {
+    const RULE_VIEW = 'banner_view';
+    const RULE_CREATE = 'banner_create';
+    const RULE_UPDATE = 'banner_update';
+    const RULE_UPLOAD_FILES = 'banner_upload_files';
+
     /**
      * @inheritdoc
      */
@@ -46,7 +51,7 @@ class Banner extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'code' => 'Code',
-            'area_id' => 'Area ID',
+            'area_id' => 'Area for placement',
         ];
     }
 

@@ -5,24 +5,48 @@ namespace app\modules\banner\controllers;
 use Yii;
 use app\modules\banner\models\BannerArea;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AreaController implements the CRUD actions for BannerArea model.
  */
 class AreaController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'allow'   => true,
+                        'actions' => ['index', 'view'],
+                        'roles'   => [BannerArea::RULE_VIEW],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['delete'],
+                        'verbs'   => ['POST'],
+                        'roles'   => [BannerArea::RULE_UPDATE],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['create'],
+                        'roles'   => [BannerArea::RULE_CREATE],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['update'],
+                        'roles'   => [BannerArea::RULE_UPDATE],
+                    ],
+                ]
+            ]
         ];
     }
 

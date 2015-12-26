@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\modules\banner\models\BannerArea;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\banner\models\Banner */
@@ -16,7 +17,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'code')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'area_id')->textInput() ?>
+    <?= $form->field($model, 'area_id')->dropDownList(
+        BannerArea::find()->select(['name', 'id'])->indexBy('id')->column(),
+        ['prompt' => 'Select area for placement']
+    ); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
