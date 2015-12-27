@@ -193,6 +193,7 @@ a.desc:after {
 .sidebar-module .tag {
     margin: 1px;
     float: left;
+    font-size: 85%;
 }
 
 /* SIZE MORE LESS */
