@@ -42,10 +42,7 @@ $tagsMenu = $this->render('components/_menu');
     <div class="list-page">
 
         <?php
-        // позиция для размещения баннера для Pad устройств, в виде индекса, в массиве
-        $mobileBannerPosition = $countArticles > 7 ? floor(10 / 2) - 1 : null;
-
-        foreach ($articles as $i => $article): // перебираем статьи
+        foreach ($articles as $article): // перебираем статьи
         $articleUrl = $article->getUrlView();
         ?>
 
@@ -76,14 +73,6 @@ $tagsMenu = $this->render('components/_menu');
                     </div>
                 </div>
             </div>
-
-            <?php
-            if ($i === $mobileBannerPosition): // если можно - втыкаем баннер
-                ?>
-                <div class="visible-xs-block">
-                    <?= BannerArea::renderArea('article-index-xs-pages-center'); ?>
-                </div>
-            <?php endif; ?>
 
         <?php endforeach; ?>
 
