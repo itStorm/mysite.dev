@@ -61,4 +61,30 @@ class BannerArea extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Banner::className(), ['area_id' => 'id']);
     }
+
+    /**
+     * Получить код баннера площадки
+     * @param $alias
+     * @return string
+     */
+    public static function renderArea($alias)
+    {
+        /** @var BannerArea $area */
+        $area = self::findOne(['alias' => $alias]);
+        if (!$area) {
+            return '';
+        }
+
+        $banners = $area->banners;
+        if (empty($banners) || !is_array($banners)) {
+            return '';
+        }
+
+        /** @var Banner $banner */
+        $banner = count($banners) == 1 ?
+            reset($banners)
+            : array_rand($banners);
+
+        return $banner->code;
+    }
 }
