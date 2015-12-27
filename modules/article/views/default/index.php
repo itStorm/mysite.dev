@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use app\modules\article\models\Article;
 use yii\widgets\LinkPager;
 use yii\data\Pagination;
+use app\modules\banner\models\BannerArea;
 
 /** @var $this yii\web\View */
 /** @var $articles Article[] */
@@ -18,6 +19,7 @@ $tagsMenu = $this->render('components/_menu');
 ?>
 
 <?php $this->beginBlock('before_content'); ?>
+    <?= BannerArea::renderArea('article-index-all-pages-top'); ?>
     <div class="visible-xs-block">
         <?= $tagsMenu ?>
     </div>
@@ -40,7 +42,10 @@ $tagsMenu = $this->render('components/_menu');
     <div class="list-page">
 
         <?php
-        foreach ($articles as $article): // перебираем статьи
+        // позиция для размещения баннера для Pad устройств, в виде индекса, в массиве
+        $mobileBannerPosition = $countArticles > 7 ? floor(10 / 2) - 1 : null;
+
+        foreach ($articles as $i => $article): // перебираем статьи
         $articleUrl = $article->getUrlView();
         ?>
 
@@ -72,6 +77,14 @@ $tagsMenu = $this->render('components/_menu');
                 </div>
             </div>
 
+            <?php
+            if ($i === $mobileBannerPosition): // если можно - втыкаем баннер
+                ?>
+                <div class="visible-xs-block">
+                    <?= BannerArea::renderArea('article-index-xs-pages-center'); ?>
+                </div>
+            <?php endif; ?>
+
         <?php endforeach; ?>
 
         <?php if (!$articles): ?>
@@ -84,4 +97,8 @@ $tagsMenu = $this->render('components/_menu');
 
     <?= LinkPager::widget(['pagination' => $pages]); ?>
 
+</div>
+
+<div class="hidden-xs">
+    <?= BannerArea::renderArea('article-index-big-pages-bottom'); ?>
 </div>

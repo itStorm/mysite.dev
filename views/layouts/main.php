@@ -5,10 +5,15 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\modules\user\models\User;
 use app\assets\CountersAsset;
+use app\modules\banner\models\BannerArea;
+use common\View;
 
-/* @var $this common\View */
+/* @var $this View */
 /* @var $content string */
 CountersAsset::register($this);
+$this->registerJsFile('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', [
+    'position' => View::POS_HEAD,
+    'async' => '']);
 ?>
 
 <?php $this->beginContent('@app/views/layouts/base.php'); ?>
@@ -63,9 +68,13 @@ CountersAsset::register($this);
                 <?= $content ?>
             </div>
             <div class="col-sm-2 col-sm-offset-1">
+                <?= BannerArea::renderArea('sidebar-all-pages-first'); ?>
                 <div class="hidden-xs">
+                    <?= BannerArea::renderArea('sidebar-all-big-pages-first'); ?>
                     <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
+                    <?= BannerArea::renderArea('sidebar-all-big-pages-last'); ?>
                 </div>
+                <?= BannerArea::renderArea('sidebar-all-pages-last'); ?>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ use app\modules\article\models\Article;
 use common\widgets\SocialButtonsWidget;
 use yii\helpers\Url;
 use common\widgets\SocialCommentWidget;
+use app\modules\banner\models\BannerArea;
 
 /* @var $this common\View */
 /* @var $model app\modules\article\models\Article */
@@ -32,6 +33,12 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
 }
 ?>
 
+
+<?php $this->beginBlock('before_content'); ?>
+<div class="visible-xs-block">
+    <?= BannerArea::renderArea('article-view-xs-pages-top'); ?>
+</div>
+<?php $this->endBlock(); ?>
 <?= $adminButtons ?>
 
 <div class="article-view">
@@ -66,6 +73,9 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
         'image'       => $model->getUrlLogoImageFile(true)?: Url::to('/img/social-logo.jpeg', true),
     ]); ?>
     <br/>
+    <div class="hidden-xs">
+        <?= BannerArea::renderArea('article-view-big-pages-bottom'); ?>
+    </div>
     <?= SocialCommentWidget::widget([
         'url' => $mainUrl,
     ]); ?>

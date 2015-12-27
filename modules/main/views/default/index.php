@@ -1,5 +1,6 @@
 <?php
 use yii\bootstrap\Carousel;
+use app\modules\banner\models\BannerArea;
 
 /** @var $this common\View */
 /** @var $articles app\modules\article\models\Article[] */
@@ -29,6 +30,7 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
         ]) ?>
     </div>
     <div class="visible-xs-block">
+        <?= BannerArea::renderArea('main-index-xs-pages-top'); ?>
         <?= $tagsMenu ?>
     </div>
 <?php $this->endBlock(); ?>
