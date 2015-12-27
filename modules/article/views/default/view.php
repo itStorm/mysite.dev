@@ -39,6 +39,23 @@ if (Yii::$app->user->can(Article::RULE_UPDATE)) {
     <?= BannerArea::renderArea('article-view-xs-pages-top'); ?>
 </div>
 <?php $this->endBlock(); ?>
+
+<p>
+    <a tabindex="0"
+       class="btn btn-lg btn-danger"
+       role="button"
+       data-toggle="popover"
+       data-placement="bottom"
+       data-trigger="focus"
+       data-html="true"
+       data-content='<div>Нажал? Любопытный? Тогда подписывайся.</div>
+                        <a class="link-no-decorate" href="https://vk.com/racocat" target="_blank" rel="nofollow">
+                            <img alt="vk" width="60px" height="60px" src="/img/vk.png"/>
+                        </a>
+                        <a class="link-no-decorate" href="https://www.facebook.com/racocat" target="_blank" rel="nofollow">
+                            <img alt="facebook" width="60px" height="60px" src="/img/fb.png"/>
+                        </a>'>Не надо нажимать</a>
+</p>
 <?= $adminButtons ?>
 
 <div class="article-view">

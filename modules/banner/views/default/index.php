@@ -28,8 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'code:ntext',
-            'area_id',
+            [
+                'label' => 'Area for placement',
+                'attribute' => 'area.name',
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

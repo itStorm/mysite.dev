@@ -62,7 +62,7 @@ class SocialCommentWidget extends Widget
      */
     protected function registerJs()
     {
-        $this->getView()->registerJsFile('//vk.com/js/api/openapi.js?117');
+        $this->getView()->registerJsFile('//vk.com/js/api/openapi.js?121');
         $this->getView()->registerJsFile('/js/social.js');
 
         // Подключение непосредственно к comment-блоку
