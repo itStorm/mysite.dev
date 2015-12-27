@@ -4,16 +4,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\modules\user\models\User;
-use app\assets\CountersAsset;
-use app\modules\banner\models\BannerArea;
-use common\View;
 
-/* @var $this View */
+/* @var $this common\View */
 /* @var $content string */
-CountersAsset::register($this);
-$this->registerJsFile('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', [
-    'position' => View::POS_HEAD,
-    'async' => '']);
 ?>
 
 <?php $this->beginContent('@app/views/layouts/base.php'); ?>
@@ -63,20 +56,8 @@ $this->registerJsFile('https://pagead2.googlesyndication.com/pagead/js/adsbygoog
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
 
-        <div class="row">
-            <div class="col-sm-9">
-                <?= $content ?>
-            </div>
-            <div class="col-sm-2 col-sm-offset-1">
-                <?= BannerArea::renderArea('sidebar-all-pages-first'); ?>
-                <div class="hidden-xs">
-                    <?= BannerArea::renderArea('sidebar-all-big-pages-first'); ?>
-                    <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
-                    <?= BannerArea::renderArea('sidebar-all-big-pages-last'); ?>
-                </div>
-                <?= BannerArea::renderArea('sidebar-all-pages-last'); ?>
-            </div>
-        </div>
+        <?= $content ?>
+
     </div>
 </div>
 
@@ -89,6 +70,5 @@ $this->registerJsFile('https://pagead2.googlesyndication.com/pagead/js/adsbygoog
         </p>
     </div>
 </footer>
-<noscript><div><img src="https://mc.yandex.ru/watch/33671559" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
 <?php $this->endContent(); ?>

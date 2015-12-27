@@ -1,5 +1,6 @@
 <?php
 use yii\bootstrap\Carousel;
+use app\modules\banner\models\BannerArea;
 
 /** @var $this common\View */
 /** @var $articles app\modules\article\models\Article[] */
@@ -29,46 +30,13 @@ $tagsMenu = $this->render('@modules/article/views/default/components/_menu');
         ]) ?>
     </div>
     <div class="visible-xs-block">
-
-        <script type='text/javascript'>(function() {
-                /* Optional settings (these lines can be removed): */
-                subID = "";  // - local banner key;
-                injectTo = "";  // - #id of html element (ex., "top-banner").
-                /* End settings block */
-
-                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
-                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
-                document.write('<div id="'+injectTo+'"></div>');
-                var s = document.createElement('script');
-                s.type = 'text/javascript'; s.async = true;
-                s.src = 'https://ad.admitad.com/shuffle/aa712d5723/'+subid_block+'?inject_to='+injectTo;
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            })();</script>
-
+        <?= BannerArea::renderArea('main-index-xs-pages-top'); ?>
         <?= $tagsMenu ?>
     </div>
 <?php $this->endBlock(); ?>
 
 <?php $this->beginBlock('sidebar'); ?>
-<?= $tagsMenu ?>
-
-<script type='text/javascript'>(function() {
-        /* Optional settings (these lines can be removed): */
-        subID = "";  // - local banner key;
-        injectTo = "";  // - #id of html element (ex., "top-banner").
-        /* End settings block */
-
-        if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
-        if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
-        document.write('<div id="'+injectTo+'"></div>');
-        var s = document.createElement('script');
-        s.type = 'text/javascript'; s.async = true;
-        s.src = 'https://ad.admitad.com/shuffle/7e47627c4a/'+subid_block+'?inject_to='+injectTo;
-        var x = document.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    })();</script>
-
+    <?= $tagsMenu ?>
 <?php $this->endBlock(); ?>
 
 <div class="site-index">

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use app\modules\article\models\Article;
 use yii\widgets\LinkPager;
 use yii\data\Pagination;
+use app\modules\banner\models\BannerArea;
 
 /** @var $this yii\web\View */
 /** @var $articles Article[] */
@@ -18,47 +19,8 @@ $tagsMenu = $this->render('components/_menu');
 ?>
 
 <?php $this->beginBlock('before_content'); ?>
-
-
-    <div class="hidden-xs">
-
-        <script type='text/javascript'>(function() {
-                /* Optional settings (these lines can be removed): */
-                subID = "";  // - local banner key;
-                injectTo = "";  // - #id of html element (ex., "top-banner").
-                /* End settings block */
-
-                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
-                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
-                document.write('<div id="'+injectTo+'"></div>');
-                var s = document.createElement('script');
-                s.type = 'text/javascript'; s.async = true;
-                s.src = 'https://ad.admitad.com/shuffle/42eafc472c/'+subid_block+'?inject_to='+injectTo;
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            })();</script>
-
-    </div>
-
-
+    <?= BannerArea::renderArea('article-index-all-pages-top'); ?>
     <div class="visible-xs-block">
-
-        <script type='text/javascript'>(function() {
-                /* Optional settings (these lines can be removed): */
-                subID = "";  // - local banner key;
-                injectTo = "";  // - #id of html element (ex., "top-banner").
-                /* End settings block */
-
-                if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
-                if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
-                document.write('<div id="'+injectTo+'"></div>');
-                var s = document.createElement('script');
-                s.type = 'text/javascript'; s.async = true;
-                s.src = 'https://ad.admitad.com/shuffle/aa712d5723/'+subid_block+'?inject_to='+injectTo;
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            })();</script>
-
         <?= $tagsMenu ?>
     </div>
 <?php $this->endBlock(); ?>
@@ -66,23 +28,6 @@ $tagsMenu = $this->render('components/_menu');
 
 <?php $this->beginBlock('sidebar'); ?>
     <?= $tagsMenu ?>
-
-<script type='text/javascript'>(function() {
-        /* Optional settings (these lines can be removed): */
-        subID = "";  // - local banner key;
-        injectTo = "";  // - #id of html element (ex., "top-banner").
-        /* End settings block */
-
-        if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
-        if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
-        document.write('<div id="'+injectTo+'"></div>');
-        var s = document.createElement('script');
-        s.type = 'text/javascript'; s.async = true;
-        s.src = 'https://ad.admitad.com/shuffle/1a643057aa/'+subid_block+'?inject_to='+injectTo;
-        var x = document.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    })();</script>
-
 <?php $this->endBlock(); ?>
 
 <div class="article-index">
@@ -97,7 +42,10 @@ $tagsMenu = $this->render('components/_menu');
     <div class="list-page">
 
         <?php
-        foreach ($articles as $article): // перебираем статьи
+        // позиция для размещения баннера для Pad устройств, в виде индекса, в массиве
+        $mobileBannerPosition = $countArticles > 7 ? floor(10 / 2) - 1 : null;
+
+        foreach ($articles as $i => $article): // перебираем статьи
         $articleUrl = $article->getUrlView();
         ?>
 
@@ -129,6 +77,14 @@ $tagsMenu = $this->render('components/_menu');
                 </div>
             </div>
 
+            <?php
+            if ($i === $mobileBannerPosition): // если можно - втыкаем баннер
+                ?>
+                <div class="visible-xs-block">
+                    <?= BannerArea::renderArea('article-index-xs-pages-center'); ?>
+                </div>
+            <?php endif; ?>
+
         <?php endforeach; ?>
 
         <?php if (!$articles): ?>
@@ -141,4 +97,8 @@ $tagsMenu = $this->render('components/_menu');
 
     <?= LinkPager::widget(['pagination' => $pages]); ?>
 
+</div>
+
+<div class="hidden-xs">
+    <?= BannerArea::renderArea('article-index-big-pages-bottom'); ?>
 </div>

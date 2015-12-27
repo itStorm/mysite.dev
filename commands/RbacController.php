@@ -1,11 +1,12 @@
 <?php
 namespace app\commands;
 
+use app\modules\banner\models\Banner;
+use app\modules\banner\models\BannerArea;
 use Yii;
 use yii\console\Controller;
 use app\modules\rbac\UserRoleRule;
 use app\modules\article\models\Article;
-use app\modules\file\models\File;
 
 class RbacController extends Controller
 {
@@ -35,6 +36,36 @@ class RbacController extends Controller
         $articleFilesUpload->description = 'Article upload files';
         $auth->add($articleFilesUpload);
 
+        // BANNER AREAS RULES
+        $bannerAreaView = $auth->createPermission(BannerArea::RULE_VIEW);
+        $bannerAreaView->description = 'Banner area view';
+        $auth->add($bannerAreaView);
+
+        $bannerAreaCreate = $auth->createPermission(BannerArea::RULE_CREATE);
+        $bannerAreaCreate->description = 'Banner area create';
+        $auth->add($bannerAreaCreate);
+
+        $bannerAreaUpdate = $auth->createPermission(BannerArea::RULE_UPDATE);
+        $bannerAreaUpdate->description = 'Banner area update';
+        $auth->add($bannerAreaUpdate);
+
+        $bannerFilesUpload = $auth->createPermission(Banner::RULE_UPLOAD_FILES);
+        $bannerFilesUpload->description = 'Banner upload files';
+        $auth->add($bannerFilesUpload);
+
+        // BANNERS RULES
+        $bannerView = $auth->createPermission(Banner::RULE_VIEW);
+        $bannerView->description = 'Banner view';
+        $auth->add($bannerView);
+
+        $bannerCreate = $auth->createPermission(Banner::RULE_CREATE);
+        $bannerCreate->description = 'Banner create';
+        $auth->add($bannerCreate);
+
+        $bannerUpdate = $auth->createPermission(Banner::RULE_UPDATE);
+        $bannerUpdate->description = 'Banner update';
+        $auth->add($bannerUpdate);
+
         // Rule for checking roles
         $rule = new UserRoleRule();
         $auth->add($rule);
@@ -63,9 +94,16 @@ class RbacController extends Controller
         $auth->addChild($moderator, $articleCreate);
         $auth->addChild($moderator, $articleUpdate);
         $auth->addChild($moderator, $articleFilesUpload);
+        $auth->addChild($moderator, $bannerView);
+        $auth->addChild($moderator, $bannerAreaView);
 
         // ..admin
         $auth->addChild($admin, $moderator);
+        $auth->addChild($admin, $bannerCreate);
+        $auth->addChild($admin, $bannerUpdate);
+        $auth->addChild($admin, $bannerFilesUpload);
+        $auth->addChild($admin, $bannerAreaCreate);
+        $auth->addChild($admin, $bannerAreaUpdate);
 
         echo "Done!\n";
     }
