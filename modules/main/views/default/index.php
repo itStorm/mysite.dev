@@ -90,6 +90,7 @@ $this->registerJsFile('/js/social.js');
 <div class="hidden-xs">
     <div class="row">
         <div class="col-sm-6">
+            <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
             <!-- VK Widget -->
             <div id="vk_groups"></div>
             <script type="text/javascript">
