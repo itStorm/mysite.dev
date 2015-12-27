@@ -72,6 +72,9 @@ $config['modules'] = [
     'filestorage' => [
         'class' => 'app\modules\filestorage\Module',
     ],
+    'banner' => [
+        'class' => 'app\modules\banner\Module',
+    ],
     'datecontrol' => [
         'class'           => 'kartik\datecontrol\Module',
         'saveSettings'    => [
