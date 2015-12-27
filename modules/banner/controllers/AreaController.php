@@ -14,6 +14,9 @@ use yii\web\NotFoundHttpException;
  */
 class AreaController extends Controller
 {
+    /** @var string */
+    public $layout = '@app/views/layouts/admin';
+
     /**
      * @return array
      */

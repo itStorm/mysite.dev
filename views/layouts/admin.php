@@ -4,11 +4,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\modules\user\models\User;
-use app\assets\CountersAsset;
 
 /* @var $this common\View */
 /* @var $content string */
-CountersAsset::register($this);
 ?>
 
 <?php $this->beginContent('@app/views/layouts/base.php'); ?>
@@ -58,16 +56,8 @@ CountersAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
 
-        <div class="row">
-            <div class="col-sm-9">
-                <?= $content ?>
-            </div>
-            <div class="col-sm-2 col-sm-offset-1">
-                <div class="hidden-xs">
-                    <?= isset($this->blocks['sidebar'])? $this->blocks['sidebar'] : ''; ?>
-                </div>
-            </div>
-        </div>
+        <?= $content ?>
+
     </div>
 </div>
 
@@ -80,6 +70,5 @@ CountersAsset::register($this);
         </p>
     </div>
 </footer>
-<noscript><div><img src="https://mc.yandex.ru/watch/33671559" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
 <?php $this->endContent(); ?>

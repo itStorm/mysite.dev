@@ -188,6 +188,8 @@ class DefaultController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = '@app/views/layouts/admin';
+
         $model = new ArticleEditForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -207,6 +209,8 @@ class DefaultController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = '@app/views/layouts/admin';
+
         $article = $this->findModel($id);
         $model = new ArticleEditForm();
         $model->setModel($article);
