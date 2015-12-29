@@ -10,7 +10,7 @@ server {
     listen 80; ## listen for ipv4
     #listen [::]:80 default_server ipv6only=on; ## listen for ipv6
 
-    server_name mysite.dev;
+    server_name racocat.dev;
     root        /home/vagrant/www/web;
     index       index-dev.php;
 
