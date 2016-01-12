@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         Если у вас есть вопросы, пожелания и предложения свяжитесь через форму указанную ниже
-        или пишите нам напрямую <a href="mailto:vlad@htmlbook.ru"><?= \Yii::$app->params['infoEmail'] ?></a>
+        или пишите нам напрямую <a href="<?= \Yii::$app->params['infoEmail'] ?>"><?= \Yii::$app->params['infoEmail'] ?></a>
     </p>
 
     <div class="row">
