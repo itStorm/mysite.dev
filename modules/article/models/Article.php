@@ -104,7 +104,7 @@ class Article extends ActiveRecord implements SafeDataInterface
 
             [['description', 'seo_keywords'], 'string', 'max' => 512],
 
-            [['description', 'seo_description'], 'string', 'max' => 1024],
+            [['seo_description'], 'string', 'max' => 1024],
 
             ['content', 'string'],
 
